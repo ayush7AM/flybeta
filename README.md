@@ -1,5 +1,7 @@
 # FlyBeta 🚀
 
+> 📋 **Picking up this project?** Start with [PROJECT_STATUS.md](PROJECT_STATUS.md) — current status, setup, business rules, API reference, known issues and the prioritised to-do list. Parts of this README are out of date.
+
 **FlyBeta** is a gamified, hands-on tech learning platform designed to take users from zero to hero through structured tracks, interactive labs, and AI-powered evaluation. Say goodbye to passive video watching and hello to active, project-based learning.
 
 Built with a striking Neo-Brutalist design system, FlyBeta makes learning programming languages, cloud architecture, and data engineering engaging and visually stunning.
