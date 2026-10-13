@@ -1,92 +1,83 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Moon, Sun } from 'lucide-react';
 import Logo from '../ui/Logo';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../auth/AuthModal';
-import { useState } from 'react';
+
+const SECTIONS = [
+  { id: 'features', label: 'Features' },
+  { id: 'how-it-works', label: 'How it works' },
+  { id: 'contact', label: 'Contact' },
+];
+
+// Same control sizing as the app navbar, so the two feel like one product
+const SHADOW = { boxShadow: '2px 2px 0px 0px var(--color-ink)' };
+const PRIMARY_BUTTON = 'h-9 flex items-center px-3 md:px-5 border-2 border-ink bg-ink text-canvas font-bold uppercase tracking-wider text-xs md:text-sm no-underline whitespace-nowrap cursor-pointer hover:bg-primary hover:text-white transition-colors';
 
 export default function LandingNavbar() {
   const { isDarkMode, toggleDarkMode } = useTheme();
-  const { user, logout } = useAuth();
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const { user } = useAuth();
+  const [authView, setAuthView] = useState(null); // 'login' | 'register' | null
 
   const scrollToSection = (e, id) => {
     e.preventDefault();
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <nav className="relative z-20 flex items-center justify-between gap-3 w-full px-4 md:px-8 py-4">
-      {/* Left: Logo */}
-      <Logo to="/" />
+    <nav className="sticky top-0 z-30 bg-canvas/95 backdrop-blur-sm border-b-2 border-ink">
+      <div className="max-w-7xl mx-auto h-16 md:h-20 px-4 md:px-8 flex items-center justify-between gap-4">
+        <Logo to="/" />
 
-      {/* Center: Marketing Links */}
-      <div className="hidden md:flex items-center gap-8 font-semibold text-ink">
-        <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="no-underline text-ink hover:text-[#EAB308] transition-colors uppercase tracking-wider text-sm cursor-pointer">
-          Home
-        </a>
-        <a href="#about-us" onClick={(e) => scrollToSection(e, 'about-us')} className="no-underline text-ink hover:text-[#EAB308] transition-colors uppercase tracking-wider text-sm cursor-pointer">
-          About Us
-        </a>
-        <a href="#how-it-works" onClick={(e) => scrollToSection(e, 'how-it-works')} className="no-underline text-ink hover:text-[#EAB308] transition-colors uppercase tracking-wider text-sm cursor-pointer">
-          How it Works
-        </a>
-        <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="no-underline text-ink hover:text-[#EAB308] transition-colors uppercase tracking-wider text-sm cursor-pointer">
-          Contact
-        </a>
-      </div>
+        {/* Section links */}
+        <div className="hidden md:flex items-center gap-8">
+          {SECTIONS.map(({ id, label }) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              onClick={(e) => scrollToSection(e, id)}
+              className="no-underline text-ink hover:text-primary transition-colors uppercase tracking-wider text-sm font-semibold"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
 
-      {/* Right: Get Started & Toggle */}
-      <div className="flex items-center gap-2 md:gap-4">
-        <button
-          onClick={toggleDarkMode}
-          className="bg-transparent border-2 border-ink text-ink p-2 hover:bg-canvas transition-colors cursor-pointer"
-          title="Toggle Dark Mode"
-        >
-          {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
-        </button>
-
-        {user ? (
-          <div className="flex items-center gap-2 md:gap-4">
-            <Link 
-              to="/tracks"
-              className="hidden md:flex items-center gap-2 bg-canvas px-4 py-2 border-2 border-ink hover:bg-border-light transition-colors no-underline text-ink label-mono"
-            >
-              <span>⚡</span>
-              <span>{user.xp || user.total_xp || 0} XP</span>
-            </Link>
-            <button
-              onClick={logout}
-              className="hidden md:inline text-sm font-bold uppercase tracking-wider text-red-600 hover:text-red-700 underline bg-transparent border-none cursor-pointer"
-            >
-              Logout
-            </button>
-            <Link
-              to="/tracks"
-              className="bg-black text-white px-3 md:px-6 py-2 md:py-2.5 font-bold hover:bg-[var(--color-primary)] hover:text-black border-4 border-black transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-wider text-xs md:text-sm no-underline whitespace-nowrap"
-            >
-              Dashboard
-            </Link>
-          </div>
-        ) : (
+        {/* Actions */}
+        <div className="flex items-center gap-2 md:gap-3">
           <button
-            onClick={() => setIsAuthOpen(true)}
-            className="bg-black text-white px-3 md:px-6 py-2 md:py-2.5 font-bold hover:bg-[#EAB308] hover:text-black border-4 border-black transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-wider text-xs md:text-sm cursor-pointer whitespace-nowrap"
+            onClick={toggleDarkMode}
+            className="h-9 w-9 flex items-center justify-center border-2 border-ink bg-surface text-ink cursor-pointer hover:bg-canvas transition-colors"
+            style={SHADOW}
+            title="Toggle dark mode"
+            aria-label="Toggle dark mode"
           >
-            GET STARTED
+            {isDarkMode ? <Moon size={16} /> : <Sun size={16} />}
           </button>
-        )}
+
+          {user ? (
+            <Link to="/dashboard" className={PRIMARY_BUTTON} style={SHADOW}>
+              Dashboard →
+            </Link>
+          ) : (
+            <>
+              <button
+                onClick={() => setAuthView('login')}
+                className="hidden sm:flex h-9 items-center px-3 text-ink font-bold uppercase tracking-wider text-sm cursor-pointer hover:text-primary transition-colors"
+              >
+                Log in
+              </button>
+              <button onClick={() => setAuthView('register')} className={PRIMARY_BUTTON} style={SHADOW}>
+                Get started
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
-      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+      <AuthModal isOpen={!!authView} initialView={authView || 'login'} onClose={() => setAuthView(null)} />
     </nav>
   );
 }

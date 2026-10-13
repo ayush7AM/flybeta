@@ -8,7 +8,59 @@
   "level": {
     "number": 6,
     "title": "RAG & Vector Databases",
-    "description": "Build AI systems that can reason over your own data — combining retrieval from vector stores with LLM generation for accurate, grounded responses."
+    "description": "Build AI systems that can reason over your own data — combining retrieval from vector stores with LLM generation for accurate, grounded responses.",
+    "quiz_data": [
+      {
+        "question": "What problem does Retrieval-Augmented Generation (RAG) solve?",
+        "options": [
+          "It makes models train faster",
+          "It lets an LLM answer using your own or up-to-date documents it was never trained on",
+          "It removes the need for prompts",
+          "It compresses images"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "In a RAG pipeline, what does the retrieval step do?",
+        "options": [
+          "Generates the final answer",
+          "Deletes old documents",
+          "Finds the document chunks most relevant to the question",
+          "Trains a new model"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What does a vector database store and search?",
+        "options": [
+          "Spreadsheets of prices",
+          "Embeddings, searched by similarity",
+          "Only images",
+          "User passwords"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Why are documents split into chunks before indexing?",
+        "options": [
+          "To make them harder to read",
+          "Because databases cannot store long text",
+          "To remove duplicate words",
+          "So retrieval returns focused passages that fit in the model's context window"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Which measure is commonly used to compare embeddings?",
+        "options": [
+          "Cosine similarity",
+          "Alphabetical order",
+          "File size",
+          "Word count"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

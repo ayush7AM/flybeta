@@ -8,7 +8,59 @@
   "level": {
     "number": 4,
     "title": "Data Visualization & Storytelling",
-    "description": "Transform numbers into narratives — master advanced plotting techniques and learn the principles of visual storytelling that make data actionable."
+    "description": "Transform numbers into narratives — master advanced plotting techniques and learn the principles of visual storytelling that make data actionable.",
+    "quiz_data": [
+      {
+        "question": "Which chart is best for showing a trend over time?",
+        "options": [
+          "Line chart",
+          "Pie chart",
+          "Scatter plot",
+          "Histogram"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Which chart is best for comparing values across categories?",
+        "options": [
+          "Histogram",
+          "Line chart",
+          "Bar chart",
+          "Box plot"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What does a histogram show?",
+        "options": [
+          "The relationship between two variables",
+          "The distribution of a single numeric variable",
+          "Parts of a whole",
+          "Changes over time"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does a Seaborn heatmap of `df.corr()` show?",
+        "options": [
+          "Missing values",
+          "Geographic data",
+          "Sales by region",
+          "How strongly the numeric variables move together"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Which is a core data-storytelling principle?",
+        "options": [
+          "Lead with the key insight and remove clutter that does not support it",
+          "Use as many colours as possible",
+          "Put every number on the chart",
+          "Always use 3D charts"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

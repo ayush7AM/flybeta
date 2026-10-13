@@ -8,7 +8,59 @@
   "level": {
     "number": 3,
     "title": "Advanced SQL & Data Wrangling",
-    "description": "Level up your SQL beyond SELECT * — master window functions, CTEs, complex joins, and the analytical queries that power real data teams."
+    "description": "Level up your SQL beyond SELECT * — master window functions, CTEs, complex joins, and the analytical queries that power real data teams.",
+    "quiz_data": [
+      {
+        "question": "What does a LEFT JOIN return?",
+        "options": [
+          "Only rows that match in both tables",
+          "All rows from the left table, plus matching rows from the right (NULL where none)",
+          "All rows from the right table",
+          "Rows that match in neither table"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "How do window functions differ from GROUP BY?",
+        "options": [
+          "They delete rows",
+          "They only work on text",
+          "They calculate across related rows without collapsing them into one row",
+          "They are slower versions of WHERE"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Two rows tie for first place. What do RANK() and ROW_NUMBER() give them?",
+        "options": [
+          "RANK() gives both the same rank; ROW_NUMBER() gives them different numbers",
+          "Both give the same number",
+          "Both give different numbers",
+          "Both return NULL"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What does LAG() let you do?",
+        "options": [
+          "Slow a query down",
+          "Delete the previous row",
+          "Join two tables",
+          "Read a value from a previous row, such as last month's sales"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What is a CTE (a WITH clause) for?",
+        "options": [
+          "Creating permanent tables",
+          "Naming a temporary result set to make complex queries readable and modular",
+          "Granting user permissions",
+          "Indexing a column"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

@@ -4,11 +4,12 @@ import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import { Loader2, CheckCircle, XCircle, Lock } from 'lucide-react';
 import MarkdownRenderer from '../ui/MarkdownRenderer';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../auth/AuthModal';
 
 export default function CapstoneEvaluator({ preselectedDomain = '' }) {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [domains, setDomains] = useState([]);
   const [domainId, setDomainId] = useState(preselectedDomain);
   const [githubUrl, setGithubUrl] = useState('');
@@ -47,6 +48,7 @@ export default function CapstoneEvaluator({ preselectedDomain = '' }) {
         github_url: githubUrl
       });
       setResult(res.data);
+      if (res.data.user) updateUser(res.data.user);
     } catch (err) {
       setError(err.response?.data?.error || err.message || 'Something went wrong');
     } finally {
@@ -149,6 +151,22 @@ export default function CapstoneEvaluator({ preselectedDomain = '' }) {
             </div>
           </div>
           
+          {result.reward && (
+            <div className="p-6 border-b-4 border-black bg-[#FEF3C7] flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="m-0 text-lg font-black uppercase text-center md:text-left">
+                {result.reward.first_completion
+                  ? `🏆 Track complete! +${result.reward.xp} XP · +${result.reward.coins} coins`
+                  : '🏆 Track already completed — nice work polishing it!'}
+              </p>
+              <Link
+                to={`/certificate/${result.reward.certificate_id}`}
+                className="px-5 py-3 font-black uppercase bg-black text-white no-underline border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] whitespace-nowrap"
+              >
+                🎓 View certificate
+              </Link>
+            </div>
+          )}
+
           <div className="p-8 prose prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-600 prose-a:font-bold hover:prose-a:text-blue-800 prose-pre:bg-gray-900 prose-pre:text-green-400 prose-pre:border-4 prose-pre:border-black prose-pre:rounded-none prose-pre:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] prose-code:font-bold prose-code:text-pink-600 prose-blockquote:border-l-8 prose-blockquote:border-black prose-blockquote:bg-yellow-100 prose-blockquote:p-4 prose-blockquote:font-bold">
             {/* AI output is shaped by repo content — never render it as HTML */}
             <MarkdownRenderer content={result.ai_feedback} allowHtml={false} />

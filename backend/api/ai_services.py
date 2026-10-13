@@ -5,6 +5,7 @@ to ensure JSON schema compliance.
 """
 import os
 import json
+import logging
 from google import genai
 from google.genai import types
 from pydantic import BaseModel, Field
@@ -14,6 +15,8 @@ from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, No
 # In a real Django app you'd import settings, but for this standalone file
 # we can just read it from os.environ (which was loaded by python-dotenv in settings.py)
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
+
+logger = logging.getLogger(__name__)
 
 # Initialize the Gemini client
 # It automatically picks up GEMINI_API_KEY from the environment if present.
@@ -82,7 +85,7 @@ def generate_project_blueprint(prompt):
         return data.get("steps", [])
         
     except Exception as e:
-        print(f"Gemini API Error: {e}")
+        logger.warning("Gemini API error: %s", e)
         raise ValueError(f"AI Generation failed: {str(e)}")
 
 
@@ -114,7 +117,7 @@ def generate_code_review(code, language="python"):
         return data.get("findings", [])
         
     except Exception as e:
-        print(f"Gemini API Error: {e}")
+        logger.warning("Gemini API error: %s", e)
         raise ValueError(f"AI Generation failed: {str(e)}")
 
 def generate_video_quiz(video_id):
@@ -160,7 +163,7 @@ def generate_video_quiz(video_id):
         return data.get("questions", [])
         
     except Exception as e:
-        print(f"Gemini API Error: {e}")
+        logger.warning("Gemini API error: %s", e)
         raise ValueError(f"AI Generation failed: {str(e)}")
 
 
@@ -210,7 +213,7 @@ def ask_oracle(message: str, history: list = None) -> str:
         )
         return response.text
     except Exception as e:
-        print(f"Gemini API Error (Oracle): {e}")
+        logger.warning("Gemini API error (Oracle): %s", e)
         raise ValueError(f"Oracle Generation failed: {str(e)}")
 
 

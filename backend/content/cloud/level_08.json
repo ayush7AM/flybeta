@@ -7,79 +7,97 @@
   },
   "level": {
     "number": 8,
-    "title": "Serverless Architecture",
-    "description": "What if you didn't even have to rent the server? Welcome to the water faucet model of cloud computing.",
+    "title": "CI/CD & Observability",
+    "description": "Ship safely and see what production is doing — automated pipelines, deployment strategies, logs, metrics, traces and SLOs.",
     "quiz_data": [
       {
-        "question": "What is the defining feature of Serverless Architecture?",
+        "question": "What is Continuous Integration (CI)?",
         "options": [
-          "There are literally no servers involved",
-          "You don't manage any servers, and you pay only for exact execution time",
-          "It is entirely free",
-          "It requires you to buy physical servers"
+          "Releasing once a year",
+          "Automatically building and testing every change that gets pushed",
+          "Manually copying files to a server",
+          "Merging two databases"
         ],
         "correct_index": 1
       },
       {
-        "question": "In the Water Faucet metaphor, how does Serverless billing work?",
+        "question": "What is a canary deployment?",
         "options": [
-          "You pay a flat monthly water bill",
-          "You only pay for the exact drops of water you use while the faucet is on",
-          "You pay to build the water tower",
-          "Water is free"
+          "Deploying only at night",
+          "Running two databases at once",
+          "Releasing to a small share of users first and expanding if it stays healthy",
+          "Deleting the old version first"
         ],
-        "correct_index": 1
+        "correct_index": 2
       },
       {
-        "question": "What does FaaS stand for?",
+        "question": "What are the three pillars of observability?",
         "options": [
-          "Functions as a Service",
-          "Firewalls as a Service",
-          "Files as a Service",
-          "Frameworks as a Service"
+          "Logs, metrics and traces",
+          "CPU, RAM and disk",
+          "Dev, staging and production",
+          "Build, test and deploy"
         ],
         "correct_index": 0
       },
       {
-        "question": "What triggers a Serverless Function?",
+        "question": "What is an SLO?",
         "options": [
-          "A manual switch",
-          "An event (like an HTTP request or file upload)",
-          "A timer that runs 24/7",
-          "A physical button press"
+          "A legal contract with customers",
+          "A type of load balancer",
+          "A log format",
+          "An internal reliability target, e.g. 99.9% of requests succeed"
         ],
-        "correct_index": 1
+        "correct_index": 3
       },
       {
-        "question": "Which of these is a famous Serverless service?",
+        "question": "Which is the better alert?",
         "options": [
-          "AWS Lambda",
-          "A physical Dell Server",
-          "Microsoft Word",
-          "Docker"
+          "CPU above 80% on one server",
+          "5% of checkout requests failing for 5 minutes",
+          "Disk usage changed by 1%",
+          "A new deployment started"
         ],
-        "correct_index": 0
+        "correct_index": 1
       }
     ]
   },
   "lessons": [
     {
       "order": 1,
-      "title": "The Water Faucet Metaphor",
-      "content_md": "# The Water Faucet Metaphor \ud83d\udeb0\n\nWhen you use IaaS (like renting a Virtual Machine), you pay by the hour. If you rent a server for 24 hours, you pay for 24 hours of electricity and hardware, even if absolutely nobody visited your website while you were asleep.\n\nThis is like paying for water by renting an entire water tower for the month, even if you only drank one glass!\n\n## The Serverless Revolution\n\n**Serverless** computing changes everything. Instead of renting the server, you just write a small piece of code (a function) and give it to the Cloud provider.\n\nYou say: *\"Hey Amazon, please run this code ONLY when someone clicks the 'Buy' button on my app.\"*\n\nWhen a customer clicks the button, Amazon instantly turns the code on, runs it, and turns it off. \n\n**You only pay for the exact milliseconds your code was running.**\n\nIf no one clicks the button for a week, you pay **$0.00**. This is exactly like your kitchen sink: you only pay for water when the faucet is actively running!\n\n<flipcard front=\"\ud83d\udeb0 What is the main cost benefit of Serverless?\" back=\"You only pay for the exact milliseconds your code is actively running. If there is no traffic, you pay absolutely nothing! (No idle server costs).\"></flipcard>",
-      "xp_reward": 15,
-      "coins_reward": 10,
+      "title": "From Commit to Cloud: CI/CD Pipelines",
+      "content_md": "# From Commit to Cloud: CI/CD Pipelines 🚦\n\nIn the early days, deploying meant someone copying files onto a server late on a Friday night. Modern teams ship many times a day — safely — because a **pipeline** does the boring, error-prone work automatically.\n\n## CI vs CD\n\n| Term | Meaning | Runs on |\n|------|---------|---------|\n| **Continuous Integration (CI)** | Every change is automatically built and tested | Every push / pull request |\n| **Continuous Delivery** | Every passing build is *ready* to release with one click | Main branch |\n| **Continuous Deployment** | Every passing build is released automatically | Main branch |\n\n<flipcard front=\"🔁 What is Continuous Integration?\" back=\"Automatically building and testing every code change as soon as it's pushed, so bugs are caught within minutes instead of at release time.\"></flipcard>\n\n## A Typical Pipeline\n\n```text\npush → lint → unit tests → build Docker image → scan image → push to registry → deploy to staging → smoke test → deploy to production\n```\n\nIf any stage fails, the pipeline stops and nothing broken reaches users.\n\n## GitHub Actions Example\n\nSave this as `.github/workflows/ci.yml` — GitHub runs it on every push:\n\n```yaml\nname: ci\non:\n  push:\n    branches: [main]\n  pull_request:\n\njobs:\n  test-and-build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n\n      - run: pip install -r requirements.txt\n      - run: pytest\n\n      - name: Build the Docker image\n        run: docker build -t my-app:${{ github.sha }} .\n```\n\nTagging the image with the commit SHA means you always know exactly which code is running.\n\n## Safe Deployment Strategies\n\n| Strategy | How it works | Rollback |\n|----------|--------------|----------|\n| **Rolling** | Replace servers a few at a time | Roll forward or back gradually |\n| **Blue/Green** | Run the new version next to the old, then switch traffic over | Switch traffic back instantly |\n| **Canary** | Send a small slice (e.g. 5%) of users to the new version first | Stop the canary if errors rise |\n\n<flipcard front=\"🐤 What is a canary deployment?\" back=\"Releasing a new version to a small percentage of users first and watching error rates — if it looks healthy, gradually send everyone to it.\"></flipcard>\n\n## Secrets in Pipelines\n\nNever write passwords or keys in the workflow file. Store them as **encrypted repository secrets** and reference them: `${{ secrets.CLOUD_API_TOKEN }}`.\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
       "is_mandatory": true,
-      "illustration_url": "https://images.unsplash.com/photo-1584067341857-79774659b6c0?w=800"
+      "lesson_type": "theory"
     },
     {
       "order": 2,
-      "title": "Functions as a Service (FaaS)",
-      "content_md": "# Functions as a Service (FaaS) \u26a1\n\nWait, why is it called \"Serverless\"? Are there no servers?\n\nNo, there are definitely still physical servers in a data center. It's called \"Serverless\" because **YOU** don't have to think about them, manage them, or pay for them when they are idle.\n\nThe technical term for this is **FaaS (Functions as a Service)**.\n\n## How FaaS Works\n\n1. A developer writes a tiny block of code (a Function). For example: a function that resizes an image.\n2. They upload it to AWS Lambda, Google Cloud Functions, or Azure Functions.\n3. They set a **Trigger**. (e.g., \"Run this function every time a user uploads a photo\").\n4. If 10,000 users upload a photo at the exact same second, the Cloud provider instantly spins up 10,000 copies of the function, runs them all simultaneously, and then shuts them all down.\n\n<flipcard front=\"\u26a1 What does FaaS stand for?\" back=\"Functions as a Service! It allows developers to deploy small snippets of code that automatically scale infinitely without managing any servers.\"></flipcard>",
-      "xp_reward": 20,
-      "coins_reward": 10,
+      "title": "Observability: Logs, Metrics & Traces",
+      "content_md": "# Observability: Logs, Metrics & Traces 🔭\n\nOnce your app is live, you can't attach a debugger to production. **Observability** is your ability to understand what the system is doing from the signals it emits — so you can answer \"why is it slow?\" at 2 a.m.\n\n## The Three Pillars\n\n| Pillar | What it is | Answers |\n|--------|------------|---------|\n| **Logs** | Timestamped records of individual events | *What happened* for this request? |\n| **Metrics** | Numbers measured over time | *How much / how often*? Is it getting worse? |\n| **Traces** | The path of one request across services | *Where* did the time go? |\n\n<flipcard front=\"🏛️ What are the three pillars of observability?\" back=\"Logs (individual events), metrics (numbers over time) and traces (one request's journey across services).\"></flipcard>\n\n## Structured Logs\n\nPlain-text logs are hard to search. **Structured** (JSON) logs can be filtered and counted:\n\n```python\nimport json, logging, time\n\nlogging.basicConfig(level=logging.INFO, format=\"%(message)s\")\nlog = logging.getLogger(\"checkout\")\n\nstart = time.time()\n# ... handle the order ...\nlog.info(json.dumps({\n    \"event\": \"order_placed\",\n    \"order_id\": \"A1042\",\n    \"amount_inr\": 1299,\n    \"duration_ms\": round((time.time() - start) * 1000),\n}))\n```\n\nNever log passwords, tokens or full card numbers.\n\n## Metrics That Matter\n\nFor any service, watch the **RED** metrics:\n\n| Metric | Meaning |\n|--------|---------|\n| **R**ate | Requests per second |\n| **E**rrors | Failed requests per second (or %) |\n| **D**uration | How long requests take — watch the 95th/99th percentile, not just the average |\n\n<flipcard front=\"⏱️ Why watch p95 latency instead of the average?\" back=\"Averages hide the slow tail. p95 means 95% of requests are faster than this — it shows what your unluckiest users actually experience.\"></flipcard>\n\n## Traces\n\nA single click might travel through an API, a queue, two microservices and a database. A **trace** stitches those steps together so you can see that, for example, 1.8 of the 2 seconds were spent waiting on one slow database query. **OpenTelemetry** is the open standard for producing traces, metrics and logs.\n\n## Tools\n\n| Platform | Built-in observability |\n|----------|------------------------|\n| AWS | CloudWatch Logs & Metrics, X-Ray |\n| GCP | Cloud Logging, Cloud Monitoring, Cloud Trace |\n| Azure | Azure Monitor, Application Insights |\n| Open source | Prometheus + Grafana, Loki, Jaeger |\n| Error tracking | Sentry |\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
       "is_mandatory": true,
-      "illustration_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800"
+      "lesson_type": "theory"
+    },
+    {
+      "order": 3,
+      "title": "Alerts, SLOs & Incident Response",
+      "content_md": "# Alerts, SLOs & Incident Response 🚨\n\nCollecting signals is only half the job. You also need to decide **what \"good enough\" means** and **who gets woken up** when it isn't.\n\n## SLI, SLO, SLA\n\n| Term | Meaning | Example |\n|------|---------|---------|\n| **SLI** — Service Level *Indicator* | A measurement | % of requests that succeed in < 300 ms |\n| **SLO** — Service Level *Objective* | Your internal target for that SLI | 99.9% over 30 days |\n| **SLA** — Service Level *Agreement* | A promise to customers, with penalties | 99.5% or customers get credits |\n\nSet the SLO **stricter** than the SLA so you notice problems before you owe anyone money.\n\n<flipcard front=\"🎯 SLO vs SLA?\" back=\"An SLO is your internal reliability target (e.g. 99.9%). An SLA is a contract with customers that has consequences if you miss it — so it's usually looser than the SLO.\"></flipcard>\n\n## Error Budgets\n\nA 99.9% monthly SLO allows 0.1% failure — about **43 minutes** of downtime in a 30-day month. That's your **error budget**.\n\n- Budget left? Ship features and take sensible risks.\n- Budget used up? Pause risky releases and fix reliability first.\n\n## Alert on Symptoms, Not Causes\n\n| Bad alert | Good alert |\n|-----------|------------|\n| \"CPU above 80% on server 3\" | \"5% of checkout requests failing for 5 minutes\" |\n| Fires many times a day and gets ignored | Fires rarely and always means users are hurting |\n\nEvery alert should be **actionable**. If nobody needs to act, make it a dashboard, not a page.\n\n## When Things Break: Incident Response\n\n1. **Detect** — an alert fires or users report a problem.\n2. **Triage** — how bad is it? Who is affected?\n3. **Mitigate first** — roll back, fail over or scale up to *stop the pain*. The root cause can wait.\n4. **Communicate** — post status updates regularly.\n5. **Resolve and review** — write a **blameless postmortem**: what happened, why, and what changes prevent a repeat.\n\n<flipcard front=\"🧯 What is a blameless postmortem?\" back=\"An incident write-up focused on how the system and process allowed the failure — not on blaming a person — so people share details honestly and real fixes get made.\"></flipcard>\n\nKeep a **runbook** for each alert: what it means, what to check first, and how to roll back.\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 4,
+      "title": "Hands-On: A CI Pipeline for Your Container",
+      "content_md": "# Hands-On: A CI Pipeline for Your Container 🛠️\n\nLet's give the containerised app from Level 4 an automatic pipeline that tests it, builds the image and publishes it to GitHub's container registry.\n\n## 1. A Tiny App With a Test\n\n```text\nmy-service/\n├── app.py\n├── test_app.py\n├── requirements.txt     # flask, pytest\n├── Dockerfile\n└── .github/workflows/ci.yml\n```\n\n```python\n# app.py\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.get(\"/health\")\ndef health():\n    return {\"status\": \"ok\"}\n```\n\n```python\n# test_app.py\nfrom app import app\n\ndef test_health():\n    response = app.test_client().get(\"/health\")\n    assert response.status_code == 200\n    assert response.json[\"status\"] == \"ok\"\n```\n\n## 2. The Workflow\n\n```yaml\n# .github/workflows/ci.yml\nname: ci\non: [push, pull_request]\n\npermissions:\n  contents: read\n  packages: write\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - run: pip install -r requirements.txt\n      - run: pytest\n\n  publish:\n    needs: test            # only runs if the tests passed\n    if: github.ref == 'refs/heads/main'\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: docker/login-action@v3\n        with:\n          registry: ghcr.io\n          username: ${{ github.actor }}\n          password: ${{ secrets.GITHUB_TOKEN }}\n      - run: |\n          OWNER=$(echo \"${{ github.repository_owner }}\" | tr '[:upper:]' '[:lower:]')   # registry names must be lowercase\n          IMAGE=ghcr.io/$OWNER/my-service:${{ github.sha }}\n          docker build -t \"$IMAGE\" .\n          docker push \"$IMAGE\"\n```\n\n## 3. Watch It Run\n\nPush to GitHub and open the **Actions** tab. Break the test on purpose (change `\"ok\"` to `\"okay\"`) and push again — the `publish` job never runs. That's CI protecting production.\n\n## 4. Challenges\n\n- Add a linting step (`ruff check .`) before the tests.\n- Add a status badge for the workflow to your README.\n- Deploy the pushed image to a serverless container service (Cloud Run, App Runner or Azure Container Apps).\n",
+      "xp_reward": 35,
+      "coins_reward": 20,
+      "is_mandatory": false,
+      "lesson_type": "lab"
     }
   ]
 }

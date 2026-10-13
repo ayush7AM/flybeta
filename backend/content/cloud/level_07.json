@@ -8,7 +8,59 @@
   "level": {
     "number": 7,
     "title": "Infrastructure as Code",
-    "description": "Define, version, and automate your entire cloud infrastructure with Terraform — treating infrastructure the same way you treat application code."
+    "description": "Define, version, and automate your entire cloud infrastructure with Terraform — treating infrastructure the same way you treat application code.",
+    "quiz_data": [
+      {
+        "question": "What is Infrastructure as Code (IaC)?",
+        "options": [
+          "Writing apps in assembly",
+          "Defining infrastructure in versioned code files instead of clicking through a console",
+          "Documenting servers in a wiki",
+          "Hard-coding passwords"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does `terraform plan` do?",
+        "options": [
+          "Deletes all resources",
+          "Downloads providers only",
+          "Shows the changes Terraform would make without applying them",
+          "Formats your code"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is the Terraform state file for?",
+        "options": [
+          "Recording the real resources Terraform manages so it can map config to reality",
+          "Storing your cloud password",
+          "Holding application logs",
+          "Listing team members"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is a Terraform provider?",
+        "options": [
+          "A cloud billing account",
+          "A person who reviews code",
+          "A server that runs Terraform",
+          "A plugin that lets Terraform talk to a platform's API, such as AWS or GCP"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Why use Terraform modules?",
+        "options": [
+          "To package configuration into reusable building blocks",
+          "To make plans run faster",
+          "To avoid writing variables",
+          "To encrypt state files"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

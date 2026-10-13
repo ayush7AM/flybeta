@@ -8,7 +8,59 @@
   "level": {
     "number": 3,
     "title": "Computer Vision & CNNs",
-    "description": "Teach machines to see — understand how images become numbers, how convolutional filters extract features, and build image classification pipelines."
+    "description": "Teach machines to see — understand how images become numbers, how convolutional filters extract features, and build image classification pipelines.",
+    "quiz_data": [
+      {
+        "question": "How does a computer represent a colour image?",
+        "options": [
+          "As a single number",
+          "As a grid of pixels, each with red, green and blue channel values",
+          "As a sentence describing it",
+          "As a list of edges only"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does a convolutional filter do?",
+        "options": [
+          "Slides across the image detecting local patterns such as edges and textures",
+          "Converts the image to text",
+          "Randomly deletes pixels",
+          "Sorts pixels by brightness"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is the main purpose of a pooling layer in a CNN?",
+        "options": [
+          "To add colour to grayscale images",
+          "To increase the image resolution",
+          "To shrink the feature maps while keeping the strongest signals",
+          "To label the training data"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is transfer learning?",
+        "options": [
+          "Copying a dataset to another computer",
+          "Training a model from scratch on every task",
+          "Moving a model between programming languages",
+          "Starting from a model pre-trained on a large dataset and fine-tuning it for your task"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Why use data augmentation (random flips, crops, rotations) when training an image model?",
+        "options": [
+          "To make the files smaller",
+          "To create varied training examples so the model generalises better and overfits less",
+          "To speed up inference",
+          "To remove the need for labels"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

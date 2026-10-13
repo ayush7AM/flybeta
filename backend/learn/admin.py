@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from learn.models import Domain, Level, Lesson, DomainProgress, LevelProgress, CapstoneSubmission
+from learn.models import Domain, Level, Lesson, DomainProgress, LevelProgress, CapstoneSubmission, DailyActivity
 
 
 # ---------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(DomainProgress)
 class DomainProgressAdmin(admin.ModelAdmin):
-    list_display = ('user', 'domain', 'current_level', 'is_unlocked')
+    list_display = ('user', 'domain', 'highest_unlocked_level', 'completed_at', 'certificate_id')
     list_filter = ('domain', 'is_unlocked')
     search_fields = ('user__username',)
 
@@ -66,3 +66,10 @@ class CapstoneSubmissionAdmin(admin.ModelAdmin):
     list_filter = ('domain', 'status', 'passed')
     search_fields = ('user__username', 'domain__title')
     readonly_fields = ('ai_feedback', 'score', 'passed', 'created_at', 'updated_at')
+
+
+@admin.register(DailyActivity)
+class DailyActivityAdmin(admin.ModelAdmin):
+    list_display = ('user', 'date', 'lessons_completed', 'quizzes_passed', 'capstones_passed', 'xp_earned')
+    list_filter = ('date',)
+    search_fields = ('user__username',)

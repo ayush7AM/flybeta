@@ -741,3 +741,28 @@ body {
     font-size: 18px !important;
   }
 }
+
+/* ── Certificate printing ────────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: landscape;
+    margin: 10mm;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .certificate-page {
+    background: #fff !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .certificate {
+    box-shadow: none !important;
+    max-width: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

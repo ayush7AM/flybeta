@@ -2,61 +2,61 @@
   "domain": {
     "name": "ai",
     "title": "AI & Machine Learning",
-    "icon": "brain",
-    "color": "#8B5CF6"
+    "icon": "robot",
+    "color": "#6D28D9"
   },
   "level": {
     "number": 8,
-    "title": "NLP & LLMs",
-    "description": "Understand how ChatGPT works under the hood by predicting text one word at a time.",
+    "title": "LLMs & Prompt Engineering",
+    "description": "Go from \"how does ChatGPT work?\" to using LLMs like an engineer — prompting patterns, tokens, context windows and sampling.",
     "quiz_data": [
       {
-        "question": "What is Generative AI?",
+        "question": "At its core, how does an LLM generate text?",
         "options": [
-          "AI that generates electricity",
-          "AI capable of creating new content (text, images, audio) based on learned patterns",
-          "AI that analyzes data",
-          "AI that plays games"
+          "By looking answers up in a database",
+          "By predicting the most likely next token, one at a time",
+          "By copying whole paragraphs from the internet",
+          "By understanding meaning exactly like a human"
         ],
         "correct_index": 1
       },
       {
-        "question": "What is an LLM?",
+        "question": "What is few-shot prompting?",
         "options": [
-          "Large Language Model",
-          "Limited Logic Machine",
-          "Learning Level Matrix",
-          "Local Language Module"
+          "Sending very short prompts",
+          "Limiting the model to a few words",
+          "Including a few worked examples in the prompt so the model follows the pattern",
+          "Asking the same question several times"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What happens when you raise the temperature?",
+        "options": [
+          "Output becomes more varied and creative, but less predictable",
+          "The model becomes more accurate",
+          "Responses get shorter",
+          "The model uses less memory"
         ],
         "correct_index": 0
       },
       {
-        "question": "How does an LLM generate text?",
+        "question": "What is a context window?",
         "options": [
-          "It copies and pastes from Wikipedia",
-          "It predicts the most likely next word based on context",
-          "It asks a human for help",
-          "It randomly selects words from a dictionary"
+          "The chat box in the app",
+          "The time limit for a request",
+          "The training dataset",
+          "The maximum number of tokens the model can consider at once — prompt plus reply"
         ],
-        "correct_index": 1
+        "correct_index": 3
       },
       {
-        "question": "What is a 'Prompt'?",
+        "question": "Your code needs to read the model's answer. What should the prompt do?",
         "options": [
-          "A quick AI",
-          "The text instruction or question you give to a Generative AI",
-          "A type of neural network",
-          "An error message"
-        ],
-        "correct_index": 1
-      },
-      {
-        "question": "Which of these is a Generative AI tool?",
-        "options": [
-          "Microsoft Excel",
-          "ChatGPT",
-          "Google Maps",
-          "A calculator"
+          "Ask for a friendly paragraph",
+          "Ask for a strict format such as JSON and describe every field",
+          "Use the highest temperature",
+          "Avoid giving any instructions"
         ],
         "correct_index": 1
       }
@@ -66,11 +66,38 @@
     {
       "order": 1,
       "title": "The Ultimate Autocomplete",
-      "content_md": "# Natural Language Processing \ud83d\udde3\ufe0f\n\nHow can an AI write poetry, code, and essays that sound exactly like a human wrote them? The answer is **Large Language Models (LLMs)**.\n\nDespite how magical tools like ChatGPT seem, they do not \"think\". They do not \"understand\" what you are saying. Underneath the hood, they are just incredibly advanced, massive versions of the autocomplete on your phone's keyboard.\n\n## Predicting the Next Word\n\nIf I say \"The quick brown fox jumps over the lazy...\"\n\nYour brain instantly knows the next word is \"dog\". You know this because you've seen that pattern of words together many times before.\n\nAn LLM does the exact same thing using probability.\n\nWe train an LLM by feeding it millions of books, articles, and websites (massive dataset). It reads billions of sentences and learns the mathematical probability of which word comes next in any given sequence.\n\nWhen you ask ChatGPT a question, it is literally just guessing the most mathematically probable next word, over and over and over again, until the sentence is finished.\n\n<flipcard front=\"\ud83e\udd16 Does ChatGPT 'think' about its answers?\" back=\"No! It uses advanced math to predict what the next most likely word should be based on its massive training data.\"></flipcard>\n\n<flipcard front=\"\ud83d\udcf1 How is it different from phone autocomplete?\" back=\"Your phone only looks at the last 2 or 3 words you typed. An LLM looks at the entire context of your paragraph, making its predictions exponentially more accurate.\"></flipcard>\n\n<flipcard front=\"\ud83d\udcd6 What does NLP stand for?\" back=\"Natural Language Processing. It is the branch of AI focused on giving computers the ability to understand text and spoken words.\"></flipcard>",
+      "content_md": "# Natural Language Processing 🗣️\n\nHow can an AI write poetry, code, and essays that sound exactly like a human wrote them? The answer is **Large Language Models (LLMs)**.\n\nDespite how magical tools like ChatGPT seem, they do not \"think\". They do not \"understand\" what you are saying. Underneath the hood, they are just incredibly advanced, massive versions of the autocomplete on your phone's keyboard.\n\n## Predicting the Next Word\n\nIf I say \"The quick brown fox jumps over the lazy...\"\n\nYour brain instantly knows the next word is \"dog\". You know this because you've seen that pattern of words together many times before.\n\nAn LLM does the exact same thing using probability.\n\nWe train an LLM by feeding it millions of books, articles, and websites (massive dataset). It reads billions of sentences and learns the mathematical probability of which word comes next in any given sequence.\n\nWhen you ask ChatGPT a question, it is literally just guessing the most mathematically probable next word, over and over and over again, until the sentence is finished.\n\n<flipcard front=\"🤖 Does ChatGPT 'think' about its answers?\" back=\"No! It uses advanced math to predict what the next most likely word should be based on its massive training data.\"></flipcard>\n\n<flipcard front=\"📱 How is it different from phone autocomplete?\" back=\"Your phone only looks at the last 2 or 3 words you typed. An LLM looks at the entire context of your paragraph, making its predictions exponentially more accurate.\"></flipcard>\n\n<flipcard front=\"📖 What does NLP stand for?\" back=\"Natural Language Processing. It is the branch of AI focused on giving computers the ability to understand text and spoken words.\"></flipcard>",
       "xp_reward": 40,
       "coins_reward": 35,
       "is_mandatory": true,
       "illustration_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+    },
+    {
+      "order": 2,
+      "title": "Prompt Engineering Patterns",
+      "content_md": "# Prompt Engineering Patterns ✍️\n\nAn LLM only sees the text you send it. **Prompt engineering** is the craft of writing that text so the model reliably does what you want — no retraining required.\n\n## Anatomy of a Good Prompt\n\n| Part | What it does | Example |\n|------|--------------|---------|\n| **Role / system instruction** | Sets tone and expertise | \"You are a patient Python tutor for beginners.\" |\n| **Task** | The exact job | \"Explain this error message.\" |\n| **Context** | Facts the model needs | The code and the full traceback |\n| **Constraints** | Limits and rules | \"Under 100 words. No jargon.\" |\n| **Output format** | Shape of the answer | \"Reply as a numbered list.\" |\n\nVague prompt: *\"Explain this.\"*\nStrong prompt: *\"You are a Python tutor. Explain this `KeyError` to a beginner in under 80 words, then show the one-line fix.\"*\n\n## Zero-Shot vs Few-Shot\n\n**Zero-shot** — just ask:\n\n```text\nClassify the sentiment of: \"The battery died after an hour.\"\n```\n\n**Few-shot** — show a couple of worked examples first, so the model copies the pattern:\n\n```text\nReview: \"Love the screen!\"        → positive\nReview: \"Arrived broken.\"         → negative\nReview: \"Battery died in an hour\" →\n```\n\nFew-shot prompting is the quickest way to lock in a format or a labelling style.\n\n<flipcard front=\"🎯 What is few-shot prompting?\" back=\"Putting a few worked input → output examples in the prompt so the model follows the same pattern for the new input.\"></flipcard>\n\n## Ask It to Reason Step by Step\n\nFor multi-step problems (maths, logic, planning), asking the model to **work through the steps before answering** usually improves accuracy:\n\n```text\nA train leaves at 14:10 and the trip takes 2 h 55 min.\nWork it out step by step, then give the arrival time on its own last line.\n```\n\n## Structured Output\n\nWhen code will read the answer, ask for a strict format such as JSON and describe every field:\n\n```python\nfrom google import genai\n\nclient = genai.Client()  # reads GEMINI_API_KEY from the environment\n\nprompt = \"\"\"Extract the event from this message as JSON with keys\n\"title\" (string), \"date\" (YYYY-MM-DD) and \"attendees\" (list of names).\nMessage: Team sync with Priya and Arjun on 3 March 2026.\"\"\"\n\nresponse = client.models.generate_content(\n    model=\"gemini-2.5-flash\",\n    contents=prompt,\n    config={\"response_mime_type\": \"application/json\"},\n)\nprint(response.text)  # {\"title\": \"Team sync\", \"date\": \"2026-03-03\", ...}\n```\n\n## Iterate Like an Engineer\n\n1. Start simple and run it on **several** real inputs, not just one.\n2. When an answer is wrong, find *why* — missing context? unclear format?\n3. Change **one thing at a time** and re-test.\n4. Keep your best prompts in version control, just like code.\n\n<flipcard front=\"🧪 Why test a prompt on many inputs?\" back=\"A prompt that works once can fail on edge cases. Testing a small set of varied inputs shows whether a change really made it better.\"></flipcard>\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 3,
+      "title": "Tokens, Context Windows & Sampling",
+      "content_md": "# Tokens, Context Windows & Sampling 🎛️\n\nTo use LLMs well (and cheaply), you need three numbers in your head: **tokens**, **context window** and **temperature**.\n\n## Tokens: How Models Read\n\nModels don't read words — they read **tokens**, chunks of text produced by a tokenizer (Level 4!).\n\n- Common words are often 1 token; rare words split into several: `unbelievable` → `un` + `believ` + `able`.\n- Rule of thumb for English: **1 token ≈ 4 characters ≈ ¾ of a word**.\n- APIs bill **per token**, for both your prompt (input) and the reply (output).\n\n<flipcard front=\"🪙 Roughly how many tokens is 1,000 English words?\" back=\"About 1,300–1,400 tokens (1 token ≈ ¾ of a word). Code and non-English text often use more tokens per word.\"></flipcard>\n\n## The Context Window\n\nThe **context window** is the most tokens a model can consider at once — your instructions, the conversation history, any documents you paste in, **and** its own reply.\n\n| When you exceed it… | What to do |\n|---------------------|------------|\n| The request is rejected or old messages are cut off | Summarise earlier conversation turns |\n| Long documents don't fit | Retrieve only the relevant chunks (RAG — Level 6!) |\n| Costs climb with every turn | Trim history you no longer need |\n\nBigger windows are convenient, but every token you send costs time and money.\n\n## Sampling: How \"Creative\" Should It Be?\n\nAt each step the model has a probability for every possible next token. **Sampling settings** decide how it picks:\n\n| Setting | Low value | High value |\n|---------|-----------|------------|\n| **Temperature** | Focused, predictable — always picks likely tokens | Varied, creative — takes more risks |\n| **Top-p** | Only the most likely tokens are allowed | A wider pool of tokens is allowed |\n| **Max output tokens** | Short replies, lower cost | Longer replies allowed |\n\n```python\nfrom google import genai\nfrom google.genai import types\n\nclient = genai.Client()\n\nresponse = client.models.generate_content(\n    model=\"gemini-2.5-flash\",\n    contents=\"Suggest a name for a study-planner app.\",\n    config=types.GenerateContentConfig(temperature=1.2, max_output_tokens=50),\n)\nprint(response.text)\n```\n\n| Task | Good temperature |\n|------|------------------|\n| Extracting data, classifying, answering from documents | 0 – 0.3 |\n| Explanations and tutoring | 0.4 – 0.7 |\n| Brainstorming names, stories | 0.8 – 1.2 |\n\n<flipcard front=\"🌡️ What does a high temperature do?\" back=\"It makes the model more willing to pick less likely tokens — more varied and creative output, but also less predictable and more likely to go off-track.\"></flipcard>\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 4,
+      "title": "Hands-On: Build an AI Study Buddy CLI",
+      "content_md": "# Hands-On: Build an AI Study Buddy CLI 🤖\n\nLet's combine everything from this level into a small chat app that runs in your terminal and **remembers the conversation**.\n\n## 1. Set Up\n\n```bash\npip install google-genai\nexport GEMINI_API_KEY=\"your-key-here\"   # Windows PowerShell: $env:GEMINI_API_KEY=\"your-key-here\"\n```\n\n## 2. The Code — `study_buddy.py`\n\n```python\nfrom google import genai\nfrom google.genai import types\n\nclient = genai.Client()  # uses GEMINI_API_KEY\n\nSYSTEM = (\n    \"You are a friendly study buddy for a beginner learning AI. \"\n    \"Explain with simple analogies, keep answers under 120 words, \"\n    \"and end with one short question that checks understanding.\"\n)\n\nchat = client.chats.create(\n    model=\"gemini-2.5-flash\",\n    config=types.GenerateContentConfig(system_instruction=SYSTEM, temperature=0.6),\n)\n\nprint(\"Study Buddy ready! Type 'quit' to exit.\")\nwhile True:\n    question = input(\"\\nYou: \").strip()\n    if question.lower() in {\"quit\", \"exit\"}:\n        break\n    if not question:\n        continue\n    reply = chat.send_message(question)\n    print(f\"\\nBuddy: {reply.text}\")\n```\n\nThe `chat` object keeps the history for you — each new message is sent **with** the earlier turns, which is how the model \"remembers\".\n\n## 3. Try It\n\n```text\nYou: What is overfitting?\nBuddy: Imagine memorising last year's exam answers... Quick check: why might that fail on a new exam?\n```\n\n## 4. Level-Up Challenges\n\n- Add a `/quiz` command that asks the model for **3 multiple-choice questions as JSON** and grades your answers.\n- Print the number of tokens used after each reply (look at `reply.usage_metadata`).\n- Add a `--strict` flag that sets `temperature=0` and compare the answers.\n\n<flipcard front=\"🧠 How does the chat remember earlier messages?\" back=\"It doesn't remember on its own — the full conversation history is sent along with every new message, so the model sees it inside its context window.\"></flipcard>\n",
+      "xp_reward": 35,
+      "coins_reward": 20,
+      "is_mandatory": false,
+      "lesson_type": "lab"
     }
   ]
 }

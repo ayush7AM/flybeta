@@ -124,7 +124,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# Streaks and the activity heatmap count days in this zone
+TIME_ZONE = os.environ.get('TIME_ZONE', 'Asia/Kolkata')
 
 USE_I18N = True
 
@@ -200,3 +201,50 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # CORS — allow all in development
 # ---------------------------------------------------------------------------
 CORS_ALLOW_ALL_ORIGINS = True  # Lock down in production
+
+
+# ---------------------------------------------------------------------------
+# Logging — everything to stdout, where the host / process manager collects it
+# ---------------------------------------------------------------------------
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s %(levelname)s %(name)s: %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': LOG_LEVEL,
+    },
+    'loggers': {
+        # Request lines from runserver keep Django's own format
+        'django.server': {'level': 'INFO', 'propagate': True},
+        'django.db.backends': {'level': 'WARNING'},
+    },
+}
+
+
+# ---------------------------------------------------------------------------
+# Error tracking — Sentry, enabled only when SENTRY_DSN is set
+# ---------------------------------------------------------------------------
+SENTRY_DSN = os.environ.get('SENTRY_DSN', '')
+
+if SENTRY_DSN:
+    import sentry_sdk
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        environment=os.environ.get('SENTRY_ENVIRONMENT', 'development' if DEBUG else 'production'),
+        traces_sample_rate=float(os.environ.get('SENTRY_TRACES_SAMPLE_RATE', '0')),
+        send_default_pii=False,  # no user emails / IPs in error reports
+    )

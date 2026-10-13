@@ -8,7 +8,59 @@
   "level": {
     "number": 7,
     "title": "MLOps & AI Deployment",
-    "description": "Ship your models to production — build API endpoints, containerize AI workloads, monitor for drift, and understand the ethics of deploying AI at scale."
+    "description": "Ship your models to production — build API endpoints, containerize AI workloads, monitor for drift, and understand the ethics of deploying AI at scale.",
+    "quiz_data": [
+      {
+        "question": "Why do we serialize (save) a trained model, e.g. with joblib or ONNX?",
+        "options": [
+          "So it can be loaded and served later without retraining",
+          "To make it more accurate",
+          "To delete the training data",
+          "To turn it into a dataset"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is a model registry for?",
+        "options": [
+          "Storing raw training images",
+          "Tracking model versions, their metrics and which one is in production",
+          "Writing documentation",
+          "Labeling data"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "In the MLOps lessons, what is FastAPI used for?",
+        "options": [
+          "Training neural networks",
+          "Visualising data",
+          "Exposing a model as an HTTP API that returns predictions",
+          "Cleaning CSV files"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is data drift?",
+        "options": [
+          "A bug in the training code",
+          "Moving data between clouds",
+          "Losing data during a backup",
+          "Live input data changing so it no longer looks like the training data"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Why package an ML service in a Docker container?",
+        "options": [
+          "So the model, code and dependencies run the same way everywhere",
+          "Because Docker makes models more accurate",
+          "To avoid writing an API",
+          "To skip testing"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

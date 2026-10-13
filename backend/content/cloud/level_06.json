@@ -8,7 +8,59 @@
   "level": {
     "number": 6,
     "title": "Serverless Architecture",
-    "description": "Write code that runs without managing servers — understand Function-as-a-Service, event-driven triggers, cold starts, and API Gateways."
+    "description": "Write code that runs without managing servers — understand Function-as-a-Service, event-driven triggers, cold starts, and API Gateways.",
+    "quiz_data": [
+      {
+        "question": "What is Function-as-a-Service (FaaS)?",
+        "options": [
+          "Renting a whole server by the month",
+          "Running small functions on demand without managing servers",
+          "A database product",
+          "A type of CDN"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "How are serverless functions usually billed?",
+        "options": [
+          "Per invocation and execution time",
+          "A fixed monthly fee per server",
+          "Per line of code",
+          "Per developer seat"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is a cold start?",
+        "options": [
+          "A server rebooting after a power cut",
+          "A function that ran out of memory",
+          "Extra latency while a new function instance is initialised after being idle",
+          "Deploying in winter"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Which is an example of an event-driven trigger?",
+        "options": [
+          "A developer opening their laptop",
+          "A cron job written on paper",
+          "Manually copying files",
+          "A file upload to a storage bucket invoking a function"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What role does an API Gateway play in a serverless app?",
+        "options": [
+          "It exposes HTTP endpoints and routes requests to functions",
+          "It stores user passwords",
+          "It compiles the code",
+          "It replaces the database"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

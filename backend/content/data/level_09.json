@@ -2,61 +2,61 @@
   "domain": {
     "name": "data",
     "title": "Data Science",
-    "icon": "database",
-    "color": "#3B82F6"
+    "icon": "chart-bar",
+    "color": "#059669"
   },
   "level": {
     "number": 9,
     "title": "Correlation vs Causation",
-    "description": "Learn the most dangerous trap in Data Science, and why two things moving together doesn't mean they are related.",
+    "description": "Learn the most dangerous trap in data science, then the tools that get you from correlation to real evidence: significance and A/B testing.",
     "quiz_data": [
       {
-        "question": "What is Predictive Analytics?",
+        "question": "Correlation does NOT imply…",
         "options": [
-          "Predicting the weather",
-          "Using historical data and machine learning to forecast future outcomes",
-          "Looking at past data to write a report",
-          "Guessing random numbers"
-        ],
-        "correct_index": 1
-      },
-      {
-        "question": "Which of these is an example of Predictive Analytics?",
-        "options": [
-          "Counting how many sales were made yesterday",
-          "Calculating the average age of customers",
-          "Forecasting which customers are most likely to cancel their subscription next month",
-          "Making a pie chart"
-        ],
-        "correct_index": 2
-      },
-      {
-        "question": "What is a 'Feature' in predictive modeling?",
-        "options": [
-          "A cool part of an app",
-          "An input variable or attribute used to make predictions",
-          "The final prediction",
-          "A bug in the code"
-        ],
-        "correct_index": 1
-      },
-      {
-        "question": "What is the 'Target Variable'?",
-        "options": [
-          "The output you are trying to predict",
-          "The number of rows in the dataset",
-          "The person running the model",
-          "The speed of the algorithm"
+          "Causation",
+          "A relationship",
+          "A pattern",
+          "Data"
         ],
         "correct_index": 0
       },
       {
-        "question": "Can predictive analytics guarantee 100% accuracy?",
+        "question": "Ice cream sales and shark attacks rise together. What is the most likely explanation?",
         "options": [
-          "Yes, if the computer is fast enough",
-          "No, it provides probabilities based on patterns, not absolute certainties",
-          "Yes, if you use Deep Learning",
-          "No, it is always wrong"
+          "Ice cream causes shark attacks",
+          "Shark attacks cause ice cream sales",
+          "A hidden factor — hot weather — drives both",
+          "It is a data entry error"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is a p-value?",
+        "options": [
+          "The probability the hypothesis is true",
+          "The size of the effect",
+          "The number of users in the test",
+          "How likely a result this extreme would be if there were no real effect"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "With the usual 0.05 threshold, a p-value of 0.01 is…",
+        "options": [
+          "Statistically significant",
+          "Not significant",
+          "Proof the result is important",
+          "A sign the test is broken"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Why do A/B tests assign users to groups at random?",
+        "options": [
+          "To save money",
+          "So that the change is the only systematic difference between the groups",
+          "Because it is faster",
+          "To pick the best users for the new version"
         ],
         "correct_index": 1
       }
@@ -66,11 +66,38 @@
     {
       "order": 1,
       "title": "The Ice Cream Trap",
-      "content_md": "# Correlation vs Causation \ud83c\udf66\ud83e\udd88\n\nThere is a famous phrase in statistics: **\"Correlation does not imply Causation.\"** \n\nFalling into this trap is the fastest way for a Data Scientist to make a terrible, million-dollar mistake.\n\n## The Trap\n\nImagine you are analyzing data for a beach town. You plot two lines on a graph: \n1. Total Ice Cream Sales\n2. Total Shark Attacks\n\nYou notice something terrifying. Every single time Ice Cream Sales go up, Shark Attacks also go up! The lines match perfectly. They are highly **Correlated**.\n\nA bad Data Scientist would look at this chart and run to the Mayor shouting: *\"Ban ice cream immediately! Eating ice cream causes shark attacks!\"*\n\n<flipcard front=\"\ud83d\udcc8 What is Correlation?\" back=\"When two variables move up or down together at the same time. But just because they move together doesn't mean one is controlling the other!\"></flipcard>\n\n## The Hidden Factor\n\nWhy did the Data Scientist fail? Because they missed the **hidden variable**: The Weather.\n\nWhen it gets hot outside (Summer), more people buy ice cream. Also, when it gets hot outside, more people swim in the ocean, leading to more shark attacks.\n\nIce cream doesn't *cause* shark attacks. Summer causes both of them.\n\n<flipcard front=\"\ud83e\udd88 What is Causation?\" back=\"When an event directly makes another event happen (cause and effect). It is much harder to prove than correlation.\"></flipcard>\n\n<flipcard front=\"\ud83d\udea8 Why is this dangerous in business?\" back=\"If a company assumes a marketing campaign 'caused' a spike in sales just because they happened at the same time, they might waste millions of dollars repeating a useless campaign.\"></flipcard>",
+      "content_md": "# Correlation vs Causation 🍦🦈\n\nThere is a famous phrase in statistics: **\"Correlation does not imply Causation.\"** \n\nFalling into this trap is the fastest way for a Data Scientist to make a terrible, million-dollar mistake.\n\n## The Trap\n\nImagine you are analyzing data for a beach town. You plot two lines on a graph: \n1. Total Ice Cream Sales\n2. Total Shark Attacks\n\nYou notice something terrifying. Every single time Ice Cream Sales go up, Shark Attacks also go up! The lines match perfectly. They are highly **Correlated**.\n\nA bad Data Scientist would look at this chart and run to the Mayor shouting: *\"Ban ice cream immediately! Eating ice cream causes shark attacks!\"*\n\n<flipcard front=\"📈 What is Correlation?\" back=\"When two variables move up or down together at the same time. But just because they move together doesn't mean one is controlling the other!\"></flipcard>\n\n## The Hidden Factor\n\nWhy did the Data Scientist fail? Because they missed the **hidden variable**: The Weather.\n\nWhen it gets hot outside (Summer), more people buy ice cream. Also, when it gets hot outside, more people swim in the ocean, leading to more shark attacks.\n\nIce cream doesn't *cause* shark attacks. Summer causes both of them.\n\n<flipcard front=\"🦈 What is Causation?\" back=\"When an event directly makes another event happen (cause and effect). It is much harder to prove than correlation.\"></flipcard>\n\n<flipcard front=\"🚨 Why is this dangerous in business?\" back=\"If a company assumes a marketing campaign 'caused' a spike in sales just because they happened at the same time, they might waste millions of dollars repeating a useless campaign.\"></flipcard>",
       "xp_reward": 45,
       "coins_reward": 40,
       "is_mandatory": true,
       "illustration_url": "https://images.unsplash.com/photo-1555529733-0e670560f7e1?w=800&q=80"
+    },
+    {
+      "order": 2,
+      "title": "Statistical Significance & p-values",
+      "content_md": "# Statistical Significance & p-values 🎲\n\nYour new checkout page converts at 5.4% and the old one at 5.0%. Better — or just luck? **Statistical significance** helps you tell a real effect from random noise.\n\n## The Null Hypothesis\n\nEvery test starts with a sceptical assumption:\n\n- **Null hypothesis (H₀):** there is no real difference — any gap is chance.\n- **Alternative hypothesis (H₁):** there is a real difference.\n\nThe data then tells us how surprising our result would be **if H₀ were true**.\n\n## What a p-value Means\n\n> The **p-value** is the probability of seeing a result at least this extreme **if there were really no effect**.\n\n| p-value | Interpretation (with the usual α = 0.05) |\n|---------|------------------------------------------|\n| 0.01 | Very unlikely under \"no effect\" → **statistically significant** |\n| 0.04 | Significant, but only just |\n| 0.30 | Quite plausible under \"no effect\" → not significant |\n\n<flipcard front=\"🎲 What does p = 0.01 mean?\" back=\"If there were truly no effect, a result this extreme would happen only about 1% of the time — so we reject the 'no effect' assumption at the usual 5% threshold.\"></flipcard>\n\n## Common Misreadings\n\n| ❌ Wrong | ✅ Right |\n|---------|---------|\n| \"p = 0.03 means a 97% chance the effect is real\" | It's about the data *assuming* no effect, not the probability the hypothesis is true |\n| \"Significant means important\" | A tiny, useless difference can be significant with a huge sample |\n| \"Not significant proves there's no effect\" | You may simply not have enough data |\n\n## Run a Test in Python\n\n```python\nfrom scipy import stats\n\nold_page = [12.1, 11.8, 13.0, 12.6, 11.9, 12.4, 12.8]   # seconds on page\nnew_page = [13.4, 13.9, 12.8, 14.1, 13.6, 13.2, 14.0]\n\nt_stat, p_value = stats.ttest_ind(new_page, old_page, equal_var=False)\nprint(f\"p = {p_value:.4f}\")\n```\n\n## Effect Size and Confidence Intervals\n\nAlways report **how big** the difference is, with a **confidence interval** — e.g. *\"+0.4 percentage points (95% CI: +0.1 to +0.7)\"*. That tells decision-makers whether it's worth acting on.\n\n<flipcard front=\"📐 Why report effect size, not just p?\" back=\"The p-value only says whether an effect is likely real; the effect size and its confidence interval say how big it is — which is what decides whether it matters.\"></flipcard>\n\n## Beware p-hacking\n\nTesting 20 metrics and reporting the one that hit p < 0.05 is **p-hacking** — by chance alone about 1 in 20 will. Decide your main metric **before** you look at the data.\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 3,
+      "title": "A/B Testing Done Right",
+      "content_md": "# A/B Testing Done Right 🧪\n\nCorrelation can't prove causation — but a well-run experiment can. An **A/B test** randomly splits users between two versions, so the **only** systematic difference between the groups is the change you made.\n\n<flipcard front=\"🎰 Why must users be assigned randomly?\" back=\"Randomisation balances everything else — age, device, mood, time of day — across both groups, so a difference in results can be credited to the change itself.\"></flipcard>\n\n## The Five Steps\n\n1. **Hypothesis:** \"A shorter sign-up form will increase completed sign-ups.\"\n2. **One primary metric**, chosen in advance: sign-up conversion rate.\n3. **Sample size**, calculated before you start (see below).\n4. **Run** until you reach that sample size — at least one full week to cover weekday/weekend patterns.\n5. **Analyse once**, at the planned end.\n\n## How Many Users Do You Need?\n\nSmaller effects need more users to detect:\n\n```python\nfrom statsmodels.stats.power import NormalIndPower\nfrom statsmodels.stats.proportion import proportion_effectsize\n\neffect = proportion_effectsize(0.055, 0.050)   # hoping to lift 5.0% → 5.5%\nn_per_group = NormalIndPower().solve_power(effect_size=effect, alpha=0.05, power=0.8)\nprint(round(n_per_group))   # roughly 31,000 users per group\n```\n\n<flipcard front=\"🔢 Why calculate sample size before starting?\" back=\"It tells you how long to run the test to reliably detect the effect you care about — and stops you ending early on a lucky streak.\"></flipcard>\n\n## Pitfalls That Ruin Experiments\n\n| Pitfall | Why it's a problem | Fix |\n|---------|--------------------|-----|\n| **Peeking** and stopping when p < 0.05 | Random swings cross 0.05 early by chance | Fix the duration in advance |\n| **Too many metrics** | Some will look significant by luck | One primary metric; others are just for context |\n| **Sample ratio mismatch** | A 50/50 split comes out 53/47 — something is broken | Check the split before reading results |\n| **Novelty effect** | People click new things just because they're new | Run long enough for it to fade |\n| **Changing the test mid-way** | You're no longer measuring one thing | Restart the test |\n\n## Reading the Result\n\n```text\nControl:   5,000 / 100,000 signed up  (5.0%)\nTreatment: 5,450 / 100,000 signed up  (5.45%)\nLift: +0.45 pts, p = 0.0001, 95% CI [+0.25, +0.65] pts\n```\n\nSignificant **and** large enough to matter → ship it. Significant but tiny → probably not worth the complexity. Not significant → you didn't find evidence of an effect; that's a valid result too.\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 4,
+      "title": "Hands-On: Analyse an A/B Test in Python",
+      "content_md": "# Hands-On: Analyse an A/B Test in Python 🔬\n\nYou've just run a two-week test of a new **\"Buy now\"** button. Let's decide whether to ship it.\n\n## 1. Load the Results\n\n```python\nimport pandas as pd\n\ndf = pd.read_csv(\"ab_test.csv\")   # columns: user_id, group (\"control\"/\"treatment\"), converted (0/1)\nsummary = df.groupby(\"group\")[\"converted\"].agg(users=\"count\", conversions=\"sum\")\nsummary[\"rate\"] = summary[\"conversions\"] / summary[\"users\"]\nprint(summary)\n```\n\n## 2. Sanity Check the Split\n\n```python\nfrom scipy.stats import chisquare\n\ncounts = summary[\"users\"].values\nprint(\"Split:\", counts, \"| p =\", chisquare(counts).pvalue)\n```\n\nA very small p-value here means the 50/50 split is broken (**sample ratio mismatch**) — fix that before trusting anything else.\n\n## 3. Test the Difference\n\n```python\nfrom statsmodels.stats.proportion import proportions_ztest, confint_proportions_2indep\n\nconversions = summary.loc[[\"treatment\", \"control\"], \"conversions\"].values\nusers = summary.loc[[\"treatment\", \"control\"], \"users\"].values\n\nz, p_value = proportions_ztest(conversions, users)\nlow, high = confint_proportions_2indep(conversions[0], users[0], conversions[1], users[1])\n\nlift = conversions[0] / users[0] - conversions[1] / users[1]\nprint(f\"Lift: {lift:+.2%}   p = {p_value:.4f}   95% CI: [{low:+.2%}, {high:+.2%}]\")\n```\n\n## 4. Make the Call\n\nWrite a three-line recommendation:\n\n1. **Result:** what changed and by how much (with the confidence interval).\n2. **Confidence:** significant or not, and whether the split was healthy.\n3. **Decision:** ship, don't ship, or run longer — and why.\n\n## 5. Challenges\n\n- Break the results down by device (mobile vs desktop). Be careful — this is exploratory, not proof.\n- Simulate peeking: re-run the test after every day of data and plot the p-value. Notice how it wanders across 0.05.\n",
+      "xp_reward": 35,
+      "coins_reward": 20,
+      "is_mandatory": false,
+      "lesson_type": "lab"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logo.webp';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function Logo({ to = '/', className = '', compact = false }) {

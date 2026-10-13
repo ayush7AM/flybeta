@@ -2,13 +2,13 @@
   "domain": {
     "name": "data",
     "title": "Data Science",
-    "icon": "database",
-    "color": "#3B82F6"
+    "icon": "chart-bar",
+    "color": "#059669"
   },
   "level": {
     "number": 10,
     "title": "The Capstone",
-    "description": "Enter the Boss Arena. It's time to build a real Python data pipeline and push it to GitHub.",
+    "description": "The Boss Arena. Plan, build and ship a real data project to GitHub — then let the AI evaluator grade it for your certificate.",
     "quiz_data": [
       {
         "question": "What is the primary goal of the Data Science Capstone?",
@@ -66,11 +66,29 @@
     {
       "order": 1,
       "title": "Building the Pipeline",
-      "content_md": "# The Capstone Project \ud83c\udfc6\n\nYou've learned how to think like a Data Scientist. Now it's time to act like one. We are going to download a messy dataset, clean it using Python and Pandas, and push the code to GitHub.\n\n## Step 1: Find the Data\n\nGo to [Kaggle.com](https://www.kaggle.com/) (the home of Data Science) and download a free CSV dataset. Find something that interests you\u2014video game sales, housing prices, or sports statistics.\n\n<flipcard front=\"\ud83c\udf10 What is Kaggle?\" back=\"The world's largest community for Data Scientists. It offers thousands of free datasets, tutorials, and machine learning competitions.\"></flipcard>\n\n## Step 2: Write the Pandas Script\n\nCreate a Python file called `clean_data.py`. We are going to tell our Robot Assistant to clean the kitchen!\n\n```python\nimport pandas as pd\n\n# 1. Load the data\ndf = pd.read_csv('my_messy_data.csv')\n\n# 2. Drop the empty rows (take out the trash)\ndf = df.dropna()\n\n# 3. Find a trend (sort the candies)\naverage_price = df['Price'].mean()\n\nprint(f\"The average price is: {average_price}\")\n```\n\n<flipcard front=\"\ud83e\uddf9 What does .dropna() do?\" back=\"It tells Pandas to scan the entire spreadsheet and automatically delete any row that has missing or blank information.\"></flipcard>\n\n## Step 3: Push to GitHub\n\nInitialize a git repository, commit your Python script (but ignore the giant CSV file using `.gitignore`), and push it to your GitHub profile to build your portfolio!\n\n<flipcard front=\"\ud83d\ude80 Congratulations!\" back=\"You have successfully completed the Data Science Track. You are now ready to tackle real-world data problems!\"></flipcard>",
+      "content_md": "# The Capstone Project 🏆\n\nYou've learned how to think like a Data Scientist. Now it's time to act like one. We are going to download a messy dataset, clean it using Python and Pandas, and push the code to GitHub.\n\n## Step 1: Find the Data\n\nGo to [Kaggle.com](https://www.kaggle.com/) (the home of Data Science) and download a free CSV dataset. Find something that interests you—video game sales, housing prices, or sports statistics.\n\n<flipcard front=\"🌐 What is Kaggle?\" back=\"The world's largest community for Data Scientists. It offers thousands of free datasets, tutorials, and machine learning competitions.\"></flipcard>\n\n## Step 2: Write the Pandas Script\n\nCreate a Python file called `clean_data.py`. We are going to tell our Robot Assistant to clean the kitchen!\n\n```python\nimport pandas as pd\n\n# 1. Load the data\ndf = pd.read_csv('my_messy_data.csv')\n\n# 2. Drop the empty rows (take out the trash)\ndf = df.dropna()\n\n# 3. Find a trend (sort the candies)\naverage_price = df['Price'].mean()\n\nprint(f\"The average price is: {average_price}\")\n```\n\n<flipcard front=\"🧹 What does .dropna() do?\" back=\"It tells Pandas to scan the entire spreadsheet and automatically delete any row that has missing or blank information.\"></flipcard>\n\n## Step 3: Push to GitHub\n\nInitialize a git repository, commit your Python script (but ignore the giant CSV file using `.gitignore`), and push it to your GitHub profile to build your portfolio!\n\n<flipcard front=\"➡️ What's next?\" back=\"This warm-up pipeline is your starting point. In the next two lessons you'll plan a full capstone and submit it to the AI evaluator to earn your certificate.\"></flipcard>",
       "xp_reward": 100,
       "coins_reward": 100,
       "is_mandatory": true,
       "illustration_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+    },
+    {
+      "order": 2,
+      "title": "Plan Your Data Capstone",
+      "content_md": "# Plan Your Data Capstone 🗺️\n\nA strong data capstone answers **one clear question** with clean data, honest analysis and a story someone can act on.\n\n## Start With a Question, Not a Dataset\n\n| Weak | Strong |\n|------|--------|\n| \"Analyse this Netflix dataset\" | \"Which genres have grown fastest on Netflix since 2015?\" |\n| \"Do machine learning on house prices\" | \"Which features best predict rent in Bengaluru, and how accurate can we get?\" |\n\n## Choose Your Path\n\n| Path | You'll show |\n|------|-------------|\n| **Analysis & storytelling** | Cleaning, EDA, clear charts, conclusions |\n| **Prediction** | Features, a baseline, a model, honest evaluation |\n| **Experiment** | Hypothesis, A/B-style test, significance, recommendation |\n\n<flipcard front=\"❓ Why start with a question?\" back=\"A specific question tells you which data you need, which methods fit and when you're finished — and makes your results easy to judge.\"></flipcard>\n\n## Data Sources\n\nKaggle, data.gov.in, the World Bank, your city's open-data portal — or data you collect yourself. Check the licence and note the source in your README.\n\n## Plan Your Repository\n\n```text\ndata-capstone/\n├── README.md               # question, findings, how to run\n├── requirements.txt\n├── data/\n│   ├── README.md           # where the data comes from + download link\n│   └── sample.csv          # a small sample only — not the full dataset\n├── notebooks/\n│   └── analysis.ipynb      # exploration with explanations\n├── src/\n│   ├── clean.py            # reusable cleaning steps\n│   └── train.py            # if you build a model\n└── reports/\n    └── figures/            # charts used in the README\n```\n\n## Milestones\n\n1. **Day 1:** Question written, data downloaded, first look.\n2. **Day 2–3:** Cleaning pipeline in `src/clean.py`.\n3. **Day 4:** EDA with 3–5 charts that answer the question.\n4. **Day 5:** Model or statistical test, compared against a baseline.\n5. **Day 6:** README with your findings and limitations.\n6. **Day 7:** Submit!\n",
+      "xp_reward": 30,
+      "coins_reward": 20,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 3,
+      "title": "Ship It: Submission Checklist",
+      "content_md": "# Ship It: Submission Checklist 🚀\n\nThe **AI Capstone Evaluator** below reads your public GitHub repository and grades it out of 100. **60 or more passes** and completes the Data Science track — **+500 XP** and a shareable **certificate**. 🎓\n\nThe evaluator reads your notebooks' **code and markdown cells** (not their outputs), so explain your reasoning in markdown cells and summarise results in your README.\n\n## What the Reviewer Looks For\n\n| Area | What earns points |\n|------|-------------------|\n| **A clear question** | Stated up front and actually answered |\n| **Data handling** | Cleaning steps that are explained and reproducible |\n| **Analysis** | Charts and statistics that support your conclusions |\n| **Rigour** | A baseline, a proper train/test (or time-based) split, honest metrics |\n| **Communication** | Findings in plain language, including limitations |\n| **Reproducibility** | `requirements.txt` and clear run instructions |\n\n## README Template\n\n```markdown\n# Which genres grew fastest on Netflix since 2015?\n\n## Findings\n1. International TV grew 6x — the fastest of any genre.\n2. Documentaries grew steadily but remain under 10% of titles.\n\n![Genre growth](reports/figures/genre_growth.png)\n\n## Data\nNetflix titles dataset (Kaggle, CC0) — see data/README.md to download.\n\n## Method\nCleaned dates and genres (src/clean.py), counted titles per genre per year, compared growth rates.\n\n## Limitations\nCounts titles, not viewing hours. Data ends in 2021.\n\n## Run it\npip install -r requirements.txt\npython src/clean.py && jupyter notebook notebooks/analysis.ipynb\n```\n\n## Final Checklist ✅\n\n- [ ] Repository is **public** on GitHub\n- [ ] README states the question, the key findings (with a chart or two) and the limitations\n- [ ] Cleaning is in code, not done by hand in Excel\n- [ ] Large datasets are **not** committed — a small sample plus a download link\n- [ ] `requirements.txt` lists every library\n- [ ] Notebooks explain each step in markdown cells\n\n<flipcard front=\"🗂️ Why not commit the full dataset?\" back=\"Big files bloat the repo and may break the data's licence. A small sample plus a download link keeps the project reproducible and light.\"></flipcard>\n\n## Submit 👇\n\nPaste your repository URL into the evaluator below. Use the feedback to improve and resubmit if you need to — your best attempt counts.\n",
+      "xp_reward": 30,
+      "coins_reward": 20,
+      "is_mandatory": true,
+      "lesson_type": "theory"
     }
   ]
 }

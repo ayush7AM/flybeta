@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { updateActiveTheme } from '../services/api';
 import EditProfileModal from '../components/EditProfileModal';
 import { useStartTour } from '../components/tour/tour';
+import ActivityHeatmap from '../components/ActivityHeatmap';
+import StreakRestoreCard from '../components/StreakRestoreCard';
 
 // ── Rank badge styling ──────────────────────────────────────────────────
 
@@ -37,6 +39,31 @@ const TRACK_META = {
   ai:             { label: 'AI & ML',           color: '#6D28D9', icon: '🤖' },
   data:           { label: 'Data Science',      color: '#059669', icon: '📊' },
 };
+
+function StatTile({ icon, value, label, className = '', style }) {
+  return (
+    <div className={`border-2 border-ink px-3 py-2.5 flex flex-col gap-1 min-w-0 ${className}`} style={style}>
+      <span className="flex items-center gap-2 font-black text-lg leading-tight min-w-0">
+        <span aria-hidden="true">{icon}</span>
+        <span className="truncate">{value}</span>
+      </span>
+      <span className="label-mono opacity-80 truncate" style={{ fontSize: '10px' }}>{label}</span>
+    </div>
+  );
+}
+
+function RankChip({ rank, muted = false }) {
+  const colors = RANK_COLORS[rank] || RANK_COLORS.Novice;
+  return (
+    <span
+      className="inline-flex items-center gap-2 whitespace-nowrap label-mono font-bold px-3 py-2 border-2 border-ink shrink-0"
+      style={{ backgroundColor: colors.bg, color: colors.text, opacity: muted ? 0.75 : 1 }}
+    >
+      <span aria-hidden="true">{RANK_ICONS[rank] || '🌱'}</span>
+      {rank}
+    </span>
+  );
+}
 
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -114,16 +141,19 @@ export default function DashboardPage() {
         </button>
       </div>
 
+      {/* ── Broken streak? Offer a coin-paid restore ────────────────── */}
+      <StreakRestoreCard />
+
       {/* ── Hero Identity Card ──────────────────────────────────────── */}
       <div
         id="tour-identity"
-        className="brutalist-card p-6 md:p-8"
+        className="brutalist-card p-4 md:p-8"
         style={{ background: 'var(--color-surface)' }}
       >
-        <div className="flex flex-col md:flex-row md:items-center gap-6">
+        <div className="flex items-start gap-4 md:gap-6">
           {/* Avatar / Rank Badge */}
           <div
-            className="w-20 h-20 md:w-24 md:h-24 border-4 border-ink shrink-0 overflow-hidden"
+            className="w-16 h-16 md:w-24 md:h-24 border-4 border-ink shrink-0 overflow-hidden"
             style={{
               backgroundColor: rankColor.bg,
               boxShadow: 'var(--shadow-brutal-sm)',
@@ -136,79 +166,67 @@ export default function DashboardPage() {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center" style={{ fontSize: '2.5rem' }}>
+              <div className="w-full h-full flex items-center justify-center text-3xl md:text-[2.5rem]">
                 {rankIcon}
               </div>
             )}
           </div>
 
           {/* Identity */}
-          <div className="flex-1 space-y-1">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h2 className="heading-lg" style={{ margin: 0, textTransform: 'none' }}>
-                {profile?.name || profile?.username}
-              </h2>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <h2 className="heading-lg break-words" style={{ margin: 0, textTransform: 'none' }}>
+                  {profile?.name || profile?.username}
+                </h2>
+                <p className="label-mono text-muted mt-1" style={{ textTransform: 'none' }}>@{profile?.username}</p>
+              </div>
               <button
                 onClick={() => setEditModalOpen(true)}
-                className="brutalist-badge bg-canvas text-ink cursor-pointer hover:bg-border-light transition-colors"
+                className="brutalist-badge bg-canvas text-ink cursor-pointer hover:bg-border-light transition-colors shrink-0"
                 title="Edit Profile"
               >
                 ✏️ Edit
               </button>
             </div>
-            <p className="label-mono text-muted" style={{ textTransform: 'none' }}>@{profile?.username}</p>
 
             {/* Bio */}
             {profile?.bio && (
-              <p className="text-sm mt-1" style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-body)', textTransform: 'none' }}>
+              <p className="text-sm mt-2 mb-0" style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-body)', textTransform: 'none' }}>
                 {profile.bio}
               </p>
             )}
-
-            {/* Stat Badges */}
-            <div className="flex flex-wrap gap-3 mt-3">
-              <span className="brutalist-badge bg-cobalt-light text-cobalt">
-                ⚡ {profile?.total_xp?.toLocaleString() || 0} XP
-              </span>
-              <span className="brutalist-badge bg-gold-light text-gold">
-                💰 {profile?.coins?.toLocaleString() || 0}
-              </span>
-              <span className="brutalist-badge bg-flame-light text-flame">
-                🔥 {profile?.streak || 0} day streak
-              </span>
-              <span
-                className="brutalist-badge"
-                style={{
-                  backgroundColor: rankColor.bg,
-                  color: rankColor.text,
-                  fontWeight: 700,
-                }}
-              >
-                {rankIcon} {rank}
-              </span>
-            </div>
           </div>
+        </div>
+
+        {/* Stat Tiles */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+          <StatTile icon="⚡" value={profile?.total_xp?.toLocaleString() || 0} label="Total XP" className="bg-cobalt-light text-cobalt" />
+          <StatTile icon="💰" value={profile?.coins?.toLocaleString() || 0} label="Coins" className="bg-gold-light text-gold" />
+          <StatTile
+            icon="🔥"
+            value={profile?.streak || 0}
+            label={`Streak · best ${profile?.best_streak || 0}`}
+            className="bg-flame-light text-flame"
+          />
+          <StatTile icon={rankIcon} value={rank} label="Rank" style={{ backgroundColor: rankColor.bg, color: rankColor.text }} />
         </div>
       </div>
 
       {/* ── XP & Rank Progress ──────────────────────────────────────── */}
-      <div id="tour-rank" className="brutalist-card p-6" style={{ background: 'var(--color-surface)' }}>
+      <div id="tour-rank" className="brutalist-card p-4 md:p-6" style={{ background: 'var(--color-surface)' }}>
         <h3 className="heading-md mb-4">RANK PROGRESSION</h3>
 
-        <div className="flex items-center justify-between mb-2">
-          <span
-            className="label-mono font-bold px-3 py-1 border-2 border-ink"
-            style={{
-              backgroundColor: rankColor.bg,
-              color: rankColor.text,
-            }}
-          >
-            {rankIcon} {rank}
-          </span>
+        <div className="flex items-center gap-3 mb-4">
+          <RankChip rank={rank} />
           {nextRank ? (
-            <span className="label-mono text-muted">
-              {xpToNext.toLocaleString()} XP to {RANK_ICONS[nextRank]} {nextRank}
-            </span>
+            <>
+              <div className="flex-1 flex items-center min-w-[24px]" aria-hidden="true">
+                <div className="flex-1 border-t-2 border-dashed border-ink opacity-40" />
+                <span className="text-ink opacity-60 text-xs leading-none">▶</span>
+              </div>
+              <RankChip rank={nextRank} muted />
+            </>
           ) : (
             <span className="label-mono text-gold font-bold">🏆 MAX RANK ACHIEVED</span>
           )}
@@ -218,6 +236,11 @@ export default function DashboardPage() {
         <div
           className="w-full h-8 border-4 border-ink relative overflow-hidden"
           style={{ backgroundColor: 'var(--color-canvas)', boxShadow: 'var(--shadow-brutal-sm)' }}
+          role="progressbar"
+          aria-valuenow={progressPct}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={nextRank ? `Progress to ${nextRank}` : 'Max rank reached'}
         >
           <div
             className="h-full transition-all duration-700 ease-out"
@@ -228,19 +251,28 @@ export default function DashboardPage() {
           />
           <span
             className="absolute inset-0 flex items-center justify-center label-mono font-bold text-sm"
-            style={{
-              color: progressPct > 50 ? 'white' : 'var(--color-ink)',
-              mixBlendMode: progressPct > 50 ? 'normal' : 'normal',
-            }}
+            style={{ color: progressPct > 50 ? 'white' : 'var(--color-ink)' }}
           >
             {progressPct}%
           </span>
         </div>
 
-        <p className="label-mono text-muted mt-2 text-sm">
-          Total: {profile?.total_xp?.toLocaleString() || 0} XP earned across all tracks
-        </p>
+        <div className="flex items-center justify-between gap-3 flex-wrap mt-3">
+          <span className="label-mono text-muted">
+            {nextRank
+              ? `${(profile?.total_xp || 0).toLocaleString()} / ${((profile?.total_xp || 0) + xpToNext).toLocaleString()} XP`
+              : `${(profile?.total_xp || 0).toLocaleString()} XP`}
+          </span>
+          {nextRank && (
+            <span className="label-mono font-bold" style={{ color: 'var(--color-primary)' }}>
+              {xpToNext.toLocaleString()} XP to go
+            </span>
+          )}
+        </div>
       </div>
+
+      {/* ── Activity Heatmap ────────────────────────────────────────── */}
+      <ActivityHeatmap refreshKey={`${profile?.total_xp}-${profile?.streak}`} />
 
       {/* ── Track Progress ──────────────────────────────────────────── */}
       <div id="tour-track-progress" className="brutalist-card p-6" style={{ background: 'var(--color-surface)' }}>
@@ -250,7 +282,8 @@ export default function DashboardPage() {
           {Object.entries(TRACK_META).map(([slug, meta]) => {
             const dp = profile?.domain_progress?.find((d) => d.domain_name === slug);
             const highest = dp?.highest_unlocked_level || 1;
-            const trackPct = Math.round((Math.max(highest - 1, 0) / 10) * 100);
+            const completed = !!dp?.track_completed;
+            const trackPct = completed ? 100 : Math.round((Math.max(highest - 1, 0) / 10) * 100);
 
             return (
               <div key={slug}>
@@ -259,9 +292,15 @@ export default function DashboardPage() {
                     <span>{meta.icon}</span>
                     <span>{meta.label}</span>
                   </span>
-                  <span className="label-mono text-muted text-sm">
-                    Level {highest} / 10
-                  </span>
+                  {completed ? (
+                    <Link to={`/certificate/${dp.certificate_id}`} className="label-mono text-sm font-bold no-underline" style={{ color: meta.color }}>
+                      ✓ Complete · 🎓 Certificate
+                    </Link>
+                  ) : (
+                    <span className="label-mono text-muted text-sm">
+                      Level {highest} / 10
+                    </span>
+                  )}
                 </div>
                 <div
                   className="w-full h-5 border-3 border-ink relative overflow-hidden"

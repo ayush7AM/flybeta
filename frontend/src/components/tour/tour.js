@@ -90,7 +90,7 @@ export const TOUR_PAGES = [
       {
         popover: {
           title: '🏆 How to Clear a Level',
-          description: '<b>Levels 1–7:</b> complete every mandatory lesson.<br><b>Levels 8–9:</b> finish the lessons, then beat the <b>Boss Quiz</b> — 60% to pass, +50 XP.<br><b>Level 10:</b> the capstone — push a project to GitHub and the AI evaluator grades it.<br><br>Clearing a level unlocks the next one — and takes you straight into it.',
+          description: '<b>Levels 1–9:</b> work through the lessons, then beat the <b>Boss Quiz</b> on the last one — 60% to pass, +50 XP. Failed? Just retry.<br><b>Level 10:</b> the capstone — push a project to GitHub; scoring 60+ from the AI evaluator completes the track, with +500 XP and a certificate 🎓.<br><br>Clearing a level unlocks the next one — and takes you straight into it.',
         },
       },
     ],
@@ -174,6 +174,15 @@ export const TOUR_PAGES = [
           description: 'Your name, avatar, bio and stats. Tap <b>Edit</b> to personalise it.',
           side: 'bottom',
           align: 'start',
+        },
+      },
+      {
+        element: '#tour-heatmap',
+        popover: {
+          title: '📅 Activity Heatmap',
+          description: 'Every square is a day. Lessons, boss quizzes and capstones light it up — keep the squares coming to grow your 🔥 streak.',
+          side: 'top',
+          align: 'center',
         },
       },
       {

@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
 
@@ -88,6 +90,8 @@ class DomainProgress(models.Model):
     is_unlocked = models.BooleanField(default=True)
     current_level = models.PositiveSmallIntegerField(default=1)
     highest_unlocked_level = models.PositiveSmallIntegerField(default=1)
+    completed_at = models.DateTimeField(null=True, blank=True, help_text='Set when the capstone is first passed')
+    certificate_id = models.UUIDField(null=True, blank=True, unique=True, editable=False)
 
     class Meta:
         verbose_name = 'Domain Progress'
@@ -143,3 +147,28 @@ class CapstoneSubmission(models.Model):
     def __str__(self):
         return f'{self.user.username} → {self.domain.title} Capstone ({self.status})'
 
+
+class DailyActivity(models.Model):
+    """
+    One row per user per active day — powers the activity heatmap.
+    Days are in the server's TIME_ZONE (see settings).
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='daily_activity')
+    date = models.DateField()
+    lessons_completed = models.PositiveIntegerField(default=0)
+    quizzes_passed = models.PositiveIntegerField(default=0)
+    capstones_passed = models.PositiveIntegerField(default=0)
+    xp_earned = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'Daily Activity'
+        verbose_name_plural = 'Daily Activity'
+        unique_together = ('user', 'date')
+        ordering = ['date']
+
+    def __str__(self):
+        return f'{self.user.username} — {self.date}: {self.activity_count} activities'
+
+    @property
+    def activity_count(self):
+        return self.lessons_completed + self.quizzes_passed + self.capstones_passed

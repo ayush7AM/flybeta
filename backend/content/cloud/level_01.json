@@ -8,7 +8,59 @@
   "level": {
     "number": 1,
     "title": "Cloud Foundations",
-    "description": "Master the fundamental concepts of cloud computing — what it is, why it matters, and how the major providers (AWS, GCP, Azure) organize their services."
+    "description": "Master the fundamental concepts of cloud computing — what it is, why it matters, and how the major providers (AWS, GCP, Azure) organize their services.",
+    "quiz_data": [
+      {
+        "question": "What is cloud computing?",
+        "options": [
+          "Storing files only on a USB drive",
+          "Renting computing resources on demand over the internet and paying for what you use",
+          "A weather forecasting system",
+          "Buying your own data centre"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Gmail and Google Docs are examples of which service model?",
+        "options": [
+          "IaaS",
+          "PaaS",
+          "SaaS",
+          "On-premises"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "You manage the operating system and runtime, while the provider manages the physical hardware. Which model is this?",
+        "options": [
+          "IaaS",
+          "SaaS",
+          "FaaS",
+          "None — that is on-premises"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is a hybrid cloud?",
+        "options": [
+          "Two laptops sharing files",
+          "A cloud that only runs at night",
+          "A cloud owned by two companies",
+          "A mix of private/on-premises infrastructure and public cloud working together"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What is the name of AWS's virtual machine service?",
+        "options": [
+          "S3",
+          "EC2",
+          "Lambda",
+          "BigQuery"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

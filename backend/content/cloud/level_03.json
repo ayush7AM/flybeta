@@ -8,7 +8,59 @@
   "level": {
     "number": 3,
     "title": "Compute & Virtual Machines",
-    "description": "Spin up, configure, and optimize virtual machines — the backbone of cloud infrastructure that powers everything from web servers to GPU training clusters."
+    "description": "Spin up, configure, and optimize virtual machines — the backbone of cloud infrastructure that powers everything from web servers to GPU training clusters.",
+    "quiz_data": [
+      {
+        "question": "EC2, Compute Engine and Azure VMs are all…",
+        "options": [
+          "Databases",
+          "Virtual machines you rent by the second or hour",
+          "Object storage buckets",
+          "Serverless functions"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is a machine image (such as an AMI)?",
+        "options": [
+          "A screenshot of the console",
+          "A billing report",
+          "A template containing an OS and software, used to launch identical VMs",
+          "A firewall rule"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Which pricing option is cheapest for fault-tolerant batch jobs that can be interrupted?",
+        "options": [
+          "On-demand",
+          "Dedicated hosts",
+          "Reserved instances",
+          "Spot instances"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Reserved instances are the best fit for…",
+        "options": [
+          "Steady, predictable workloads you can commit to for 1–3 years",
+          "Jobs that run once for 5 minutes",
+          "Experiments you might cancel tomorrow",
+          "Workloads that tolerate interruptions"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is an SSH key pair used for?",
+        "options": [
+          "Encrypting S3 buckets",
+          "Logging in to a Linux server securely with a private key instead of a password",
+          "Paying the cloud bill",
+          "Creating DNS records"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

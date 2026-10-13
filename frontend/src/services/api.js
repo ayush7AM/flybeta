@@ -197,6 +197,23 @@ export const updateProfileData = async (formData) => {
   return data;
 };
 
+export const getActivity = async (days = 182) => {
+  const { data } = await api.get('users/activity/', { params: { days } });
+  return data;
+};
+
+// Public — anyone with the link can verify a certificate
+export const getCertificate = async (certificateId) => {
+  const { data } = await api.get(`certificates/${certificateId}/`);
+  return data;
+};
+
+// Spend coins to repair a recently broken streak
+export const restoreStreak = async () => {
+  const { data } = await api.post('users/streak/restore/');
+  return data;
+};
+
 export const completeLesson = async (lessonId) => {
   const { data } = await api.post(`lessons/${lessonId}/complete/`);
   return data;

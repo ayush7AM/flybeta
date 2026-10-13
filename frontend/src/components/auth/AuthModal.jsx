@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Mail, User, Lock, ArrowRight, Loader } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useStartTour } from '../tour/tour';
@@ -89,8 +90,10 @@ export default function AuthModal({ isOpen, onClose, customMessage = null, initi
     setSuccess(null);
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  // Portal to <body>: a parent with transform/filter/backdrop-filter would otherwise
+  // become the containing block for this fixed overlay and squeeze it into that parent.
+  return createPortal(
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-md bg-[var(--color-surface)] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b-4 border-black bg-[var(--color-primary)]">
@@ -260,5 +263,5 @@ export default function AuthModal({ isOpen, onClose, customMessage = null, initi
         </div>
       </div>
     </div>
-  );
+  , document.body);
 }

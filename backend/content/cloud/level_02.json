@@ -8,7 +8,59 @@
   "level": {
     "number": 2,
     "title": "Storage & Networking Fundamentals",
-    "description": "Understand how data is stored and moved in the cloud — from object storage and block volumes to VPCs, subnets, and content delivery networks."
+    "description": "Understand how data is stored and moved in the cloud — from object storage and block volumes to VPCs, subnets, and content delivery networks.",
+    "quiz_data": [
+      {
+        "question": "Which storage type is best for images, videos and backups accessed over HTTP?",
+        "options": [
+          "Object storage (e.g. Amazon S3)",
+          "Block storage",
+          "A database index",
+          "RAM"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Block storage behaves most like…",
+        "options": [
+          "A website",
+          "A virtual hard drive attached to a server",
+          "An email inbox",
+          "A CDN"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is a Virtual Private Cloud (VPC)?",
+        "options": [
+          "A cheaper VM",
+          "A private chat app",
+          "Your own logically isolated network inside the cloud",
+          "A backup service"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What usually makes a subnet \"public\"?",
+        "options": [
+          "It has more IP addresses",
+          "It is free",
+          "It is in another country",
+          "It has a route to an internet gateway"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What does a CDN do?",
+        "options": [
+          "Caches content at edge locations close to users to cut latency",
+          "Encrypts databases",
+          "Hosts virtual machines",
+          "Writes code automatically"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

@@ -1,7 +1,13 @@
-import { Outlet } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import OracleWidget from './OracleWidget';
-import TourGuide from '../tour/TourGuide';
+import PageLoader from './PageLoader';
+import StreakRestoreCard from '../StreakRestoreCard';
+import { useAuth } from '../../context/AuthContext';
+
+// driver.js only downloads once someone is inside the app
+const TourGuide = lazy(() => import('../tour/TourGuide'));
 import { useTheme } from '../../context/ThemeContext';
 
 // ── Per-theme background images ──────────────────────────────────────────
@@ -14,6 +20,8 @@ const THEME_BACKGROUNDS = {
 
 export default function Layout() {
   const { themeKey, isDarkMode } = useTheme();
+  const { user } = useAuth();
+  const { pathname } = useLocation();
   const bgImage = THEME_BACKGROUNDS[themeKey];
   const hasThemedBg = !!bgImage;
 
@@ -47,10 +55,16 @@ export default function Layout() {
       <div className="relative" style={{ zIndex: 10 }}>
         <Navbar />
         <main className="max-w-[1440px] mx-auto px-4 md:px-12 pt-24 md:pt-28 pb-28 md:pb-16">
-          <Outlet />
+          {/* The Dashboard shows its own, larger restore card */}
+          {user?.streak_restore && pathname !== '/dashboard' && <StreakRestoreCard variant="banner" />}
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
         </main>
         <OracleWidget />
-        <TourGuide />
+        <Suspense fallback={null}>
+          <TourGuide />
+        </Suspense>
       </div>
     </div>
   );

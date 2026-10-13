@@ -62,6 +62,7 @@ export default function TrackRoadmapPage() {
   // which has nothing after it) once every mandatory lesson is complete.
   const isLevelCompleted = (level) => {
     if (!user) return false;
+    if (domainProgress?.track_completed) return true;
     if (level.number < highestUnlockedLevel) return true;
     const mandatory = level.lessons?.filter(l => l.is_mandatory) || [];
     return mandatory.length > 0 && mandatory.every(l => completedLessonIds.has(l.id));
@@ -145,9 +146,18 @@ export default function TrackRoadmapPage() {
               <p className="heading-md m-0" style={{ color: 'var(--color-primary)' }}>
                 Track Complete!
               </p>
-              <p className="text-sm text-muted m-0 mt-1">
-                Master all {levels.length} levels to earn your certificate.
-              </p>
+              {domainProgress?.track_completed ? (
+                <p className="text-sm m-0 mt-1">
+                  You finished this track.{' '}
+                  <Link to={`/certificate/${domainProgress.certificate_id}`} className="font-bold" style={{ color: 'var(--color-primary)' }}>
+                    🎓 View your certificate →
+                  </Link>
+                </p>
+              ) : (
+                <p className="text-sm text-muted m-0 mt-1">
+                  Master all {levels.length} levels and pass the capstone to earn your certificate.
+                </p>
+              )}
             </div>
           </div>
         )}

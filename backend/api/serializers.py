@@ -5,14 +5,22 @@ from accounts.models import StudentProfile
 
 class DomainProgressSerializer(serializers.ModelSerializer):
     domain_name = serializers.CharField(source='domain.name', read_only=True)
+    track_completed = serializers.SerializerMethodField()
 
     class Meta:
         model = DomainProgress
-        fields = ['domain_name', 'is_unlocked', 'current_level', 'highest_unlocked_level']
+        fields = [
+            'domain_name', 'is_unlocked', 'current_level', 'highest_unlocked_level',
+            'track_completed', 'completed_at', 'certificate_id',
+        ]
+
+    def get_track_completed(self, obj):
+        return obj.completed_at is not None
 
 
 class UserStatsSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
+    streak = serializers.IntegerField(source='current_streak', read_only=True)
     domain_progress = serializers.SerializerMethodField()
 
     class Meta:
@@ -52,6 +60,29 @@ class LevelSerializer(serializers.ModelSerializer):
         ]
 
 
+class LessonSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = ['id', 'order', 'title', 'xp_reward', 'is_mandatory', 'lesson_type']
+
+
+class LevelSummarySerializer(serializers.ModelSerializer):
+    lessons = LessonSummarySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Level
+        fields = ['id', 'number', 'title', 'description', 'lessons']
+
+
+class DomainListSerializer(serializers.ModelSerializer):
+    """Track cards only need titles and counts — the full payload is ~15x larger."""
+    levels = LevelSummarySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Domain
+        fields = ['id', 'name', 'title', 'icon', 'color', 'track_code', 'character_image', 'is_published', 'levels']
+
+
 class DomainSerializer(serializers.ModelSerializer):
     levels = LevelSerializer(many=True, read_only=True)
 
@@ -82,6 +113,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
     name = serializers.CharField(source='user.name', read_only=True)
     email = serializers.EmailField(source='user.email', read_only=True)
+    streak = serializers.IntegerField(source='current_streak', read_only=True)
+    streak_restore = serializers.SerializerMethodField()
     domain_progress = serializers.SerializerMethodField()
     completed_lesson_ids = serializers.SerializerMethodField()
 
@@ -94,15 +127,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = StudentProfile
         fields = [
             'username', 'name', 'email',
-            'xp', 'total_xp', 'coins', 'streak', 'last_active_date',
+            'xp', 'total_xp', 'coins', 'streak', 'best_streak', 'last_active_date',
             'current_rank', 'next_rank', 'xp_to_next_rank', 'rank_progress_pct',
             'theme_preference',
             'avatar', 'bio',
-            'domain_progress', 'completed_lesson_ids',
+            'streak_restore', 'domain_progress', 'completed_lesson_ids',
         ]
         read_only_fields = [
             'username', 'name', 'email',
-            'xp', 'total_xp', 'coins', 'streak', 'last_active_date',
+            'xp', 'total_xp', 'coins', 'streak', 'best_streak', 'last_active_date',
             'current_rank', 'next_rank', 'xp_to_next_rank', 'rank_progress_pct',
             'avatar',
         ]
@@ -115,3 +148,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return list(
             Lesson.objects.filter(completed_by__user=obj.user).values_list('id', flat=True).distinct()
         )
+
+    def get_streak_restore(self, obj):
+        return obj.streak_restore_offer()

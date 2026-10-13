@@ -8,7 +8,59 @@
   "level": {
     "number": 2,
     "title": "Data Wrangling & Feature Engineering",
-    "description": "Master the craft of transforming raw, messy data into model-ready features — the skill that separates good data scientists from great ones."
+    "description": "Master the craft of transforming raw, messy data into model-ready features — the skill that separates good data scientists from great ones.",
+    "quiz_data": [
+      {
+        "question": "What does one-hot encoding do?",
+        "options": [
+          "Turns a categorical column into separate 0/1 columns, one per category",
+          "Sorts categories alphabetically",
+          "Deletes rare categories",
+          "Converts numbers to text"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Why is encoding \"city\" as 1, 2, 3 risky for a linear model?",
+        "options": [
+          "It uses too much memory",
+          "It implies an order and distance between cities that does not exist",
+          "Cities cannot be numbers",
+          "It removes missing values"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does standardization do to a feature?",
+        "options": [
+          "Scales it to between 0 and 1",
+          "Rounds it to integers",
+          "Rescales it to a mean of 0 and standard deviation of 1",
+          "Removes outliers"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Min-max normalization rescales a feature to…",
+        "options": [
+          "A mean of 0",
+          "Whole numbers",
+          "Percentages of the total",
+          "The range 0 to 1"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Why fit a scaler on the training data only?",
+        "options": [
+          "To avoid leaking information from the test set into training",
+          "Because it is faster",
+          "Because test data has no columns",
+          "To get bigger numbers"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

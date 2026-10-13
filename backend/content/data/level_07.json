@@ -8,7 +8,59 @@
   "level": {
     "number": 7,
     "title": "Big Data & Capstone Pipelines",
-    "description": "Scale your skills beyond single-machine limits — learn distributed computing concepts, build end-to-end analytical pipelines, and present insights like a professional."
+    "description": "Scale your skills beyond single-machine limits — learn distributed computing concepts, build end-to-end analytical pipelines, and present insights like a professional.",
+    "quiz_data": [
+      {
+        "question": "Why use a distributed engine like Apache Spark?",
+        "options": [
+          "To draw charts",
+          "To process data too large or slow for one machine by splitting work across a cluster",
+          "To store passwords",
+          "To replace SQL entirely"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does ETL stand for?",
+        "options": [
+          "Evaluate, Test, Launch",
+          "Encrypt, Transfer, Lock",
+          "Extract, Transform, Load",
+          "Edit, Track, Log"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What does lazy evaluation in Spark mean?",
+        "options": [
+          "Transformations are only planned and run when an action asks for results",
+          "Spark skips errors",
+          "Jobs always run overnight",
+          "Data is never loaded"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Which tool is commonly used to schedule and orchestrate data pipelines?",
+        "options": [
+          "Photoshop",
+          "Excel macros",
+          "Kubernetes Ingress",
+          "Apache Airflow"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "When presenting insights to executives, you should…",
+        "options": [
+          "Lead with the business impact and your recommendation",
+          "Walk through every line of code",
+          "Show raw tables only",
+          "Avoid making any recommendation"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

@@ -8,7 +8,59 @@
   "level": {
     "number": 4,
     "title": "Natural Language Processing",
-    "description": "Teach machines to read — from tokenizing text and word embeddings to sequence models that power chatbots, translators, and sentiment analyzers."
+    "description": "Teach machines to read — from tokenizing text and word embeddings to sequence models that power chatbots, translators, and sentiment analyzers.",
+    "quiz_data": [
+      {
+        "question": "What is tokenization?",
+        "options": [
+          "Splitting text into smaller units (words or sub-words) a model can process",
+          "Encrypting text",
+          "Translating text into another language",
+          "Counting the letters in a document"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What do word embeddings do?",
+        "options": [
+          "Store words alphabetically",
+          "Remove stop words",
+          "Represent words as vectors where similar meanings sit close together",
+          "Check spelling"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "In the classic embedding example, \"king − man + woman\" is closest to…",
+        "options": [
+          "prince",
+          "castle",
+          "man",
+          "queen"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "Why were LSTMs an improvement over basic RNNs?",
+        "options": [
+          "They need no training data",
+          "Their gates help them remember information across long sequences",
+          "They only process images",
+          "They are always smaller"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "A model that labels movie reviews as positive or negative is doing…",
+        "options": [
+          "Sentiment analysis",
+          "Image segmentation",
+          "Machine translation",
+          "Clustering"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

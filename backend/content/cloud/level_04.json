@@ -8,7 +8,59 @@
   "level": {
     "number": 4,
     "title": "Containers & Docker",
-    "description": "Package applications with their dependencies into portable, reproducible containers — the technology that revolutionized software delivery."
+    "description": "Package applications with their dependencies into portable, reproducible containers — the technology that revolutionized software delivery.",
+    "quiz_data": [
+      {
+        "question": "What is the key difference between containers and virtual machines?",
+        "options": [
+          "Containers share the host OS kernel, so they are lighter and start faster",
+          "Containers each include a full operating system",
+          "VMs cannot run Linux",
+          "Containers only run on Windows"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is a Dockerfile?",
+        "options": [
+          "A running container",
+          "A log file",
+          "A list of instructions for building an image",
+          "A Kubernetes setting"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Why copy and install dependencies before copying your app code in a Dockerfile?",
+        "options": [
+          "It is required syntax",
+          "Unchanged layers are cached, so rebuilds after code edits are much faster",
+          "It makes the image public",
+          "It encrypts the code"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What do multi-stage builds achieve?",
+        "options": [
+          "Running several apps in one container",
+          "Building on multiple computers",
+          "Splitting a database",
+          "Small final images that leave build tools behind"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What is Docker Compose used for?",
+        "options": [
+          "Defining and running multi-container apps from one YAML file",
+          "Writing Dockerfiles automatically",
+          "Monitoring CPU usage",
+          "Scanning images for viruses"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

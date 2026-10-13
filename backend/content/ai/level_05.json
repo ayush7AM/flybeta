@@ -8,7 +8,59 @@
   "level": {
     "number": 5,
     "title": "The Transformer Revolution",
-    "description": "Understand the architecture that powers GPT, BERT, and every modern LLM — self-attention, encoder-decoder models, and the paradigm shift from sequence to parallelism."
+    "description": "Understand the architecture that powers GPT, BERT, and every modern LLM — self-attention, encoder-decoder models, and the paradigm shift from sequence to parallelism.",
+    "quiz_data": [
+      {
+        "question": "What is the core idea of self-attention?",
+        "options": [
+          "Each token decides how relevant every other token is when building its own representation",
+          "The model ignores word order completely",
+          "Only the last word in a sentence matters",
+          "Words are processed strictly one at a time"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What big advantage do Transformers have over RNNs?",
+        "options": [
+          "They need no data",
+          "They only work on short sentences",
+          "They process all tokens in parallel and capture long-range relationships more easily",
+          "They have no parameters"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Why do Transformers need positional encodings?",
+        "options": [
+          "To compress the model",
+          "Attention on its own has no sense of word order",
+          "To translate between languages",
+          "To remove punctuation"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "BERT is best described as…",
+        "options": [
+          "A decoder-only model built to generate long stories",
+          "A convolutional network for images",
+          "A reinforcement learning agent",
+          "An encoder-only model that reads text in both directions — great for understanding tasks"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "How do GPT-style models generate text?",
+        "options": [
+          "By predicting the next token, one at a time, based on everything before it",
+          "By copying sentences from the training data",
+          "By filling in a fixed template",
+          "By translating from an internal language"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {

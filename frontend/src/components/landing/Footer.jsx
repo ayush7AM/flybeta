@@ -3,9 +3,9 @@ import Logo from '../ui/Logo';
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t-8 border-ink bg-surface transition-colors">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer id="contact" className="border-t-8 border-ink bg-surface transition-colors scroll-mt-16 md:scroll-mt-20">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
           {/* Left — Brand */}
           <div>
@@ -62,7 +62,7 @@ export default function Footer() {
         </div>
 
         {/* ── Bottom Bar ─────────────────────────────────────────────── */}
-        <div className="mt-12 pt-6 border-t-4 border-ink text-center transition-colors">
+        <div className="mt-10 pt-6 border-t-4 border-ink text-center transition-colors">
           <p className="text-muted opacity-80 text-xs font-bold uppercase tracking-wider transition-colors">
             © {new Date().getFullYear()} FLYBETA. ALL RIGHTS RESERVED. BUILT FOR LEARNERS, BY LEARNERS.
           </p>

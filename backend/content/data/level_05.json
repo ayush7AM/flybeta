@@ -8,7 +8,59 @@
   "level": {
     "number": 5,
     "title": "Supervised Learning Algorithms",
-    "description": "Master the core ML algorithms every data scientist must know — from decision trees to logistic regression — and learn to evaluate models rigorously."
+    "description": "Master the core ML algorithms every data scientist must know — from decision trees to logistic regression — and learn to evaluate models rigorously.",
+    "quiz_data": [
+      {
+        "question": "What is a random forest?",
+        "options": [
+          "A single very deep decision tree",
+          "Many decision trees whose votes are combined, which reduces overfitting",
+          "A clustering method",
+          "A neural network"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is logistic regression mainly used for?",
+        "options": [
+          "Predicting continuous numbers like price",
+          "Reducing dimensions",
+          "Classification — estimating the probability of a class",
+          "Clustering customers"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What does precision measure?",
+        "options": [
+          "Of everything predicted positive, how much was actually positive",
+          "Of all real positives, how many were found",
+          "Overall accuracy",
+          "Training speed"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "When should you prioritise recall?",
+        "options": [
+          "When false positives are expensive",
+          "When the data is perfectly balanced",
+          "When training time matters most",
+          "When missing a real positive is costly, such as detecting a disease"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "How does gradient boosting build its model?",
+        "options": [
+          "It trains all trees independently in parallel",
+          "It adds trees one after another, each correcting the previous ones' errors",
+          "It uses only one tree",
+          "It clusters the data first"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 
 class CustomUser(AbstractUser):
@@ -53,7 +56,11 @@ class StudentProfile(models.Model):
     # Gamification — original fields
     xp = models.IntegerField(default=0, help_text='Legacy XP (from lessons)')
     coins = models.IntegerField(default=0)
-    streak = models.IntegerField(default=0)
+    streak = models.IntegerField(default=0, help_text='Consecutive active days as of last_active_date — read current_streak for display')
+    best_streak = models.PositiveIntegerField(default=0)
+    # The streak that most recently broke — kept so it can be restored with coins
+    broken_streak = models.PositiveIntegerField(default=0)
+    broken_streak_last_day = models.DateField(null=True, blank=True)
     last_active_date = models.DateField(null=True, blank=True)
 
     # New fields
@@ -69,6 +76,100 @@ class StudentProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} — XP: {self.total_xp}, Rank: {self.current_rank}'
+
+    # ── Streak helpers ───────────────────────────────────────────────────
+
+    @property
+    def current_streak(self):
+        """The streak as of today: a day without activity since yesterday breaks it."""
+        if not self.last_active_date:
+            return 0
+        if self.last_active_date < timezone.localdate() - timedelta(days=1):
+            return 0
+        return self.streak
+
+    def register_activity_day(self, day):
+        """Extend, keep, or restart the streak for activity on `day`. Caller saves."""
+        if self.last_active_date == day:
+            return
+        if self.last_active_date == day - timedelta(days=1):
+            self.streak += 1
+        else:
+            if self.streak > 0 and self.last_active_date:
+                # Keep the broken streak so it can still be restored
+                self.broken_streak = self.streak
+                self.broken_streak_last_day = self.last_active_date
+            self.streak = 1
+        self.last_active_date = day
+        self.best_streak = max(self.best_streak, self.streak)
+
+    # A broken streak can be repaired if at most this many days were missed,
+    # within a week of the last active day, for a coin price per missed day.
+    STREAK_RESTORE_MAX_MISSED_DAYS = 2
+    STREAK_RESTORE_WINDOW_DAYS = 7
+    STREAK_RESTORE_COST_PER_DAY = 50
+
+    def _broken_streak(self, today):
+        """
+        (lost_length, lost_last_day, new_streak, missed_days) for the most recent break,
+        or None. Covers both "hasn't been back since" and "already started a new streak".
+        """
+        if not self.last_active_date:
+            return None
+
+        if self.streak > 0 and self.last_active_date < today - timedelta(days=1):
+            # Broke and hasn't been active since
+            missed = (today - self.last_active_date).days - 1
+            return self.streak, self.last_active_date, 0, missed
+
+        if self.broken_streak and self.broken_streak_last_day and self.current_streak > 0:
+            # Broke, then started a new streak — the gap sits between the two
+            new_start = self.last_active_date - timedelta(days=self.streak - 1)
+            missed = (new_start - self.broken_streak_last_day).days - 1
+            if missed > 0:
+                return self.broken_streak, self.broken_streak_last_day, self.streak, missed
+
+        return None
+
+    def streak_restore_offer(self):
+        """What restoring the last broken streak would cost and give, or None if it can't be."""
+        today = timezone.localdate()
+        broken = self._broken_streak(today)
+        if not broken:
+            return None
+        lost, lost_last_day, new_streak, missed = broken
+        if not 1 <= missed <= self.STREAK_RESTORE_MAX_MISSED_DAYS:
+            return None
+        if (today - lost_last_day).days > self.STREAK_RESTORE_WINDOW_DAYS:
+            return None
+
+        cost = missed * self.STREAK_RESTORE_COST_PER_DAY
+        return {
+            'lost_streak': lost,
+            'missed_days': missed,
+            'cost': cost,
+            'restored_streak': lost + missed + new_streak,
+            'can_afford': self.coins >= cost,
+            'broken_on': lost_last_day + timedelta(days=1),
+        }
+
+    def restore_streak(self):
+        """Pay coins to bridge the missed days. Returns the offer used. Caller saves."""
+        offer = self.streak_restore_offer()
+        if not offer:
+            raise ValueError('There is no broken streak that can be restored.')
+        if not offer['can_afford']:
+            raise ValueError(f"Restoring this streak costs {offer['cost']} coins — you have {self.coins}.")
+
+        self.coins -= offer['cost']
+        self.streak = offer['restored_streak']
+        if self.last_active_date < timezone.localdate() - timedelta(days=1):
+            # Not active since the break: the streak now runs through yesterday
+            self.last_active_date = timezone.localdate() - timedelta(days=1)
+        self.best_streak = max(self.best_streak, self.streak)
+        self.broken_streak = 0
+        self.broken_streak_last_day = None
+        return offer
 
     # ── Rank helpers ─────────────────────────────────────────────────────
 

@@ -1,12 +1,14 @@
-from datetime import date, timedelta
 import logging
 import re
-import traceback
+import uuid
+from datetime import timedelta
 
 # pyrefly: ignore [missing-import]
 from django.contrib.auth import get_user_model
 # pyrefly: ignore [missing-import]
 from django.db import transaction
+# pyrefly: ignore [missing-import]
+from django.utils import timezone
 # pyrefly: ignore [missing-import]
 from django.db.models import Max
 from rest_framework.views import APIView
@@ -17,10 +19,11 @@ from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 
-from learn.models import Domain, Level, Lesson, LevelProgress, DomainProgress, CapstoneSubmission
+from learn.models import Domain, Level, Lesson, LevelProgress, DomainProgress, CapstoneSubmission, DailyActivity
+from learn.services.activity import record_activity
 from accounts.models import StudentProfile
 from api.serializers import (
-    DomainSerializer, LevelSerializer, LessonSerializer, UserStatsSerializer,
+    DomainSerializer, DomainListSerializer, LevelSerializer, LessonSerializer, UserStatsSerializer,
     CapstoneSubmissionSerializer, UserProfileSerializer
 )
 from api.ai_services import generate_project_blueprint, generate_code_review, generate_video_quiz, ask_oracle
@@ -40,6 +43,9 @@ def get_dev_user():
 
 QUIZ_PASS_PERCENT = 60
 QUIZ_XP_REWARD = 50
+CAPSTONE_XP_REWARD = 500
+CAPSTONE_COINS_REWARD = 100
+MAX_ACTIVITY_DAYS = 366
 
 
 def get_highest_unlocked_level(user, domain):
@@ -159,6 +165,10 @@ class DomainViewSet(ReadOnlyModelViewSet):
     serializer_class = DomainSerializer
     lookup_field = 'name'  # Allow lookup by slug: /api/v1/domains/cloud/
 
+    def get_serializer_class(self):
+        # The track list only needs titles and counts — not every lesson's Markdown
+        return DomainListSerializer if self.action == 'list' else DomainSerializer
+
 
 class LevelViewSet(ReadOnlyModelViewSet):
     """
@@ -214,12 +224,14 @@ class LevelViewSet(ReadOnlyModelViewSet):
         if passed:
             with transaction.atomic():
                 level_unlocked = unlock_next_level(user, level)
+                profile = user.profile
+                xp_awarded = QUIZ_XP_REWARD if level_unlocked else 0
                 if level_unlocked:
-                    profile = user.profile
-                    profile.xp += QUIZ_XP_REWARD
-                    profile.total_xp += QUIZ_XP_REWARD
+                    profile.xp += xp_awarded
+                    profile.total_xp += xp_awarded
                     profile.current_rank = profile.compute_rank()
-                    profile.save()
+                record_activity(profile, quizzes=1, xp=xp_awarded)
+                profile.save()
 
         return Response({
             'passed': passed,
@@ -263,7 +275,6 @@ class LessonViewSet(ReadOnlyModelViewSet):
         lesson = self.get_object()
         user = request.user
         profile = user.profile
-        today = date.today()
         next_level_unlocked = False
 
         if lesson.level.number > get_highest_unlocked_level(user, lesson.level.domain):
@@ -291,21 +302,9 @@ class LessonViewSet(ReadOnlyModelViewSet):
                 profile.total_xp += lesson.xp_reward
                 profile.coins += lesson.coins_reward
 
-                # 4. Streak logic
-                if profile.last_active_date is None:
-                    # First ever activity
-                    profile.streak = 1
-                elif profile.last_active_date == today:
-                    # Already active today — no streak change
-                    pass
-                elif profile.last_active_date == today - timedelta(days=1):
-                    # Active yesterday — increment streak
-                    profile.streak += 1
-                else:
-                    # Streak broken — reset to 1
-                    profile.streak = 1
+                # 4. Streak + activity heatmap
+                record_activity(profile, lessons=1, xp=lesson.xp_reward)
 
-                profile.last_active_date = today
                 profile.current_rank = profile.compute_rank()
                 profile.save()
 
@@ -365,8 +364,8 @@ class BlueprintView(APIView):
                 'prompt': prompt,
                 'steps': steps,
             }, status=status.HTTP_200_OK)
-        except Exception as e:
-            traceback.print_exc()
+        except Exception:
+            logger.exception('AI request failed')
             return Response(
                 {'error': 'The Architect is meditating. Please try again.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -399,8 +398,8 @@ class CodeReviewView(APIView):
                 'language': language,
                 'findings': findings,
             }, status=status.HTTP_200_OK)
-        except Exception as e:
-            traceback.print_exc()
+        except Exception:
+            logger.exception('AI request failed')
             return Response(
                 {'error': 'The Reviewer is meditating. Please try again.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -449,8 +448,8 @@ class SynapseExtractView(APIView):
             return Response(quiz, status=status.HTTP_200_OK)
         except ValueError as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            traceback.print_exc()
+        except Exception:
+            logger.exception('AI request failed')
             return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -475,8 +474,8 @@ class OracleChatView(APIView):
         try:
             reply = ask_oracle(message, history)
             return Response({'reply': reply}, status=status.HTTP_200_OK)
-        except Exception as e:
-            traceback.print_exc()
+        except Exception:
+            logger.exception('AI request failed')
             return Response(
                 {'error': 'The Oracle is meditating. Please try again.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -570,6 +569,127 @@ class CapstoneSubmissionViewSet(
         submission.status = 'graded'
         submission.save()
 
-        # 5. Return updated submission
-        serializer = self.get_serializer(submission)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # 5. First pass completes the track: reward + certificate
+        reward = None
+        if submission.passed:
+            reward = self._complete_track(user, domain)
+
+        # 6. Return updated submission (+ fresh profile so the navbar updates)
+        data = dict(self.get_serializer(submission).data)
+        data['reward'] = reward
+        data['user'] = UserProfileSerializer(user.profile).data
+        return Response(data, status=status.HTTP_201_CREATED)
+
+    @staticmethod
+    def _complete_track(user, domain):
+        """Mark the track complete on its first passing capstone. Returns the reward given."""
+        with transaction.atomic():
+            progress, _ = DomainProgress.objects.select_for_update().get_or_create(user=user, domain=domain)
+            first_completion = progress.completed_at is None
+            if first_completion:
+                progress.completed_at = timezone.now()
+                progress.certificate_id = uuid.uuid4()
+                progress.save(update_fields=['completed_at', 'certificate_id'])
+
+            profile = user.profile
+            xp = CAPSTONE_XP_REWARD if first_completion else 0
+            coins = CAPSTONE_COINS_REWARD if first_completion else 0
+            profile.xp += xp
+            profile.total_xp += xp
+            profile.coins += coins
+            profile.current_rank = profile.compute_rank()
+            record_activity(profile, capstones=1, xp=xp)
+            profile.save()
+
+        return {
+            'xp': xp,
+            'coins': coins,
+            'first_completion': first_completion,
+            'certificate_id': str(progress.certificate_id),
+        }
+
+
+class StreakRestoreView(APIView):
+    """
+    POST /api/v1/users/streak/restore/
+    Spend coins to repair a recently broken streak (see StudentProfile.streak_restore_offer).
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        with transaction.atomic():
+            profile = StudentProfile.objects.select_for_update().get(user=request.user)
+            try:
+                offer = profile.restore_streak()
+            except ValueError as e:
+                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            profile.save()
+
+        return Response({
+            'restored_streak': profile.streak,
+            'coins_spent': offer['cost'],
+            'user': UserProfileSerializer(profile).data,
+        })
+
+
+class UserActivityView(APIView):
+    """
+    GET /api/v1/users/activity/?days=182
+    The user's active days (for the heatmap) plus streak stats.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        try:
+            days = min(max(int(request.query_params.get('days', 182)), 1), MAX_ACTIVITY_DAYS)
+        except ValueError:
+            days = 182
+        today = timezone.localdate()
+        rows = DailyActivity.objects.filter(user=request.user, date__gte=today - timedelta(days=days - 1))
+        profile = request.user.profile
+        return Response({
+            'today': today,
+            'days': [
+                {
+                    'date': row.date,
+                    'count': row.activity_count,
+                    'lessons': row.lessons_completed,
+                    'quizzes': row.quizzes_passed,
+                    'capstones': row.capstones_passed,
+                    'xp': row.xp_earned,
+                }
+                for row in rows
+            ],
+            'current_streak': profile.current_streak,
+            'best_streak': profile.best_streak,
+            'total_active_days': DailyActivity.objects.filter(user=request.user).count(),
+        })
+
+
+class CertificateView(APIView):
+    """
+    GET /api/v1/certificates/<uuid>/
+    Public, so a certificate link can be shared and verified by anyone.
+    """
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+    def get(self, request, certificate_id):
+        progress = DomainProgress.objects.select_related('user', 'domain').filter(
+            certificate_id=certificate_id, completed_at__isnull=False,
+        ).first()
+        if not progress:
+            return Response({'error': 'Certificate not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        best = CapstoneSubmission.objects.filter(
+            user=progress.user, domain=progress.domain, passed=True,
+        ).aggregate(Max('score'))['score__max']
+        return Response({
+            'certificate_id': progress.certificate_id,
+            'name': progress.user.name or progress.user.username,
+            'username': progress.user.username,
+            'track_title': progress.domain.title,
+            'track_name': progress.domain.name,
+            'completed_at': progress.completed_at,
+            'score': best,
+        })

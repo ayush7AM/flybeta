@@ -8,57 +8,57 @@
   "level": {
     "number": 9,
     "title": "Scaling & Security",
-    "description": "How do you handle millions of users without crashing? Meet the traffic cops of the internet.",
+    "description": "Handle millions of users without crashing — and without getting hacked. Scaling, load balancing, IAM, least privilege and secrets.",
     "quiz_data": [
       {
-        "question": "What is Vertical Scaling?",
+        "question": "What is vertical scaling?",
         "options": [
-          "Adding more servers to a group",
-          "Upgrading a single server with more CPU and RAM",
-          "Stacking servers on top of each other",
-          "Moving servers to the cloud"
+          "Adding more servers",
+          "Upgrading one server to more CPU and RAM",
+          "Moving to another region",
+          "Deleting old data"
         ],
         "correct_index": 1
       },
       {
-        "question": "What is Horizontal Scaling?",
+        "question": "Why is horizontal scaling preferred in the cloud?",
         "options": [
-          "Adding more identical servers to share the load",
-          "Buying a bigger server",
-          "Laying servers flat on the floor",
-          "Reducing the number of servers"
+          "It is the only option on Linux",
+          "It needs no load balancer",
+          "There is no hard size limit and one failed server doesn't take the app down",
+          "It never costs money"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What does a load balancer do?",
+        "options": [
+          "Distributes incoming traffic across healthy servers",
+          "Stores user passwords",
+          "Compiles your code",
+          "Backs up the database"
         ],
         "correct_index": 0
       },
       {
-        "question": "What is the role of a Load Balancer?",
+        "question": "What is the principle of least privilege?",
         "options": [
-          "To weigh the servers",
-          "To act as a traffic cop, distributing incoming requests across multiple servers",
-          "To increase internet speed",
-          "To stop hackers"
+          "Give everyone admin access to save time",
+          "Use one shared password",
+          "Only senior engineers can log in",
+          "Give each user or service only the permissions it needs"
         ],
-        "correct_index": 1
+        "correct_index": 3
       },
       {
-        "question": "Which scaling method is generally preferred in the Cloud?",
+        "question": "Where should an API key for your app live?",
         "options": [
-          "Vertical Scaling",
-          "Horizontal Scaling",
-          "Diagonal Scaling",
-          "No scaling"
+          "In a secrets manager or environment variables — never committed to git",
+          "Hard-coded in the source code",
+          "In the README",
+          "In a public bucket"
         ],
-        "correct_index": 1
-      },
-      {
-        "question": "Why is Horizontal Scaling more resilient?",
-        "options": [
-          "Because smaller servers are cheaper",
-          "Because if one server crashes, the others can still handle the traffic",
-          "Because it uses less electricity",
-          "Because it's easier to code"
-        ],
-        "correct_index": 1
+        "correct_index": 0
       }
     ]
   },
@@ -66,7 +66,7 @@
     {
       "order": 1,
       "title": "Horizontal vs. Vertical Scaling",
-      "content_md": "# Horizontal vs. Vertical Scaling \u2696\ufe0f\n\nIf your website becomes incredibly popular overnight, your single server won't be able to handle all the traffic. It will crash under the pressure. You need to **Scale** (grow) your app.\n\nThere are two ways to do this:\n\n## 1. Vertical Scaling (Scaling UP) \ud83c\udfe2\nImagine you have a small delivery van. Vertical scaling is like taking that van to a mechanic, stripping out the engine, and replacing it with a massive, turbo-charged monster engine. \n\nIn the Cloud, this means keeping your **one server**, but upgrading it to have more CPU and RAM. \n- **The Problem:** A server can only get so big before you hit the physical limits of hardware. Plus, you have to turn the server off to upgrade it!\n\n## 2. Horizontal Scaling (Scaling OUT) \ud83d\ude97\ud83d\ude97\ud83d\ude97\nImagine you have a small delivery van. Instead of making it bigger, you just buy **10 more identical vans**. \n\nIn the Cloud, this means keeping your small servers, but adding **hundreds of identical copies** of them side-by-side.\n- **The Benefit:** There is no limit! If you need more power, you just add another server. This is the true power of the Cloud.\n\n<flipcard front=\"\ud83c\udfe2 What is the difference between Vertical and Horizontal scaling?\" back=\"Vertical (Scaling UP) is making a single server bigger and stronger. Horizontal (Scaling OUT) is adding many more identical servers to share the load.\"></flipcard>",
+      "content_md": "# Horizontal vs. Vertical Scaling ⚖️\n\nIf your website becomes incredibly popular overnight, your single server won't be able to handle all the traffic. It will crash under the pressure. You need to **Scale** (grow) your app.\n\nThere are two ways to do this:\n\n## 1. Vertical Scaling (Scaling UP) 🏢\nImagine you have a small delivery van. Vertical scaling is like taking that van to a mechanic, stripping out the engine, and replacing it with a massive, turbo-charged monster engine. \n\nIn the Cloud, this means keeping your **one server**, but upgrading it to have more CPU and RAM. \n- **The Problem:** A server can only get so big before you hit the physical limits of hardware. Plus, you have to turn the server off to upgrade it!\n\n## 2. Horizontal Scaling (Scaling OUT) 🚗🚗🚗\nImagine you have a small delivery van. Instead of making it bigger, you just buy **10 more identical vans**. \n\nIn the Cloud, this means keeping your small servers, but adding **hundreds of identical copies** of them side-by-side.\n- **The Benefit:** There is no limit! If you need more power, you just add another server. This is the true power of the Cloud.\n\n<flipcard front=\"🏢 What is the difference between Vertical and Horizontal scaling?\" back=\"Vertical (Scaling UP) is making a single server bigger and stronger. Horizontal (Scaling OUT) is adding many more identical servers to share the load.\"></flipcard>",
       "xp_reward": 15,
       "coins_reward": 10,
       "is_mandatory": true,
@@ -75,11 +75,29 @@
     {
       "order": 2,
       "title": "The Load Balancer: The Traffic Cop",
-      "content_md": "# The Load Balancer: The Traffic Cop \ud83d\udc6e\u200d\u2642\ufe0f\n\nSo, you chose **Horizontal Scaling**. You now have 5 identical web servers running your app.\n\nWhen a user types your website address into their browser, which of the 5 servers do they connect to?\n\nIf all the users accidentally connect to Server #1, it will crash, while the other 4 servers sit around doing nothing!\n\n## Enter the Load Balancer\n\nTo fix this, we put a **Load Balancer** in front of the servers. \n\nThink of a Load Balancer as a traffic cop standing at a massive intersection during rush hour.\n- Car 1 arrives: The cop points them to Server A.\n- Car 2 arrives: The cop points them to Server B.\n- Car 3 arrives: The cop points them to Server C.\n\nThe Load Balancer ensures that the traffic is perfectly distributed so that no single server ever gets overwhelmed.\n\n<flipcard front=\"\ud83d\udc6e\u200d\u2642\ufe0f What is the job of a Load Balancer?\" back=\"A Load Balancer acts like a traffic cop, distributing incoming internet traffic evenly across multiple servers so no single server gets overloaded and crashes.\"></flipcard>",
+      "content_md": "# The Load Balancer: The Traffic Cop 👮‍♂️\n\nSo, you chose **Horizontal Scaling**. You now have 5 identical web servers running your app.\n\nWhen a user types your website address into their browser, which of the 5 servers do they connect to?\n\nIf all the users accidentally connect to Server #1, it will crash, while the other 4 servers sit around doing nothing!\n\n## Enter the Load Balancer\n\nTo fix this, we put a **Load Balancer** in front of the servers. \n\nThink of a Load Balancer as a traffic cop standing at a massive intersection during rush hour.\n- Car 1 arrives: The cop points them to Server A.\n- Car 2 arrives: The cop points them to Server B.\n- Car 3 arrives: The cop points them to Server C.\n\nThe Load Balancer ensures that the traffic is perfectly distributed so that no single server ever gets overwhelmed.\n\n<flipcard front=\"👮‍♂️ What is the job of a Load Balancer?\" back=\"A Load Balancer acts like a traffic cop, distributing incoming internet traffic evenly across multiple servers so no single server gets overloaded and crashes.\"></flipcard>",
       "xp_reward": 20,
       "coins_reward": 10,
       "is_mandatory": true,
       "illustration_url": "https://images.unsplash.com/photo-1549420063-e380fb8e492f?w=800"
+    },
+    {
+      "order": 3,
+      "title": "Cloud Security: IAM, Least Privilege & Secrets",
+      "content_md": "# Cloud Security: IAM, Least Privilege & Secrets 🔐\n\nScaling gets you more users — and more attackers. Most cloud breaches aren't clever hacks; they're **misconfigurations**: over-powerful credentials, public buckets and leaked keys.\n\n## The Shared Responsibility Model\n\n| The cloud provider secures… | You secure… |\n|-----------------------------|-------------|\n| Physical data centres | Who can access what (IAM) |\n| Hardware and the network backbone | Your data and its encryption settings |\n| The managed services themselves | Your code, OS patches (on VMs) and configuration |\n\n<flipcard front=\"🤝 What is the shared responsibility model?\" back=\"The provider secures the cloud itself (buildings, hardware, core services); you secure what you put in it — identities, permissions, data and configuration.\"></flipcard>\n\n## Identity & Access Management (IAM)\n\nIAM answers: **who** (a user, group or service) can do **what** (actions) on **which** resource.\n\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [{\n    \"Effect\": \"Allow\",\n    \"Action\": [\"s3:GetObject\"],\n    \"Resource\": \"arn:aws:s3:::flybeta-avatars/*\"\n  }]\n}\n```\n\nThis policy only lets its holder **read** objects in **one** bucket — nothing else.\n\n## The Principle of Least Privilege\n\nGive every user and service **only the permissions it needs, and nothing more**.\n\n| ❌ Risky | ✅ Least privilege |\n|---------|-------------------|\n| App server uses an admin key | App server has a role that can only read one bucket |\n| Everyone shares one root login | Individual users, MFA on, root locked away |\n| Long-lived access keys on laptops | Short-lived credentials from roles |\n\n<flipcard front=\"🗝️ What is the principle of least privilege?\" back=\"Grant each user or service only the permissions required for its job — so a leaked credential or a bug can do as little damage as possible.\"></flipcard>\n\n## Secrets Management\n\nAPI keys and database passwords must **never** be committed to git or baked into images.\n\n- Store them in a **secrets manager** (AWS Secrets Manager, GCP Secret Manager, Azure Key Vault).\n- Inject them at runtime as environment variables.\n- **Rotate** them regularly — and immediately if one leaks.\n\n## Encryption\n\n- **In transit:** HTTPS/TLS everywhere, including between internal services.\n- **At rest:** turn on encryption for disks, buckets and databases (usually one setting).\n\n## Quick Security Checklist\n\n- [ ] MFA on every human account; root/owner account locked away\n- [ ] No public buckets unless they truly host public files\n- [ ] Security groups only open the ports you need (e.g. 443, not 0–65535)\n- [ ] Secrets in a secrets manager, never in code\n- [ ] Logging of who did what (CloudTrail / Cloud Audit Logs) switched on\n",
+      "xp_reward": 25,
+      "coins_reward": 15,
+      "is_mandatory": true,
+      "lesson_type": "theory"
+    },
+    {
+      "order": 4,
+      "title": "Hands-On: Auto Scaling Behind a Load Balancer",
+      "content_md": "# Hands-On: Auto Scaling Behind a Load Balancer 📈\n\nLet's put horizontal scaling and a load balancer together using Docker Compose on your own machine, then see how the cloud automates the same idea.\n\n## 1. A Tiny Service That Reports Who Answered\n\n```python\n# app.py\nimport socket\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.get(\"/\")\ndef hello():\n    return {\"served_by\": socket.gethostname()}\n```\n\n```dockerfile\n# Dockerfile\nFROM python:3.12-slim\nWORKDIR /app\nRUN pip install flask gunicorn\nCOPY app.py .\nCMD [\"gunicorn\", \"-b\", \"0.0.0.0:8000\", \"app:app\"]\n```\n\n## 2. An Nginx Load Balancer\n\n```nginx\n# nginx.conf\nevents {}\nhttp {\n  upstream app_servers {\n    server app:8000;   # Docker's DNS returns every replica of \"app\"\n  }\n  server {\n    listen 80;\n    location / { proxy_pass http://app_servers; }\n  }\n}\n```\n\n```yaml\n# docker-compose.yml\nservices:\n  app:\n    build: .\n  lb:\n    image: nginx:alpine\n    ports: [\"8080:80\"]\n    volumes: [\"./nginx.conf:/etc/nginx/nginx.conf:ro\"]\n    depends_on: [app]\n```\n\n## 3. Scale Out\n\n```bash\ndocker compose up --build --scale app=3 -d\nfor i in 1 2 3 4 5 6; do curl -s localhost:8080; echo; done\n```\n\nYou'll see `served_by` change between the three containers — the load balancer is spreading requests across them. (Nginx resolves the replicas when it starts, so restart `lb` after scaling up or down.)\n\n## 4. How the Cloud Automates This\n\n| Piece | AWS | GCP | Azure |\n|-------|-----|-----|-------|\n| Group of identical servers | Auto Scaling Group | Managed Instance Group | VM Scale Set |\n| Load balancer | Application Load Balancer | Cloud Load Balancing | Azure Load Balancer |\n| Scaling rule | e.g. keep average CPU at 60% | Same idea | Same idea |\n\nThe load balancer runs **health checks** and stops sending traffic to unhealthy servers; the scaling group replaces them automatically.\n\n## 5. Challenges\n\n- Kill one container (`docker kill <id>`) and keep curling. What happens?\n- Add a `/slow` endpoint that sleeps for 2 seconds and compare 1 vs 3 replicas under load (try `hey` or `ab`).\n",
+      "xp_reward": 35,
+      "coins_reward": 20,
+      "is_mandatory": false,
+      "lesson_type": "lab"
     }
   ]
 }

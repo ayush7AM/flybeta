@@ -8,7 +8,59 @@
   "level": {
     "number": 1,
     "title": "Data Alchemy",
-    "description": "Transform raw, messy data into gold — learn the foundational tools and techniques every data scientist uses to wrangle, explore, and visualize datasets."
+    "description": "Transform raw, messy data into gold — learn the foundational tools and techniques every data scientist uses to wrangle, explore, and visualize datasets.",
+    "quiz_data": [
+      {
+        "question": "What is a pandas DataFrame?",
+        "options": [
+          "A chart type",
+          "A two-dimensional labeled table of rows and columns",
+          "A machine learning model",
+          "A SQL database"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does `df.isnull().sum()` show?",
+        "options": [
+          "The total of every column",
+          "The number of rows",
+          "How many missing values each column has",
+          "Duplicate rows"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is a common way to handle missing numeric values?",
+        "options": [
+          "Fill them with the median or mean, or drop those rows — depending on the context",
+          "Always replace them with zero",
+          "Ignore them; models handle them automatically",
+          "Delete the whole column every time"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is the purpose of Exploratory Data Analysis (EDA)?",
+        "options": [
+          "To deploy a model",
+          "To write the final report",
+          "To encrypt the data",
+          "To understand distributions, patterns and anomalies before modelling"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What does `df.describe()` return for numeric columns?",
+        "options": [
+          "Their data types only",
+          "Summary statistics: count, mean, std, min, quartiles and max",
+          "A correlation heatmap",
+          "The first five rows"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

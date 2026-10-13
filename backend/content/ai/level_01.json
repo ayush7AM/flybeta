@@ -8,7 +8,59 @@
   "level": {
     "number": 1,
     "title": "Neural Ignition",
-    "description": "Ignite your AI journey — understand what machine learning really is, how models learn from data, and build intuition for the algorithms powering the modern world."
+    "description": "Ignite your AI journey — understand what machine learning really is, how models learn from data, and build intuition for the algorithms powering the modern world.",
+    "quiz_data": [
+      {
+        "question": "What makes machine learning different from traditional programming?",
+        "options": [
+          "It runs faster on GPUs",
+          "The program learns patterns from example data instead of following hand-written rules",
+          "It never makes mistakes",
+          "It only works with images"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "A model learns to predict house prices from past sales where the price is known. What type of learning is this?",
+        "options": [
+          "Supervised learning",
+          "Unsupervised learning",
+          "Reinforcement learning",
+          "Transfer learning"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Grouping customers into segments when no categories are given in advance is an example of…",
+        "options": [
+          "Supervised learning",
+          "Reinforcement learning",
+          "Unsupervised learning",
+          "Regression"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "In a spam filter, what is the \"label\"?",
+        "options": [
+          "The email subject line",
+          "The number of words in the email",
+          "The sender's address",
+          "Whether each email is spam or not spam"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "A model scores 99% on its training data but only 60% on new data. What is happening?",
+        "options": [
+          "Underfitting",
+          "Overfitting — it memorised the training data instead of learning general patterns",
+          "The model needs more layers",
+          "The test data is too small to matter"
+        ],
+        "correct_index": 1
+      }
+    ]
   },
   "lessons": [
     {

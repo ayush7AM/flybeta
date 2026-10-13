@@ -8,7 +8,59 @@
   "level": {
     "number": 5,
     "title": "Kubernetes & Orchestration",
-    "description": "Orchestrate containers at scale — understand Pods, Deployments, Services, and Ingress to run production workloads on Kubernetes clusters."
+    "description": "Orchestrate containers at scale — understand Pods, Deployments, Services, and Ingress to run production workloads on Kubernetes clusters.",
+    "quiz_data": [
+      {
+        "question": "What is the smallest deployable unit in Kubernetes?",
+        "options": [
+          "Node",
+          "Pod",
+          "Cluster",
+          "Namespace"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does a Deployment do?",
+        "options": [
+          "Stores secrets",
+          "Keeps the desired number of Pod replicas running and handles rolling updates",
+          "Builds Docker images",
+          "Opens SSH sessions"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "A Pod managed by a Deployment crashes. What happens?",
+        "options": [
+          "The whole cluster stops",
+          "Nothing until an admin intervenes",
+          "Kubernetes replaces it to get back to the desired state",
+          "The Deployment is deleted"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What does a Kubernetes Service provide?",
+        "options": [
+          "A stable network address that load-balances across a set of Pods",
+          "A Docker registry",
+          "A billing dashboard",
+          "Persistent disk storage"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is an Ingress for?",
+        "options": [
+          "Storing logs",
+          "Scheduling Pods onto nodes",
+          "Encrypting disks",
+          "Routing external HTTP(S) traffic to Services by host name or path"
+        ],
+        "correct_index": 3
+      }
+    ]
   },
   "lessons": [
     {

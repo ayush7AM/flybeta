@@ -8,7 +8,59 @@
   "level": {
     "number": 2,
     "title": "Neural Networks & Deep Learning Anatomy",
-    "description": "Dissect the building blocks of deep learning — from a single artificial neuron to multi-layer networks, and learn how backpropagation teaches machines to think."
+    "description": "Dissect the building blocks of deep learning — from a single artificial neuron to multi-layer networks, and learn how backpropagation teaches machines to think.",
+    "quiz_data": [
+      {
+        "question": "What does a single artificial neuron (perceptron) compute?",
+        "options": [
+          "A weighted sum of its inputs plus a bias, passed through an activation function",
+          "The average of all training examples",
+          "A random number between 0 and 1",
+          "The square root of its inputs"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Why do neural networks need activation functions?",
+        "options": [
+          "To make training data smaller",
+          "To store the weights",
+          "To add non-linearity so the network can learn complex patterns",
+          "To shuffle the inputs"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "Which activation function is the most common choice for hidden layers in modern deep networks?",
+        "options": [
+          "Softmax",
+          "ReLU",
+          "Step function",
+          "Linear"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is Softmax typically used for?",
+        "options": [
+          "Removing outliers",
+          "Speeding up backpropagation",
+          "Initialising weights",
+          "Turning output scores into probabilities across several classes"
+        ],
+        "correct_index": 3
+      },
+      {
+        "question": "What does backpropagation do?",
+        "options": [
+          "Calculates how much each weight contributed to the error so the weights can be adjusted",
+          "Feeds the input through the network",
+          "Deletes neurons that are not used",
+          "Splits the data into batches"
+        ],
+        "correct_index": 0
+      }
+    ]
   },
   "lessons": [
     {
