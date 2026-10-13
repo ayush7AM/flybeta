@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { getDomain, getCachedDomain } from '../services/api';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
@@ -8,6 +8,7 @@ import AuthModal from '../components/auth/AuthModal';
 
 export default function TrackRoadmapPage() {
   const { name } = useParams();
+  const focusLevel = useLocation().state?.focusLevel;
   const { themeKey } = useTheme();
   const { user } = useAuth();
   const cached = getCachedDomain(name);
@@ -27,6 +28,16 @@ export default function TrackRoadmapPage() {
       })
       .finally(() => setLoading(false));
   }, [name, cached]);
+
+  // Coming back from a finished level: bring the newly unlocked level into view
+  useEffect(() => {
+    if (!focusLevel || loading) return;
+    // A short timer (not rAF) so it also runs if the tab is in the background
+    const timer = setTimeout(() => {
+      document.querySelector(`[data-level="${focusLevel}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [focusLevel, loading]);
 
   if (loading) {
     return (

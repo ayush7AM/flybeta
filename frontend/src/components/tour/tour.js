@@ -40,8 +40,8 @@ export const TOUR_PAGES = [
       {
         element: '#tour-xp',
         popover: {
-          title: '⚡ XP, Coins & Streaks',
-          description: 'Lessons earn XP and coins, and boss quizzes earn bonus XP. Learn on consecutive days to grow your 🔥 streak. XP raises your rank — from Novice all the way to Legend.',
+          title: '🔥 Streaks, Coins & XP',
+          description: 'Learn on consecutive days to grow your 🔥 streak — miss a day and you can restore it with coins. Lessons and boss quizzes also earn XP and coins; XP raises your rank, from Novice all the way to Legend.',
           side: 'bottom',
           align: 'end',
         },
@@ -90,7 +90,7 @@ export const TOUR_PAGES = [
       {
         popover: {
           title: '🏆 How to Clear a Level',
-          description: '<b>Levels 1–9:</b> work through the lessons, then beat the <b>Boss Quiz</b> on the last one — 60% to pass, +50 XP. Failed? Just retry.<br><b>Level 10:</b> the capstone — push a project to GitHub; scoring 60+ from the AI evaluator completes the track, with +500 XP and a certificate 🎓.<br><br>Clearing a level unlocks the next one — and takes you straight into it.',
+          description: '<b>Levels 1–9:</b> work through the lessons, then beat the <b>Boss Quiz</b> on the last one — 60% to pass, +50 XP. Failed? Just retry.<br><b>Level 10:</b> the capstone — push a project to GitHub; scoring 60+ from the AI evaluator completes the track, with +500 XP and a certificate 🎓.<br><br>Clearing a level sends you back to your roadmap with the next level unlocked.',
         },
       },
     ],

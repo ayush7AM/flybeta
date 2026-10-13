@@ -18,7 +18,7 @@ export default function LevelNode({
   };
 
   return (
-    <div id={tourId} className="relative flex items-start gap-3 md:gap-6">
+    <div id={tourId} data-level={level.number} className="relative flex items-start gap-3 md:gap-6">
       {/* Connector Line (vertical) */}
       <div className="flex flex-col items-center">
         <div

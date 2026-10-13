@@ -6,12 +6,6 @@ import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../auth/AuthModal';
 
-const SECTIONS = [
-  { id: 'features', label: 'Features' },
-  { id: 'how-it-works', label: 'How it works' },
-  { id: 'contact', label: 'Contact' },
-];
-
 // Same control sizing as the app navbar, so the two feel like one product
 const SHADOW = { boxShadow: '2px 2px 0px 0px var(--color-ink)' };
 const PRIMARY_BUTTON = 'h-9 flex items-center px-3 md:px-5 border-2 border-ink bg-ink text-canvas font-bold uppercase tracking-wider text-xs md:text-sm no-underline whitespace-nowrap cursor-pointer hover:bg-primary hover:text-white transition-colors';
@@ -21,29 +15,10 @@ export default function LandingNavbar() {
   const { user } = useAuth();
   const [authView, setAuthView] = useState(null); // 'login' | 'register' | null
 
-  const scrollToSection = (e, id) => {
-    e.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <nav className="sticky top-0 z-30 bg-canvas/95 backdrop-blur-sm border-b-2 border-ink">
       <div className="max-w-7xl mx-auto h-16 md:h-20 px-4 md:px-8 flex items-center justify-between gap-4">
         <Logo to="/" />
-
-        {/* Section links */}
-        <div className="hidden md:flex items-center gap-8">
-          {SECTIONS.map(({ id, label }) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              onClick={(e) => scrollToSection(e, id)}
-              className="no-underline text-ink hover:text-primary transition-colors uppercase tracking-wider text-sm font-semibold"
-            >
-              {label}
-            </a>
-          ))}
-        </div>
 
         {/* Actions */}
         <div className="flex items-center gap-2 md:gap-3">

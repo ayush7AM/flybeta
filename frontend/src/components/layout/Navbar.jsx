@@ -87,19 +87,23 @@ export default function Navbar() {
 
       {/* Right: Stats · Display · Account */}
       <div className="flex items-center gap-2 lg:gap-3 shrink-0">
-        {/* Stats pill — streak & coins join XP on large screens */}
+        {/* Streak button (opens the Dashboard) — coins join it on large screens */}
         {user && (
-          <div id="tour-xp" className={`${CONTROL} flex divide-x-2 divide-ink overflow-hidden`} style={CONTROL_SHADOW}>
-            <span className="hidden lg:flex items-center gap-1.5 h-full px-3 bg-flame-light text-flame label-mono font-bold" title="Daily streak">
-              🔥 {user.streak || 0}
+          <Link
+            id="tour-xp"
+            to="/dashboard"
+            className={`${CONTROL} flex divide-x-2 divide-ink overflow-hidden no-underline`}
+            style={CONTROL_SHADOW}
+            title={user.streak_restore ? 'Your streak ended — restore it on the Dashboard' : 'Daily streak — open your Dashboard'}
+          >
+            <span className="flex items-center gap-1.5 h-full px-3 bg-flame-light text-flame label-mono font-bold whitespace-nowrap">
+              {user.streak_restore && !user.streak ? '💔' : '🔥'} {user.streak || 0}
+              <span className="hidden sm:inline">day{user.streak === 1 ? '' : 's'}</span>
             </span>
-            <span className="hidden lg:flex items-center gap-1.5 h-full px-3 bg-gold-light text-gold label-mono font-bold" title="Coins">
+            <span className="hidden lg:flex items-center gap-1.5 h-full px-3 bg-gold-light text-gold label-mono font-bold">
               💰 {user.coins?.toLocaleString() || 0}
             </span>
-            <span className="flex items-center gap-1.5 h-full px-3 bg-cobalt-light text-cobalt label-mono font-bold whitespace-nowrap" title="Experience points">
-              ⚡ {user.total_xp?.toLocaleString() || 0} XP
-            </span>
-          </div>
+          </Link>
         )}
 
         {/* Display: dark mode + theme */}
@@ -230,9 +234,9 @@ export default function Navbar() {
               {user ? (
                 <>
                   <div className="flex items-center gap-2 pt-2">
-                    <div className="brutalist-badge bg-flame-light text-flame" title="Daily Streak">
-                      <span>🔥</span>
-                      <span>{user.streak || 0} day streak</span>
+                    <div className="brutalist-badge bg-cobalt-light text-cobalt" title="Experience points">
+                      <span>⚡</span>
+                      <span>{user.total_xp?.toLocaleString() || 0} XP</span>
                     </div>
                     <div className="brutalist-badge bg-gold-light text-gold" title="Coins">
                       <span>💰</span>

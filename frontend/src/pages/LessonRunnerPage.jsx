@@ -157,11 +157,8 @@ export default function LessonRunnerPage() {
   const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
   const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
 
-  // Finishing this level's last lesson opens the next level (once it's unlocked)
+  // Finishing this level's last lesson returns to the roadmap, focused on the next level
   const nextLevel = domain.levels?.find(l => l.number === levelNum + 1);
-  const nextLevelFirstLesson = nextLevel?.lessons?.length
-    ? [...nextLevel.lessons].sort((a, b) => a.order - b.order)[0]
-    : null;
 
   // Handle lesson completion
   const handleComplete = async () => {
@@ -178,7 +175,7 @@ export default function LessonRunnerPage() {
 
       const highestUnlocked = result.user.domain_progress
         ?.find(p => p.domain_name === name)?.highest_unlocked_level || 1;
-      const openNextLevel = !nextLesson && nextLevelFirstLesson && highestUnlocked >= nextLevel.number;
+      const unlockedNext = !nextLesson && !!nextLevel && highestUnlocked >= nextLevel.number;
 
       // Always show the success overlay
       setReward({
@@ -186,17 +183,16 @@ export default function LessonRunnerPage() {
         coins: currentLesson.coins_reward,
         levelCompleted: result.level_completed,
         alreadyDone: result.status === 'already_completed',
-        nextLevelNumber: openNextLevel ? nextLevel.number : null,
+        nextLevelNumber: unlockedNext ? nextLevel.number : null,
       });
 
       // Navigate after 1.5s so the user actually sees the celebration
       setTimeout(() => {
         if (nextLesson) {
           navigate(`/track/${name}/level/${levelNum}/lesson/${nextLesson.order}`);
-        } else if (openNextLevel) {
-          navigate(`/track/${name}/level/${nextLevel.number}/lesson/${nextLevelFirstLesson.order}`);
         } else {
-          navigate(`/track/${name}`);
+          // Level finished: back to the roadmap, scrolled to the level that just opened up
+          navigate(`/track/${name}`, { state: { focusLevel: unlockedNext ? nextLevel.number : levelNum } });
         }
       }, 1500);
     } catch (err) {
@@ -281,7 +277,7 @@ export default function LessonRunnerPage() {
 
             {reward.nextLevelNumber && (
               <p className="label-mono m-0 mt-5" style={{ fontSize: '0.85rem' }}>
-                🔓 Level {reward.nextLevelNumber} unlocked — opening it now…
+                🔓 Level {reward.nextLevelNumber} unlocked — back to your roadmap…
               </p>
             )}
           </div>
@@ -399,7 +395,6 @@ export default function LessonRunnerPage() {
                   quizData={currentLevel.quiz_data || []} 
                   levelId={currentLevel.id} 
                   onUnlock={handleComplete} 
-                  continueLabel={nextLevelFirstLesson ? `Continue to Level ${nextLevel.number} →` : 'Return to Roadmap →'}
                 />
               )}
             </div>
