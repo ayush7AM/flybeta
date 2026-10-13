@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interactive Lesson Runner</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rubik:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#906f70",
+                    "on-surface": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#e11d48",
+                    "on-secondary-fixed": "#001a42",
+                    "inverse-surface": "#313030",
+                    "on-primary-container": "#fffaf9",
+                    "canvas-paper": "#FEF08A",
+                    "on-tertiary-fixed": "#231b00",
+                    "surface": "#fcf9f8",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#be0037",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface-container-high": "#ebe7e7",
+                    "tertiary": "#735c00",
+                    "on-background": "#1c1b1b",
+                    "crayon-red": "#E11D48",
+                    "on-primary-fixed": "#40000c",
+                    "on-surface-variant": "#5c3f40",
+                    "notebook-line": "#60A5FA",
+                    "on-tertiary-container": "#4e3e00",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "background": "#fcf9f8",
+                    "surface-container-low": "#f6f3f2",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "primary": "#b80035",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-on-surface": "#f3f0ef",
+                    "secondary": "#0058be",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-fixed-dim": "#eec200",
+                    "tertiary-container": "#cea700",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dcd9d9",
+                    "on-primary-fixed-variant": "#920028",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-container": "#f0edec",
+                    "inverse-primary": "#ffb3b6",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#e5bdbe",
+                    "primary-fixed": "#ffdada",
+                    "tertiary-fixed": "#ffe083",
+                    "kinder-blue": "#3B82F6",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-container": "#2170e4",
+                    "primary-fixed-dim": "#ffb3b6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "shadow-offset": "6px",
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "border-width": "3px"
+            },
+            "fontFamily": {
+                    "body-md": [
+                            "Rubik"
+                    ],
+                    "headline-lg": [
+                            "Anton"
+                    ],
+                    "headline-lg-mobile": [
+                            "Anton"
+                    ],
+                    "scribble-caption": [
+                            "Rubik"
+                    ],
+                    "body-lg": [
+                            "Rubik"
+                    ],
+                    "headline-md": [
+                            "Anton"
+                    ],
+                    "label-bold": [
+                            "Rubik"
+                    ]
+            },
+            "fontSize": {
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "64px",
+                            {
+                                    "lineHeight": "72px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "40px",
+                            {
+                                    "lineHeight": "44px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "scribble-caption": [
+                            "12px",
+                            {
+                                    "lineHeight": "14px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "32px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "900"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Notebook lines overlay using mapped theme colors */
+        .notebook-lines {
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 39px,
+                #60A5FA 39px,
+                #60A5FA 41px
+            );
+        }
+        
+        /* Crayon scribble SVG filter for extra texture if needed */
+        .crayon-stroke {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 0;
+            animation: dash 0.5s ease-out forwards;
+        }
+        @keyframes dash {
+            from { stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-canvas-paper text-on-background font-body-md min-h-screen relative selection:bg-kinder-blue selection:text-white">
+<!-- Background Pattern layer -->
+<div class="fixed inset-0 pointer-events-none z-[-1] notebook-lines opacity-60"></div>
+<!-- Task-Focused Header (Navigation Shell Suppressed) -->
+<header class="sticky top-0 z-50 flex items-center justify-between p-gutter bg-canvas-paper/90 backdrop-blur-md border-b-border-width border-on-background">
+<button class="w-12 h-12 flex items-center justify-center border-border-width border-on-background bg-surface shadow-[4px_4px_0px_0px_#1c1b1b] hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-kinder-blue hover:text-white transition-all active:translate-x-2 active:translate-y-2">
+<span class="material-symbols-outlined font-bold" data-icon="close">close</span>
+</button>
+<div class="font-headline-md text-headline-md uppercase tracking-tighter text-center">
+            Mission: Loop-de-Loop
+        </div>
+<div class="w-12"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Layout Container -->
+<div class="flex flex-col md:flex-row min-h-[calc(100vh-80px)]">
+<!-- Left Rail: Physical Checklist -->
+<aside class="w-full md:w-80 lg:w-96 border-b-border-width md:border-b-0 md:border-r-border-width border-on-background p-gutter flex flex-col gap-6 relative">
+<h2 class="font-headline-md text-headline-md uppercase rotate-[-2deg] mb-2 bg-surface-container-lowest border-border-width border-on-background p-2 inline-block shadow-[4px_4px_0px_0px_#1c1b1b]">
+                Objectives
+            </h2>
+<!-- Checklist Item 1: Completed -->
+<div class="group border-border-width border-on-background bg-surface p-4 shadow-[6px_6px_0px_0px_#1c1b1b] transform hover:-rotate-1 transition-transform cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 shrink-0 border-border-width border-on-background bg-surface-container-lowest relative flex items-center justify-center">
+<svg class="absolute w-12 h-12 text-crayon-red -top-2 -left-2 crayon-stroke" fill="none" viewbox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 15 L20 40 L45 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" style="filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.3));"></path>
+</svg>
+</div>
+<span class="font-body-lg text-body-lg line-through decoration-crayon-red decoration-4 opacity-70">Initialize System</span>
+</div>
+</div>
+<!-- Checklist Item 2: Active -->
+<div class="group border-border-width border-on-background bg-surface p-4 shadow-[6px_6px_0px_0px_#1c1b1b] transform rotate-1 hover:rotate-0 transition-transform cursor-pointer ring-4 ring-kinder-blue ring-offset-4 ring-offset-canvas-paper">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 shrink-0 border-border-width border-on-background bg-surface-container-lowest relative flex items-center justify-center">
+</div>
+<span class="font-body-lg text-body-lg">Write the For Loop</span>
+</div>
+</div>
+<!-- Checklist Item 3: Pending -->
+<div class="group border-border-width border-on-background bg-surface p-4 shadow-[6px_6px_0px_0px_#1c1b1b] transform hover:rotate-1 transition-transform cursor-pointer opacity-80">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 shrink-0 border-border-width border-on-background bg-surface-container-lowest relative flex items-center justify-center">
+</div>
+<span class="font-body-lg text-body-lg">Defeat the Boss</span>
+</div>
+</div>
+<!-- Decorative scribbles/tape -->
+<div class="absolute bottom-10 left-4 w-16 h-4 bg-gray-300/80 -rotate-12 border border-gray-400 backdrop-blur-sm opacity-50 z-10" style="box-shadow: 1px 1px 2px rgba(0,0,0,0.1);"></div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-gutter md:p-margin-desktop flex flex-col gap-10">
+<!-- Mission Briefing Callout -->
+<section class="border-border-width border-on-background bg-surface-container-lowest shadow-[8px_8px_0px_0px_#1c1b1b] p-6 relative">
+<!-- Pin decorative -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-crayon-red border-border-width border-on-background shadow-[2px_2px_0px_0px_#1c1b1b] z-10"></div>
+<h3 class="font-headline-md text-headline-md uppercase mb-4 text-primary">Briefing</h3>
+<p class="font-body-lg text-body-lg leading-relaxed">
+                    Action Kamen needs to punch 5 times to break the barrier! We don't have time to write 'punch' five times. Use a <strong class="bg-primary text-on-primary px-2 border-2 border-on-background">FOR LOOP</strong> to automate his attacks!
+                </p>
+</section>
+<!-- Code Editor Block -->
+<section class="relative mt-4">
+<!-- Taped-on Tab -->
+<button class="absolute -top-5 right-6 bg-surface border-border-width border-on-background font-label-bold text-label-bold uppercase px-6 py-2 rotate-2 hover:bg-kinder-blue hover:text-white hover:-translate-y-1 transition-all z-10 shadow-[4px_4px_0px_0px_#1c1b1b] active:shadow-none active:translate-y-1">
+                    Copy Code
+                </button>
+<!-- Editor Surface -->
+<div class="bg-inverse-surface border-border-width border-on-background p-6 shadow-[10px_10px_0px_0px_#1c1b1b] overflow-x-auto rounded-sm">
+<div class="flex gap-2 mb-4 border-b-2 border-on-surface-variant pb-2">
+<div class="w-4 h-4 rounded-full bg-crayon-red border-2 border-on-background"></div>
+<div class="w-4 h-4 rounded-full bg-tertiary-fixed border-2 border-on-background"></div>
+<div class="w-4 h-4 rounded-full bg-kinder-blue border-2 border-on-background"></div>
+</div>
+<pre class="font-mono text-body-lg text-on-primary leading-loose tracking-wide"><span class="text-kinder-blue font-bold">function</span> breakBarrier() {
+  <span class="text-tertiary-fixed font-bold">for</span> (<span class="text-kinder-blue font-bold">let</span> i = 0; i &lt; 5; i++) {
+    <span class="text-surface-container-highest">actionKamen</span>.<span class="text-inverse-primary">punch</span>();
+  }
+}
+</pre>
+</div>
+</section>
+<!-- Spacer -->
+<div class="flex-1"></div>
+<!-- Massive Arcade CTA -->
+<div class="flex justify-center md:justify-end mt-8 pb-8">
+<button class="group relative inline-flex items-center justify-center bg-crayon-red text-on-primary font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase py-6 px-16 border-[4px] border-on-background shadow-[12px_12px_0px_0px_#1c1b1b] hover:translate-x-2 hover:translate-y-2 hover:shadow-[4px_4px_0px_0px_#1c1b1b] active:translate-x-3 active:translate-y-3 active:shadow-none transition-all cursor-pointer overflow-hidden rotate-[-1deg]">
+<span class="relative z-10 flex items-center gap-4">
+                        CLAIM XP
+                        <span class="material-symbols-outlined text-[48px]" data-icon="military_tech" data-weight="fill" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</span>
+<!-- Glint effect on hover -->
+<div class="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-[shimmer_0.5s_forwards] skew-x-12"></div>
+</button>
+</div>
+</main>
+</div>
+<style>
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</body></html>

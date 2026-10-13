@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - The Bounty Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Chivo:wght@400;600&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1e1b19",
+                        "outline-variant": "#e4beb9",
+                        "on-tertiary-fixed": "#251a00",
+                        "background": "#fff8f5",
+                        "secondary-fixed-dim": "#94ccff",
+                        "on-secondary-fixed-variant": "#004b74",
+                        "on-tertiary-fixed-variant": "#5a4300",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#cde5ff",
+                        "surface-container-high": "#eee7e3",
+                        "surface-bright": "#fff8f5",
+                        "on-secondary-fixed": "#001d32",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#ffd36c",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e9e1dd",
+                        "on-primary-container": "#ffcdc7",
+                        "on-secondary-container": "#004f7b",
+                        "surface-dim": "#e0d8d5",
+                        "on-primary-fixed-variant": "#93000b",
+                        "inverse-surface": "#33302d",
+                        "surface-container-highest": "#e9e1dd",
+                        "inverse-primary": "#ffb4ab",
+                        "tertiary-fixed-dim": "#f7be1d",
+                        "surface-container": "#f4ece8",
+                        "surface-tint": "#b91c1c",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#775a00",
+                        "primary": "#93000b",
+                        "surface": "#fff8f5",
+                        "tertiary-fixed": "#ffdf9a",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#006399",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7bc2ff",
+                        "inverse-on-surface": "#f7efeb",
+                        "on-primary-fixed": "#410002",
+                        "on-background": "#1e1b19",
+                        "on-surface-variant": "#5b403d",
+                        "surface-container-low": "#faf2ee",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary": "#5a4300",
+                        "outline": "#8f6f6c",
+                        "primary-container": "#b91c1c",
+                        "primary-fixed-dim": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "shadow-offset": "6px",
+                        "margin-page": "40px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "border-heavy": "8px",
+                        "border-thick": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Anton"],
+                        "headline-lg": ["Anton"],
+                        "body-lg": ["Chivo"],
+                        "label-caps": ["Space Grotesk"],
+                        "display-lg": ["Anton"],
+                        "body-md": ["Chivo"],
+                        "headline-lg-mobile": ["Anton"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "38px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-caps": ["14px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "display-lg": ["84px", { "lineHeight": "90px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "36px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>body {
+    background-color: #fff8f5;
+    background-image: radial-gradient(#8f6f6c 1px, transparent 1px);
+    background-size: 24px 24px
+    }
+.parchment-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDr4KALHZChzoQL2FPdXFAxFLlZdm9tNerRv2KYNtHZSd0w1keKQw7reyfg5or1tF66htfo9Pd_6de4zhJeQHrCKZ5P9A0BhzP-8OvajMxSv9RDmMXj_tKxTAQVRCcgdfgWaSzsEBjrIB4_gs5cZacbkaYeGDG9dHSGd9EHy6a93USydwVouYVGs4bNoDWyxJlUUtNnLfWPCPMutHMj_S3g84wfa-JC1-0fKJR27NObpP0azweq0HYW);
+    background-blend-mode: multiply
+    }
+.nautical-map-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAPHM6cMKLQfmno8nvHjHmFR9XgUwZqtw0qBP2nw9z9g2spygyuVm6vC999Yt_-s8UbhIjwAKgTXyFHusuz8j4rftS1LQcdTl2AcZ9B4BAUpRPGXXKCnOd0moImyge9xSEI8SyHdv5e6hUogpYzITPVl63WAYSnVffNaTBqaMP8gT6Jjnly4V6gmqe57v28YBWc6eqTsQYKR8fJ23kMzTEZjLeEtsJfJIOoY-_bv38jJQKzhsT_WZR4);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: luminosity;
+    opacity: 0.1;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none
+    }
+/* Custom scrollbar to match neo-brutalist theme */
+::-webkit-scrollbar {
+    width: 16px
+    }
+::-webkit-scrollbar-track {
+    background: #fff8f5;
+    border-left: 4px solid #1e1b19
+    }
+::-webkit-scrollbar-thumb {
+    background: #1e1b19;
+    border: 4px solid #fff8f5
+    }</style>
+</head>
+<body class="text-on-surface font-body-md min-h-screen relative overflow-x-hidden pt-20 md:pt-0 md:pl-72">
+<!-- Decorative Map Background -->
+<div class="nautical-map-bg" data-alt="A highly detailed, aged nautical chart rendered in sepia tones with faded ink. The map shows intricate coastlines, sea monsters, compass roses, and rhumb lines. The style is reminiscent of 17th-century cartography, heavily textured to look like old parchment, fitting a rugged, high-seas pirate adventure aesthetic."></div>
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-margin-page h-20 bg-surface dark:bg-surface-container-high text-primary dark:text-primary-fixed border-b-border-thick border-on-surface dark:border-outline-variant shadow-[6px_6px_0px_0px_#1e1b19]">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed uppercase tracking-tighter">
+            FlyBeta
+        </div>
+<!-- Navigation Links (Hidden on very small screens, maybe collapsed into a menu later, but preserving logic) -->
+<div class="hidden sm:flex space-x-4">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface hover:text-primary hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Quests</a>
+<a class="font-label-caps text-label-caps text-primary dark:text-primary-fixed border-b-border-thick border-primary dark:border-primary-fixed hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Bounties</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface hover:text-primary hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Map</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface hover:text-primary hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Armory</a>
+</div>
+<div class="flex space-x-2">
+<button class="hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none"><span class="material-symbols-outlined">local_fire_department</span></button>
+<button class="hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none"><span class="material-symbols-outlined">monetization_on</span></button>
+<button class="hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-75 active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none"><span class="material-symbols-outlined">military_tech</span></button>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col p-base z-40 bg-surface-container-low dark:bg-surface-container-highest text-primary dark:text-primary-fixed-dim border-r-border-thick border-on-surface dark:border-outline shadow-[6px_0px_0px_0px_#1e1b19] w-72">
+<div class="mb-8 p-4 border-b-border-thick border-on-surface">
+<div class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface mb-2">Dread Pirate Beta</div>
+<div class="flex items-center space-x-4">
+<img class="w-16 h-16 border-border-thick border-on-surface object-cover shadow-[4px_4px_0px_0px_#1e1b19]" data-alt="A rugged, stylized portrait of a pirate captain with an eyepatch, thick beard, and a tricorn hat. Rendered in a bold, neo-brutalist illustration style with heavy black outlines, stark white highlights, and deep crimson accents against a rough parchment background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-2PRLEvXWk4rT1zgSuaXOvfWoxqyPbp1Jpy4vJin5ajHT4cVnu6Hb1kWW2w1iMGXgBK-GzR40KOSEnnFGWZdFBjhpW8l47V67Xv0AKH26a1aGoBPELJ0x64Q-y_OcQVHzwczQ0jzP7IBpqk9qpHTUPxMi4NZnKuDKMIkhEn0C0Dt21f1_LbQjTWc9yUTltFBkbwrRUgCGcwwA1ZVU1KtnnOR3tcJ7V74lcBAL6F_XOCftN9lUsVxM"/>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Captain</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Rank: Scallywag</div>
+</div>
+</div>
+</div>
+<div class="flex-grow space-y-2">
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 active:scale-95 border-2 border-transparent" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Logbook</span>
+</a>
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps bg-primary-container text-on-primary-container border-4 border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] hover:border-4 hover:border-on-surface transition-all duration-100 active:scale-95" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span>Bounty Board</span>
+</a>
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 active:scale-95 border-2 border-transparent" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span>Treasure Map</span>
+</a>
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 active:scale-95 border-2 border-transparent" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>The Crew</span>
+</a>
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 active:scale-95 border-2 border-transparent" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t-border-thick border-on-surface space-y-2">
+<button class="w-full bg-primary text-on-primary font-headline-md text-headline-md py-3 px-4 border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] hover:shadow-[0px_0px_0px_0px_#1e1b19] hover:translate-x-[4px] hover:translate-y-[4px] transition-all active:scale-95 mb-4">
+                Claim Bounty
+            </button>
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 active:scale-95 border-2 border-transparent" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center space-x-3 p-3 font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 active:scale-95 border-2 border-transparent" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Abandon Ship</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="p-margin-page max-w-7xl mx-auto">
+<!-- Hero Section -->
+<header class="mb-12 text-center md:text-left relative">
+<h1 class="font-display-lg text-display-lg text-on-surface uppercase tracking-tight mb-4 drop-shadow-[4px_4px_0px_#b91c1c]">
+                The Bounty Board
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl bg-surface-container-high p-4 border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] inline-block">
+                Draft yer AI blueprints here, scallywag. Describe the project ye seek, and watch the plans unfurl before yer very eyes.
+            </p>
+</header>
+<!-- Input Section: The Drafting Board -->
+<section class="mb-16">
+<div class="bg-surface-container-lowest border-border-heavy border-on-surface shadow-[8px_8px_0px_0px_#1e1b19] p-6 md:p-8 relative">
+<!-- Decorative pushpin corner -->
+<div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary border-4 border-on-surface shadow-[2px_2px_0px_0px_#1e1b19] flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-on-primary"></div>
+</div>
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-primary border-4 border-on-surface shadow-[2px_2px_0px_0px_#1e1b19] flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-on-primary"></div>
+</div>
+<div class="flex items-center justify-between border-b-border-thick border-on-surface pb-4 mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Architect's Logbook</h2>
+<span class="material-symbols-outlined text-4xl text-on-surface" style="font-variation-settings: 'FILL' 1;">draw</span>
+</div>
+<div class="relative">
+<textarea class="w-full min-h-[200px] p-6 bg-[#f4ece8] border-border-thick border-on-surface font-body-lg text-body-lg text-on-surface placeholder:text-outline focus:border-secondary focus:ring-0 focus:outline-none transition-colors resize-y leading-relaxed" placeholder="Detail yer software bounty here... What beast are ye tryin' to build?" style="background-image: repeating-linear-gradient(transparent, transparent 31px, #e4beb9 31px, #e4beb9 32px);"></textarea>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="bg-primary text-on-primary font-headline-md text-headline-md py-4 px-8 border-border-thick border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] hover:bg-surface-tint hover:shadow-[0px_0px_0px_0px_#1e1b19] hover:translate-x-[6px] hover:translate-y-[6px] transition-all active:scale-95 flex items-center space-x-3">
+<span>Forge Blueprint</span>
+<span class="material-symbols-outlined text-3xl">construction</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Output Section: The Scattered Blueprints (Bento Grid Style) -->
+<section>
+<div class="flex items-center space-x-4 mb-8">
+<div class="h-border-thick flex-grow bg-on-surface"></div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase shrink-0">Generated Blueprints</h2>
+<div class="h-border-thick flex-grow bg-on-surface"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Large Feature Blueprint Card (Span 8 cols) -->
+<article class="col-span-1 md:col-span-8 bg-surface-container-lowest border-border-heavy border-on-surface shadow-[8px_8px_0px_0px_#1e1b19] p-6 flex flex-col group relative overflow-hidden transform hover:-rotate-1 transition-transform duration-300">
+<div class="absolute inset-0 parchment-texture" data-alt="A macro shot of heavily textured, aged parchment paper. The surface is uneven with slight creases, faint water stains, and a warm, yellowish-brown sepia tone. The texture is coarse, resembling historical documents used by sailors and cartographers, perfectly suited for a neo-brutalist background."></div>
+<div class="relative z-10 flex flex-col h-full">
+<header class="flex justify-between items-start border-b-border-thick border-on-surface pb-4 mb-4">
+<div>
+<div class="inline-block bg-tertiary-fixed font-label-caps text-label-caps text-on-tertiary-fixed px-3 py-1 border-2 border-on-surface mb-2 shadow-[2px_2px_0px_0px_#1e1b19]">Core Architecture</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface leading-tight">Database Schema Nexus</h3>
+</div>
+<button class="w-12 h-12 bg-surface-variant border-4 border-on-surface flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors shadow-[4px_4px_0px_0px_#1e1b19] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
+<span class="material-symbols-outlined text-2xl">download</span>
+</button>
+</header>
+<div class="flex-grow font-body-md text-body-md text-on-surface-variant space-y-4">
+<p>A robust relational mapping strategy designed to handle heavy transactional loads while maintaining strict data integrity across the high seas of your server infrastructure.</p>
+<!-- Mini abstract visualization representing a diagram -->
+<div class="h-40 w-full bg-surface-container border-border-thick border-on-surface p-4 flex items-center justify-center">
+<div class="grid grid-cols-3 gap-4 w-full h-full opacity-80">
+<div class="border-2 border-on-surface bg-secondary-fixed flex items-center justify-center font-headline-md text-on-secondary-fixed">Users</div>
+<div class="flex items-center justify-center">
+<div class="h-2 w-full bg-on-surface relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 border-t-2 border-r-2 border-on-surface rotate-45 transform origin-center"></div>
+</div>
+</div>
+<div class="border-2 border-on-surface bg-primary-fixed flex items-center justify-center font-headline-md text-on-primary-fixed">Bounties</div>
+</div>
+</div>
+</div>
+<footer class="mt-6 pt-4 border-t-border-thick border-on-surface flex justify-between items-center">
+<div class="flex space-x-2">
+<span class="material-symbols-outlined text-on-surface">star</span>
+<span class="material-symbols-outlined text-on-surface">star</span>
+<span class="material-symbols-outlined text-on-surface">star</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface">Complexity: High</span>
+</footer>
+</div>
+</article>
+<!-- Smaller Blueprint Card (Span 4 cols) -->
+<article class="col-span-1 md:col-span-4 bg-[#ffd36c] border-border-heavy border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] p-6 flex flex-col group transform rotate-2 hover:rotate-0 transition-transform duration-300">
+<header class="border-b-border-thick border-on-surface pb-3 mb-4 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">API Endpoints</h3>
+<span class="material-symbols-outlined text-3xl text-on-surface">api</span>
+</header>
+<div class="flex-grow font-body-md text-body-md text-on-tertiary-fixed-variant">
+<ul class="space-y-3 font-label-caps text-label-caps">
+<li class="flex items-center space-x-2"><div class="w-3 h-3 bg-on-surface rounded-full"></div><span>GET /api/v1/loot</span></li>
+<li class="flex items-center space-x-2"><div class="w-3 h-3 bg-on-surface rounded-full"></div><span>POST /api/v1/claim</span></li>
+<li class="flex items-center space-x-2"><div class="w-3 h-3 bg-on-surface rounded-full"></div><span>DELETE /api/v1/mutiny</span></li>
+</ul>
+</div>
+<button class="mt-6 w-full bg-surface text-on-surface font-headline-md text-headline-md py-2 border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] hover:bg-on-surface hover:text-surface hover:shadow-[0px_0px_0px_0px_#1e1b19] hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                        View Docs
+                    </button>
+</article>
+<!-- Medium Blueprint Card (Span 6 cols) -->
+<article class="col-span-1 md:col-span-6 bg-surface-container-high border-border-heavy border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] p-6 flex flex-col group transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+<header class="border-b-border-thick border-on-surface pb-3 mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Auth &amp; Security Protocols</h3>
+</header>
+<div class="flex-grow">
+<!-- Progress Bar Styled as a Treasure Map to completion -->
+<div class="mb-4">
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface mb-2">
+<span>Implementation Progress</span>
+<span>75%</span>
+</div>
+<div class="h-8 border-border-thick border-on-surface bg-surface-container-lowest relative overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-secondary w-3/4 border-r-border-thick border-on-surface"></div>
+<div class="absolute top-1/2 left-[75%] -translate-y-1/2 -translate-x-1/2 text-on-surface font-display-lg text-2xl leading-none">X</div>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Fortified defense mechanisms utilizing JWT tokens and rigorous validation to keep the scallywags out of your precious data holds.</p>
+</div>
+</article>
+<!-- Medium Blueprint Card (Span 6 cols) -->
+<article class="col-span-1 md:col-span-6 bg-surface-container-lowest border-border-heavy border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] p-6 flex flex-col relative">
+<!-- Decorative stamp -->
+<div class="absolute top-4 right-4 border-4 border-primary text-primary font-headline-md text-xl px-2 py-1 rotate-12 opacity-80 pointer-events-none">APPROVED</div>
+<header class="border-b-border-thick border-on-surface pb-3 mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">UI Component Library</h3>
+</header>
+<div class="flex-grow font-body-md text-body-md text-on-surface-variant flex flex-col justify-center items-center p-4 bg-[repeating-linear-gradient(45deg,#1e1b19,#1e1b19_2px,transparent_2px,transparent_8px)] opacity-60">
+<span class="bg-surface px-4 py-2 border-2 border-on-surface font-headline-md text-on-surface">Awaiting Assembly</span>
+</div>
+</article>
+</div>
+</section>
+</main>
+</body></html>

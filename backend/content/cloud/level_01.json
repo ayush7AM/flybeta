@@ -1,0 +1,55 @@
+{
+  "domain": {
+    "name": "cloud",
+    "title": "Cloud Computing",
+    "icon": "cloud",
+    "color": "#2563EB"
+  },
+  "level": {
+    "number": 1,
+    "title": "Cloud Foundations",
+    "description": "Master the fundamental concepts of cloud computing — what it is, why it matters, and how the major providers (AWS, GCP, Azure) organize their services."
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "What is Cloud Computing?",
+      "content_md": "# What is Cloud Computing?\n\nCloud computing is the delivery of computing services — servers, storage, databases, networking, software, analytics, and intelligence — over the internet (\"the cloud\") to offer faster innovation, flexible resources, and economies of scale.\n\n## Key Characteristics\n\n- **On-demand self-service**: Provision resources automatically without human interaction.\n- **Broad network access**: Available over the network via standard mechanisms.\n- **Resource pooling**: Provider resources are pooled to serve multiple consumers.\n- **Rapid elasticity**: Scale up or down quickly based on demand.\n- **Measured service**: Pay only for what you use.\n\n## Why Cloud?\n\nBefore the cloud, companies had to buy and maintain their own physical servers. This meant:\n- Huge upfront capital expenditure\n- Capacity planning guesswork\n- Slow provisioning (weeks to months)\n- Wasted resources during low-usage periods\n\nCloud computing eliminates these problems by letting you rent exactly the resources you need, when you need them.",
+      "xp_reward": 10,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 2,
+      "title": "Cloud Service Models: IaaS, PaaS, SaaS",
+      "content_md": "# Cloud Service Models\n\nCloud services are typically categorized into three models, each offering a different level of control, flexibility, and management.\n\n## Infrastructure as a Service (IaaS)\n\nProvides virtualized computing resources over the internet.\n\n**You manage:** Applications, data, runtime, middleware, OS.\n**Provider manages:** Virtualization, servers, storage, networking.\n\n**Examples:** AWS EC2, Google Compute Engine, Azure Virtual Machines.\n\n## Platform as a Service (PaaS)\n\nProvides a platform allowing customers to develop, run, and manage applications without dealing with infrastructure.\n\n**You manage:** Applications and data.\n**Provider manages:** Runtime, middleware, OS, virtualization, servers.\n\n**Examples:** Google App Engine, Heroku, AWS Elastic Beanstalk.\n\n## Software as a Service (SaaS)\n\nDelivers software applications over the internet, on a subscription basis.\n\n**You manage:** Just your data and user access.\n**Provider manages:** Everything else.\n\n**Examples:** Gmail, Slack, Salesforce, Dropbox.",
+      "xp_reward": 15,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 3,
+      "title": "Public vs Private vs Hybrid Cloud",
+      "content_md": "# Cloud Deployment Models\n\n## Public Cloud\n\nOwned and operated by third-party providers. Resources are shared across multiple organizations (multi-tenant).\n\n**Pros:** No upfront costs, infinite scalability, no maintenance.\n**Cons:** Less control, potential compliance concerns.\n\n**Examples:** AWS, Google Cloud, Microsoft Azure.\n\n## Private Cloud\n\nCloud infrastructure dedicated to a single organization. Can be hosted on-premises or by a third party.\n\n**Pros:** Full control, enhanced security, regulatory compliance.\n**Cons:** Higher cost, limited scalability.\n\n## Hybrid Cloud\n\nCombines public and private clouds, allowing data and applications to move between them.\n\n**Pros:** Flexibility, optimized existing infrastructure, compliance balance.\n**Cons:** Complexity, integration challenges.\n\n## Multi-Cloud\n\nUsing services from multiple public cloud providers simultaneously.\n\n**Pros:** Avoid vendor lock-in, best-of-breed services.\n**Cons:** Operational complexity, data transfer costs.",
+      "xp_reward": 15,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 4,
+      "title": "Meet the Big Three: AWS, GCP, Azure",
+      "content_md": "# The Major Cloud Providers\n\n## Amazon Web Services (AWS)\n\nThe pioneer and market leader in cloud computing (launched 2006).\n\n- **Market share:** ~31%\n- **Strengths:** Broadest service catalog, largest ecosystem, most mature.\n- **Key services:** EC2, S3, Lambda, RDS, DynamoDB.\n\n## Google Cloud Platform (GCP)\n\nGoogle's cloud offering, leveraging their expertise in data and ML.\n\n- **Market share:** ~12%\n- **Strengths:** Big data & ML/AI, Kubernetes (GKE), competitive pricing.\n- **Key services:** Compute Engine, BigQuery, Cloud Functions, GKE.\n\n## Microsoft Azure\n\nMicrosoft's cloud platform, strong in enterprise and hybrid scenarios.\n\n- **Market share:** ~24%\n- **Strengths:** Enterprise integration, hybrid cloud, .NET ecosystem.\n- **Key services:** Azure VMs, Azure SQL, Azure Functions, AKS.\n\n## How to Choose?\n\nConsider: existing tech stack, specific service needs, pricing, compliance requirements, and team expertise. Many organizations use multi-cloud strategies.",
+      "xp_reward": 10,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 5,
+      "title": "Hands-On: Your First Cloud Resource",
+      "content_md": "# Your First Cloud Resource\n\nIn this bonus lesson, we'll conceptually walk through launching your first virtual machine in the cloud.\n\n## The Steps (Any Provider)\n\n1. **Sign up** for a free-tier account.\n2. **Navigate** to the compute service (EC2, Compute Engine, or Azure VMs).\n3. **Choose** an operating system image (e.g., Ubuntu 22.04).\n4. **Select** instance size (start with the smallest free-tier eligible).\n5. **Configure** networking (allow SSH access on port 22).\n6. **Launch** and connect via SSH.\n\n## What Just Happened?\n\nYou just provisioned a virtual machine running on physical hardware in a data center, possibly thousands of miles away. You:\n- Didn't buy any hardware\n- Didn't configure any networking equipment\n- Didn't install an operating system from a disc\n- Got a running server in under 60 seconds\n\nThis is the power of cloud computing.\n\n## Clean Up!\n\nAlways remember to **terminate** or **stop** resources you're not using to avoid unexpected charges.",
+      "xp_reward": 20,
+      "coins_reward": 10,
+      "is_mandatory": false
+    }
+  ]
+}

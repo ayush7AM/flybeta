@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - Track Selection Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#906f70",
+                      "on-surface": "#1c1b1b",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#e11d48",
+                      "on-secondary-fixed": "#001a42",
+                      "inverse-surface": "#313030",
+                      "on-primary-container": "#fffaf9",
+                      "canvas-paper": "#FEF08A",
+                      "on-tertiary-fixed": "#231b00",
+                      "surface": "#fcf9f8",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#be0037",
+                      "on-secondary-fixed-variant": "#004395",
+                      "surface-container-high": "#ebe7e7",
+                      "tertiary": "#735c00",
+                      "on-background": "#1c1b1b",
+                      "crayon-red": "#E11D48",
+                      "on-primary-fixed": "#40000c",
+                      "on-surface-variant": "#5c3f40",
+                      "notebook-line": "#60A5FA",
+                      "on-tertiary-container": "#4e3e00",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#574500",
+                      "background": "#fcf9f8",
+                      "surface-container-low": "#f6f3f2",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "primary": "#b80035",
+                      "secondary-fixed": "#d8e2ff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "secondary": "#0058be",
+                      "on-secondary-container": "#fefcff",
+                      "tertiary-fixed-dim": "#eec200",
+                      "tertiary-container": "#cea700",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#dcd9d9",
+                      "on-primary-fixed-variant": "#920028",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container-highest": "#e5e2e1",
+                      "surface-container": "#f0edec",
+                      "inverse-primary": "#ffb3b6",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#e5bdbe",
+                      "primary-fixed": "#ffdada",
+                      "tertiary-fixed": "#ffe083",
+                      "kinder-blue": "#3B82F6",
+                      "surface-bright": "#fcf9f8",
+                      "secondary-container": "#2170e4",
+                      "primary-fixed-dim": "#ffb3b6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "shadow-offset": "6px",
+                      "margin-mobile": "16px",
+                      "unit": "8px",
+                      "border-width": "3px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Rubik"
+                      ],
+                      "headline-lg": [
+                              "Anton"
+                      ],
+                      "headline-lg-mobile": [
+                              "Anton"
+                      ],
+                      "scribble-caption": [
+                              "Rubik"
+                      ],
+                      "body-lg": [
+                              "Rubik"
+                      ],
+                      "headline-md": [
+                              "Anton"
+                      ],
+                      "label-bold": [
+                              "Rubik"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "scribble-caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "900"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .marker-border {
+            border: 3px solid #1c1b1b;
+            filter: url('#roughen');
+        }
+        
+        .solid-shadow {
+            box-shadow: 6px 6px 0px 0px #111111;
+        }
+
+        .notebook-bg {
+            background-color: theme('colors.canvas-paper');
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 39px,
+                theme('colors.notebook-line') 39px,
+                theme('colors.notebook-line') 42px
+            );
+            background-attachment: local;
+        }
+
+        .interactive-element:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0px 0px #111111;
+        }
+
+        .interactive-element:active {
+            transform: translate(6px, 6px);
+            box-shadow: 0px 0px 0px 0px #111111;
+        }
+    </style>
+</head>
+<body class="notebook-bg text-on-surface font-body-md min-h-screen pt-24 pl-0 md:pl-64">
+<!-- SVG Filter for Marker effect -->
+<svg height="0" style="visibility: hidden; position: absolute;" version="1.1" width="0" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="roughen">
+<feturbulence basefrequency="0.05" numoctaves="2" result="noise" type="fractalNoise"></feturbulence>
+<fedisplacementmap in="SourceGraphic" in2="noise" scale="2" xchannelselector="R" ychannelselector="G"></fedisplacementmap>
+</filter>
+</defs>
+</svg>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-canvas-paper border-b-border-width border-on-background shadow-[6px_6px_0px_0px_#1c1b1b] hidden md:flex">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim uppercase tracking-tighter">FlyBeta</span>
+<div class="hidden md:flex gap-6">
+<a class="font-label-bold text-label-bold text-primary dark:text-primary-fixed-dim border-b-border-width border-primary pb-1 hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Classroom</a>
+<a class="font-label-bold text-label-bold text-on-surface dark:text-on-surface-variant hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Playground</a>
+<a class="font-label-bold text-label-bold text-on-surface dark:text-on-surface-variant hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none" href="#">Gallery</a>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="p-2 border-border-width border-on-background solid-shadow bg-surface interactive-element transition-all">
+<span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+</button>
+<button class="p-2 border-border-width border-on-background solid-shadow bg-surface interactive-element transition-all">
+<span class="material-symbols-outlined" data-icon="monetization_on">monetization_on</span>
+</button>
+<button class="p-2 border-border-width border-on-background solid-shadow bg-surface interactive-element transition-all">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full flex flex-col pt-24 z-40 bg-surface border-r-border-width border-on-background w-64 shadow-[6px_0px_0px_0px_#1c1b1b] hidden md:flex">
+<div class="p-4 mb-4 border-b-border-width border-on-background">
+<div class="w-16 h-16 bg-surface-variant border-border-width border-on-background solid-shadow mb-2 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" data-icon="face">face</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Shin-chan</h2>
+<p class="font-scribble-caption text-scribble-caption text-on-surface-variant">Level 5 Rookie</p>
+</div>
+<div class="flex flex-col flex-grow">
+<a class="bg-primary text-on-primary border-border-width border-on-background shadow-[4px_4px_0px_0px_#1c1b1b] m-2 flex items-center p-4 font-label-bold text-label-bold uppercase hover:bg-kinder-blue hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="home">home</span> Home
+            </a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 font-label-bold text-label-bold uppercase hover:bg-kinder-blue hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="school">school</span> Lessons
+            </a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 font-label-bold text-label-bold uppercase hover:bg-kinder-blue hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span> Friends
+            </a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 font-label-bold text-label-bold uppercase hover:bg-kinder-blue hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span> Settings
+            </a>
+</div>
+<div class="p-4 mt-auto">
+<button class="w-full bg-crayon-red text-on-primary border-border-width border-on-background solid-shadow p-3 font-label-bold text-label-bold uppercase interactive-element transition-all">
+                GO PREMIUM
+            </button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto px-gutter py-margin-desktop md:py-margin-desktop min-h-[calc(100vh-80px)]">
+<!-- Header Banner -->
+<div class="relative w-full max-w-4xl mx-auto mb-16 rotate-[-2deg] z-10">
+<!-- Tape effect top left -->
+<div class="absolute -top-4 -left-4 w-12 h-6 bg-surface-variant/80 rotate-12 border-border-width border-on-background opacity-80 mix-blend-multiply z-20"></div>
+<!-- Tape effect top right -->
+<div class="absolute -top-4 -right-4 w-12 h-6 bg-surface-variant/80 -rotate-12 border-border-width border-on-background opacity-80 mix-blend-multiply z-20"></div>
+<div class="bg-surface-container-lowest border-border-width border-on-background solid-shadow p-6 text-center transform hover:rotate-0 transition-transform duration-300">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background marker-border inline-block px-4 py-2 bg-canvas-paper">
+                    CHOOSE YOUR TRACK
+                </h1>
+</div>
+</div>
+<!-- Master Track Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+<!-- Data Science Card -->
+<div class="bg-surface-container-lowest border-border-width border-on-background solid-shadow flex flex-col group relative rotate-1 hover:rotate-0 transition-transform duration-300 z-10 hover:z-20">
+<div class="h-64 border-b-border-width border-on-background relative overflow-hidden bg-canvas-paper">
+<img alt="Data Science blocks" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtovittF6kGlz-A_PwTS2KvepWJu5YpKVe16Paf3Nr_I_5b9unyIWPiLoYA2YZuZ_uAD7X6iyb0_3h34miYov8SVwFeZJ4f9Y1T_H5b83XzDjC9mNGLfJMMjMJ4Y5njSsaA9UDijkQ1ljpBROhb2NFA-iYKBKcx3ZioT2h6pthRF5hxOGc8s2Vas4-D-BsA1JBpUryabEdyG47pTNd0lmnd0ErnhuoEGcX9mICOFbCEewlNw66CkYu"/>
+</div>
+<div class="p-6 flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 marker-border inline-block bg-inverse-primary px-2">DATA SCIENCE</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 border-l-border-width border-kinder-blue pl-4 py-2">Build the foundation with sturdy data blocks. Analyze, stack, and discover patterns like a superhero.</p>
+</div>
+<button class="w-full bg-crayon-red text-on-primary border-border-width border-on-background solid-shadow py-4 px-6 font-label-bold text-label-bold uppercase interactive-element transition-all text-center">
+                        START TRACK
+                    </button>
+</div>
+</div>
+<!-- AI & ML Card -->
+<div class="bg-surface-container-lowest border-border-width border-on-background solid-shadow flex flex-col group relative -rotate-1 hover:rotate-0 transition-transform duration-300 z-10 hover:z-20 mt-4 md:mt-0">
+<div class="h-64 border-b-border-width border-on-background relative overflow-hidden bg-canvas-paper">
+<img alt="AI and ML Robot" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWmsm93KtmlxeyX17Afr85eVTUtnhfh2urQmlcSwJWeEd3Y1L_i3_c8ILu09hdCbDqiJFykkpmcoa2COENn9DnjetyAhodUYW0EMFiv2-CH6C9Dq1tDfEzgQYepahjyxzlTmL4EtH9iBkxNSOSRYEaF5AT20-hF4DLPMUQa9G2AwxKevqOaIIZYHH09on3O-A6JqOnAGw_4-WT7gHKq6KyVSOqUYnpdVxAbQpf3bdVCjCeTTpOmyku"/>
+</div>
+<div class="p-6 flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 marker-border inline-block bg-primary-fixed px-2">AI &amp; ML</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 border-l-border-width border-kinder-blue pl-4 py-2">Power up your logic circuits. Train intelligent systems and conquer complex algorithms with raw robotic power.</p>
+</div>
+<button class="w-full bg-crayon-red text-on-primary border-border-width border-on-background solid-shadow py-4 px-6 font-label-bold text-label-bold uppercase interactive-element transition-all text-center">
+                        START TRACK
+                    </button>
+</div>
+</div>
+<!-- Cloud Computing Card -->
+<div class="bg-surface-container-lowest border-border-width border-on-background solid-shadow flex flex-col group relative rotate-2 hover:rotate-0 transition-transform duration-300 z-10 hover:z-20 mt-4 md:mt-0">
+<div class="h-64 border-b-border-width border-on-background relative overflow-hidden bg-canvas-paper">
+<img alt="Cloud Computing UFO" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdyUph9iTE_L0lzeuYXcoJ22btFYjlbpiTflMJ9smy55GmViGgqru5l6CvGzpz1HVog466l_pHGBHK5DCta94ugKN0pFhMD5SEx-noMBmGhpBZ2vHM3kRLOvtmU8pnBQA0Q8kYKhBAePoPD6lP0nUoOxcAoVu_iyKmEKrnfyLsY4iEBnlKJVP_t6Aar_TyYlZml-bCZNCivJ9901hypOKasb5oHnZchycE2pHrufudq_Ht8e2bflSE"/>
+</div>
+<div class="p-6 flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 marker-border inline-block bg-secondary-fixed px-2">CLOUD COMPUTING</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 border-l-border-width border-kinder-blue pl-4 py-2">Deploy your projects to the sky. Master scalable infrastructure and float above local hardware limits.</p>
+</div>
+<button class="w-full bg-crayon-red text-on-primary border-border-width border-on-background solid-shadow py-4 px-6 font-label-bold text-label-bold uppercase interactive-element transition-all text-center">
+                        START TRACK
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Track Roadmap - FlyBeta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Chivo:wght@400;600&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1e1b19",
+                        "outline-variant": "#e4beb9",
+                        "on-tertiary-fixed": "#251a00",
+                        "background": "#fff8f5",
+                        "secondary-fixed-dim": "#94ccff",
+                        "on-secondary-fixed-variant": "#004b74",
+                        "on-tertiary-fixed-variant": "#5a4300",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#cde5ff",
+                        "surface-container-high": "#eee7e3",
+                        "surface-bright": "#fff8f5",
+                        "on-secondary-fixed": "#001d32",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#ffd36c",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e9e1dd",
+                        "on-primary-container": "#ffcdc7",
+                        "on-secondary-container": "#004f7b",
+                        "surface-dim": "#e0d8d5",
+                        "on-primary-fixed-variant": "#93000b",
+                        "inverse-surface": "#33302d",
+                        "surface-container-highest": "#e9e1dd",
+                        "inverse-primary": "#ffb4ab",
+                        "tertiary-fixed-dim": "#f7be1d",
+                        "surface-container": "#f4ece8",
+                        "surface-tint": "#b91c1c",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#775a00",
+                        "primary": "#93000b",
+                        "surface": "#fff8f5",
+                        "tertiary-fixed": "#ffdf9a",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#006399",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7bc2ff",
+                        "inverse-on-surface": "#f7efeb",
+                        "on-primary-fixed": "#410002",
+                        "on-background": "#1e1b19",
+                        "on-surface-variant": "#5b403d",
+                        "surface-container-low": "#faf2ee",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary": "#5a4300",
+                        "outline": "#8f6f6c",
+                        "primary-container": "#b91c1c",
+                        "primary-fixed-dim": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "shadow-offset": "6px",
+                        "margin-page": "40px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "border-heavy": "8px",
+                        "border-thick": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Anton"],
+                        "headline-lg": ["Anton"],
+                        "body-lg": ["Chivo"],
+                        "label-caps": ["Space Grotesk"],
+                        "display-lg": ["Anton"],
+                        "body-md": ["Chivo"],
+                        "headline-lg-mobile": ["Anton"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "38px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-caps": ["14px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "display-lg": ["84px", { "lineHeight": "90px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "36px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .parchment-bg {
+            background-color: #f4ece8; /* surface-container */
+            background-image: 
+                radial-gradient(#e9e1dd 2px, transparent 2px),
+                linear-gradient(90deg, transparent 49%, #e9e1dd 50%, #e9e1dd 51%, transparent 52%),
+                linear-gradient(0deg, transparent 49%, #e9e1dd 50%, #e9e1dd 51%, transparent 52%);
+            background-size: 24px 24px, 100px 100px, 100px 100px;
+        }
+        .anchor-line {
+            background: repeating-linear-gradient(
+                45deg,
+                #1e1b19,
+                #1e1b19 10px,
+                #33302d 10px,
+                #33302d 20px
+            );
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased flex selection:bg-primary selection:text-on-primary parchment-bg">
+<!-- Top Navigation (Mobile) -->
+<nav class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-margin-page h-20 bg-surface dark:bg-surface-container-high border-b-border-thick border-on-surface dark:border-outline-variant shadow-[6px_6px_0px_0px_#1e1b19]">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed uppercase tracking-tighter">
+            FlyBeta
+        </div>
+<div class="flex items-center gap-base">
+<button class="p-base text-on-surface-variant hover:text-primary transition-all duration-75">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Side Navigation (Desktop) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col p-base z-40 bg-surface-container-low dark:bg-surface-container-highest docked left-0 h-full w-72 border-r-border-thick border-on-surface dark:border-outline shadow-[6px_0px_0px_0px_#1e1b19]">
+<div class="mb-gutter text-center border-b-border-thick border-on-surface pb-base">
+<img alt="Captain's Portrait" class="w-24 h-24 rounded-full border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] mx-auto mb-base object-cover" data-alt="A rugged portrait of a ship's captain in a neo-brutalist nautical style. The captain has weathered skin, a stern expression, and is wearing a dark pirate coat. The background is a stark, off-white parchment texture with deep, solid black ink shadows framing the figure. The overall mood is authoritative and adventurous, matching a high-seas bounty hunter aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPj8w0Lgrn-Gdox6WUcyjeVnK88_q_yeXPrXchEW1Jc47uyzYWGFK3aZwyM5WVghxR-sfViq-z9OG0HBIvP9XYLjqk3gQizCIiSNwDbNe7NtE_tJ5uA_8JzsI7OWUSYteWPsaAut9eeCLJK-WmdHQNicp10DNE9yo_7wBpwzdCYQGQYAkZxlzpoY8010ZzYsh_Ta-NovAYB2YIoADZdaqOia6dFp0X1Bjvcj2t02YJHBddrCmg4RHB"/>
+<h1 class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface">Dread Pirate Beta</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Rank: Scallywag</p>
+</div>
+<div class="flex-1 flex flex-col gap-base">
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 rounded" href="#">
+<span class="material-symbols-outlined">menu_book</span> Logbook
+            </a>
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 rounded" href="#">
+<span class="material-symbols-outlined">assignment</span> Bounty Board
+            </a>
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps bg-primary-container text-on-primary-container border-4 border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] rounded active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">explore</span> Treasure Map
+            </a>
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 rounded" href="#">
+<span class="material-symbols-outlined">group</span> The Crew
+            </a>
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 rounded" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</div>
+<div class="mt-auto pt-gutter border-t-border-thick border-on-surface flex flex-col gap-base">
+<button class="w-full bg-primary text-on-primary font-headline-md text-headline-md py-base px-gutter border-border-thick border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] hover:shadow-[6px_6px_0px_0px_#f7be1d] active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none transition-all">
+                Claim Bounty
+            </button>
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 rounded" href="#">
+<span class="material-symbols-outlined">help</span> Support
+            </a>
+<a class="flex items-center gap-base p-base font-label-caps text-label-caps text-on-surface dark:text-on-surface-variant hover:bg-surface-variant hover:border-2 hover:border-on-surface transition-all duration-100 rounded" href="#">
+<span class="material-symbols-outlined">logout</span> Abandon Ship
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-72 mt-20 md:mt-0 p-margin-page relative flex justify-center">
+<!-- The Vertical Path Anchor -->
+<div class="absolute top-0 bottom-0 left-1/2 -ml-2 w-4 anchor-line z-0 shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<div class="max-w-4xl w-full z-10 flex flex-col items-center gap-16 py-12">
+<!-- Page Header -->
+<div class="bg-surface p-gutter border-border-heavy border-on-surface shadow-[shadow-offset_shadow-offset_0px_0px_#1e1b19] rotate-[-1deg] text-center w-full max-w-2xl mb-8 relative">
+<div class="absolute -top-4 -left-4 w-8 h-8 rounded-full border-border-thick border-on-surface bg-outline shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<div class="absolute -top-4 -right-4 w-8 h-8 rounded-full border-border-thick border-on-surface bg-outline shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<h2 class="font-display-lg text-display-lg text-on-surface uppercase mb-2">The Voyage</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Trace your path through the perilous seas of beta development.</p>
+</div>
+<!-- Level 1: Completed -->
+<div class="relative w-full max-w-lg flex justify-end pr-1/2 group">
+<div class="absolute left-1/2 -ml-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-primary border-border-thick border-on-surface z-20 shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<div class="w-5/6 bg-surface p-base border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] rotate-[2deg] relative mr-12 opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute inset-0 border-2 border-primary border-dashed m-1 pointer-events-none"></div>
+<div class="absolute -top-6 -right-6 font-headline-md text-headline-md text-primary rotate-[15deg] bg-surface px-2 border-border-thick border-primary shadow-[2px_2px_0px_0px_#b91c1c]">CLEARED</div>
+<div class="p-base">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Level 1</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Harbor Setup</h3>
+</div>
+</div>
+</div>
+<!-- Level 2: Completed -->
+<div class="relative w-full max-w-lg flex justify-start pl-1/2 group">
+<div class="absolute right-1/2 -mr-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-primary border-border-thick border-on-surface z-20 shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<div class="w-5/6 bg-surface p-base border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] rotate-[-1deg] relative ml-12 opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute inset-0 border-2 border-primary border-dashed m-1 pointer-events-none"></div>
+<div class="absolute -top-6 -left-6 font-headline-md text-headline-md text-primary rotate-[-10deg] bg-surface px-2 border-border-thick border-primary shadow-[2px_2px_0px_0px_#b91c1c]">CLEARED</div>
+<div class="p-base text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Level 2</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Data Mapping</h3>
+</div>
+</div>
+</div>
+<!-- Level 3: Completed -->
+<div class="relative w-full max-w-lg flex justify-end pr-1/2 group">
+<div class="absolute left-1/2 -ml-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-primary border-border-thick border-on-surface z-20 shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<div class="w-5/6 bg-surface p-base border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] rotate-[1deg] relative mr-12 opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute inset-0 border-2 border-primary border-dashed m-1 pointer-events-none"></div>
+<div class="absolute -bottom-4 right-0 font-headline-md text-headline-md text-primary rotate-[-5deg] bg-surface px-2 border-border-thick border-primary shadow-[2px_2px_0px_0px_#b91c1c]">WANTED</div>
+<div class="p-base">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Level 3</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">User Authentication</h3>
+</div>
+</div>
+</div>
+<!-- Level 4: Completed -->
+<div class="relative w-full max-w-lg flex justify-start pl-1/2 group">
+<div class="absolute right-1/2 -mr-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-primary border-border-thick border-on-surface z-20 shadow-[2px_2px_0px_0px_#1e1b19]"></div>
+<div class="w-5/6 bg-surface p-base border-border-thick border-on-surface shadow-[4px_4px_0px_0px_#1e1b19] rotate-[3deg] relative ml-12 opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute inset-0 border-2 border-primary border-dashed m-1 pointer-events-none"></div>
+<div class="absolute -top-4 left-4 font-headline-md text-headline-md text-primary rotate-[5deg] bg-surface px-2 border-border-thick border-primary shadow-[2px_2px_0px_0px_#b91c1c]">CLEARED</div>
+<div class="p-base text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Level 4</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Base Styling</h3>
+</div>
+</div>
+</div>
+<!-- Active Station (Level 5) -->
+<div class="relative w-full max-w-2xl z-30 my-8">
+<div class="absolute left-1/2 -ml-4 top-1/2 -mt-4 w-8 h-8 rounded-full bg-tertiary-fixed-dim border-border-thick border-on-surface z-40 shadow-[4px_4px_0px_0px_#1e1b19] flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-on-surface">close</span>
+</div>
+<div class="bg-surface-bright border-border-heavy border-on-surface shadow-[12px_12px_0px_0px_#1e1b19] p-gutter relative transform transition-transform hover:-translate-y-2 hover:-translate-x-2 hover:shadow-[16px_16px_0px_0px_#1e1b19]">
+<div class="absolute top-0 left-0 w-full h-2 bg-on-surface"></div>
+<div class="absolute -top-6 right-8 font-label-caps text-label-caps bg-tertiary-fixed-dim text-on-tertiary-fixed py-1 px-4 border-border-thick border-on-surface shadow-[2px_2px_0px_0px_#1e1b19]">CURRENT QUEST</div>
+<div class="flex flex-col md:flex-row gap-gutter mt-4">
+<div class="flex-1">
+<span class="font-label-caps text-label-caps text-secondary mb-2 block">Level 5</span>
+<h2 class="font-display-lg text-display-lg text-on-surface leading-none mb-4">API ARCHITECTURE</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6 border-l-border-thick border-outline pl-4">Establish the primary endpoints for bounty tracking and crew management. Ensure secure data transmission across the perilous digital straits.</p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary font-headline-md text-headline-md py-2 px-6 border-border-thick border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] hover:shadow-[6px_6px_0px_0px_#f7be1d] active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none transition-all">
+                                    Engage Task
+                                </button>
+<button class="bg-surface text-on-surface font-headline-md text-headline-md py-2 px-6 border-border-thick border-on-surface shadow-[6px_6px_0px_0px_#1e1b19] active:translate-x-shadow-offset active:translate-y-shadow-offset active:shadow-none transition-all">
+                                    Details
+                                </button>
+</div>
+</div>
+<div class="w-full md:w-1/3 flex flex-col gap-4">
+<div class="border-border-thick border-on-surface p-4 bg-surface-variant shadow-[4px_4px_0px_0px_#1e1b19]">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">Difficulty</span>
+<div class="font-headline-md text-headline-md text-primary">LEGENDARY</div>
+</div>
+<div class="border-border-thick border-on-surface p-4 bg-surface-variant shadow-[4px_4px_0px_0px_#1e1b19]">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">Reward</span>
+<div class="font-headline-md text-headline-md text-tertiary-fixed-dim flex items-center gap-2">
+<span class="material-symbols-outlined text-[32px]">monetization_on</span> 5,000
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Level 6: Locked -->
+<div class="relative w-full max-w-lg flex justify-start pl-1/2 group grayscale opacity-60">
+<div class="absolute right-1/2 -mr-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-surface-variant border-border-thick border-outline z-20"></div>
+<div class="w-5/6 bg-surface-container-highest p-base border-border-thick border-outline rotate-[-2deg] relative ml-12">
+<div class="p-base text-right flex items-center justify-between">
+<span class="material-symbols-outlined text-outline">lock</span>
+<div>
+<span class="font-label-caps text-label-caps text-outline block mb-1">Level 6</span>
+<h3 class="font-headline-md text-headline-md text-outline">State Management</h3>
+</div>
+</div>
+</div>
+</div>
+<!-- Level 7: Locked -->
+<div class="relative w-full max-w-lg flex justify-end pr-1/2 group grayscale opacity-50">
+<div class="absolute left-1/2 -ml-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-surface-variant border-border-thick border-outline z-20"></div>
+<div class="w-5/6 bg-surface-container-highest p-base border-border-thick border-outline rotate-[1deg] relative mr-12">
+<div class="p-base flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-outline block mb-1">Level 7</span>
+<h3 class="font-headline-md text-headline-md text-outline">Performance Opt.</h3>
+</div>
+<span class="material-symbols-outlined text-outline">lock</span>
+</div>
+</div>
+</div>
+<!-- Level 8: Locked -->
+<div class="relative w-full max-w-lg flex justify-start pl-1/2 group grayscale opacity-40">
+<div class="absolute right-1/2 -mr-3 top-1/2 -mt-3 w-6 h-6 rounded-full bg-surface-variant border-border-thick border-outline z-20"></div>
+<div class="w-5/6 bg-surface-container-highest p-base border-border-thick border-outline rotate-[2deg] relative ml-12">
+<div class="p-base text-right flex items-center justify-between">
+<span class="material-symbols-outlined text-outline">lock</span>
+<div>
+<span class="font-label-caps text-label-caps text-outline block mb-1">Level 8</span>
+<h3 class="font-headline-md text-headline-md text-outline">Beta Launch</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

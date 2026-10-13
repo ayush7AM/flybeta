@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - Interactive Lesson Runner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#5b5c5b",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-fixed": "#1a1c1b",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#916f6b",
+                    "secondary-container": "#e5e2e1",
+                    "secondary-fixed": "#e5e2e1",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#c7c6c5",
+                    "surface": "#fcf9f8",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#fdfcfa",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#ffb4ac",
+                    "surface-container-high": "#ebe7e7",
+                    "on-surface": "#1c1b1b",
+                    "on-primary-container": "#fffbff",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#464746",
+                    "on-primary-fixed": "#410002",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-background": "#1c1b1b",
+                    "primary-fixed": "#ffdad6",
+                    "on-surface-variant": "#5c403d",
+                    "on-primary-fixed-variant": "#93000e",
+                    "background": "#fcf9f8",
+                    "tertiary-container": "#747573",
+                    "secondary": "#5f5e5e",
+                    "surface-bright": "#fcf9f8",
+                    "primary-container": "#e02a2b",
+                    "surface-tint": "#bf0717",
+                    "outline-variant": "#e6bdb9",
+                    "primary-fixed-dim": "#ffb4ac",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#656464",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-surface": "#313030",
+                    "tertiary-fixed": "#e3e2e0",
+                    "surface-container": "#f0edec",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f6f3f2",
+                    "inverse-on-surface": "#f3f0ef",
+                    "primary": "#bb0215",
+                    "surface-dim": "#dcd9d9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "stack-gap": "12px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "mono-label": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Anton"
+                    ],
+                    "headline-lg-mobile": [
+                            "Anton"
+                    ],
+                    "label-bold": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "display-lg": [
+                            "Anton"
+                    ],
+                    "headline-lg": [
+                            "Anton"
+                    ]
+            },
+            "fontSize": {
+                    "mono-label": [
+                            "12px",
+                            {
+                                    "lineHeight": "14px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "28px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "32px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "0",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "96px",
+                            {
+                                    "lineHeight": "90px",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar (Rendered for Web/Tablet) -->
+<nav class="hidden md:flex fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 bg-surface border-b-2 border-on-surface shadow-[6px_6px_0px_0px_#111111]">
+<div class="flex items-center gap-6">
+<span class="font-headline-md text-headline-md font-bold text-on-surface border-2 border-on-surface px-2 py-1">FlyBeta</span>
+<div class="flex">
+<a class="text-on-surface border-b-4 border-primary px-4 py-2 font-bold font-label-bold text-label-bold hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">Lessons</a>
+<a class="text-tertiary px-4 py-2 font-medium font-label-bold text-label-bold hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">Quests</a>
+<a class="text-tertiary px-4 py-2 font-medium font-label-bold text-label-bold hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">Archive</a>
+<a class="text-tertiary px-4 py-2 font-medium font-label-bold text-label-bold hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">Labs</a>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="p-2 border-2 border-on-surface hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 shadow-[2px_2px_0px_0px_#111111] active:shadow-none bg-surface">
+<span class="material-symbols-outlined text-primary" data-icon="local_fire_department">local_fire_department</span>
+</button>
+<button class="p-2 border-2 border-on-surface hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 shadow-[2px_2px_0px_0px_#111111] active:shadow-none bg-surface">
+<span class="material-symbols-outlined text-primary" data-icon="monetization_on">monetization_on</span>
+</button>
+<button class="p-2 border-2 border-on-surface hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 shadow-[2px_2px_0px_0px_#111111] active:shadow-none bg-surface">
+<span class="material-symbols-outlined text-primary" data-icon="database">database</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Suppressed as per rules: This is a focused lesson runner, not a top-level destination navigation hub for the canvas) -->
+<div class="pt-[104px] pb-12 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<!-- Lesson Header -->
+<header class="mb-gutter border-2 border-on-surface p-4 md:p-6 bg-surface shadow-[6px_6px_0px_0px_#111111]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<span class="font-mono-label text-mono-label bg-surface-container-high px-2 py-1 border border-on-surface mb-2 inline-block">MODULE 04 // PROTOCOL INITIALIZATION</span>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase mt-2">Core Avionics Systems</h1>
+</div>
+<div class="flex gap-2">
+<span class="border border-on-surface px-2 py-1 font-mono-label text-mono-label bg-[#a78bfa] text-on-surface">COBALT TRACK</span>
+<span class="border border-on-surface px-2 py-1 font-mono-label text-mono-label bg-surface-container-high">EST. 15 MIN</span>
+</div>
+</div>
+</header>
+<!-- Asymmetrical Split Layout -->
+<div class="grid grid-cols-4 md:grid-cols-12 gap-gutter">
+<!-- Left Rail: Checklist -->
+<aside class="col-span-4 md:col-span-4 lg:col-span-3 border-2 border-on-surface bg-surface shadow-[6px_6px_0px_0px_#111111] p-4 self-start">
+<h3 class="font-headline-md text-headline-md border-b-2 border-on-surface pb-2 mb-4 uppercase">Task List</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 border-2 border-on-surface bg-primary-container flex items-center justify-center shrink-0 mt-1 shadow-[2px_2px_0px_0px_#111111]">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container" data-icon="check" data-weight="fill">check</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold line-through opacity-70">Review Protocol Alpha</p>
+<p class="font-mono-label text-mono-label text-tertiary">COMPLETED</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 border-2 border-on-surface bg-surface shrink-0 mt-1 shadow-[2px_2px_0px_0px_#111111]"></div>
+<div>
+<p class="font-label-bold text-label-bold">Initialize Subsystems</p>
+<p class="font-mono-label text-mono-label text-tertiary text-primary">CURRENT TASK</p>
+</div>
+</li>
+<li class="flex items-start gap-3 opacity-50">
+<div class="w-6 h-6 border-2 border-on-surface bg-surface shrink-0 mt-1"></div>
+<div>
+<p class="font-label-bold text-label-bold">Run Diagnostics</p>
+<p class="font-mono-label text-mono-label text-tertiary">LOCKED</p>
+</div>
+</li>
+<li class="flex items-start gap-3 opacity-50">
+<div class="w-6 h-6 border-2 border-on-surface bg-surface shrink-0 mt-1"></div>
+<div>
+<p class="font-label-bold text-label-bold">Commit Changes</p>
+<p class="font-mono-label text-mono-label text-tertiary">LOCKED</p>
+</div>
+</li>
+</ul>
+</aside>
+<!-- Main Content -->
+<main class="col-span-4 md:col-span-8 lg:col-span-9 space-y-gutter">
+<!-- Mission Briefing Callout -->
+<div class="border-l-8 border-l-primary border-t-2 border-r-2 border-b-2 border-on-surface p-6 bg-surface shadow-[6px_6px_0px_0px_#111111]">
+<h2 class="font-headline-md text-headline-md uppercase mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="campaign">campaign</span>
+                        Mission Briefing
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        To proceed, you must construct the basic initialization loop for the core avionics module. The system expects a continuous feedback sequence handling both telemetry and basic power distribution requests before returning a nominal status code.
+                    </p>
+</div>
+<!-- Code Editor Block -->
+<div class="border-2 border-on-surface bg-[#1c1b1b] text-[#fdfcfa] shadow-[6px_6px_0px_0px_#111111] overflow-hidden">
+<div class="flex justify-between items-center border-b-2 border-on-surface bg-surface-container p-2">
+<div class="flex gap-2">
+<span class="w-3 h-3 border-2 border-on-surface rounded-full bg-error"></span>
+<span class="w-3 h-3 border-2 border-on-surface rounded-full bg-[#facc15]"></span>
+<span class="w-3 h-3 border-2 border-on-surface rounded-full bg-[#34d399]"></span>
+</div>
+<span class="font-mono-label text-mono-label text-on-surface uppercase">avionics_init.rs</span>
+<button class="border-2 border-on-surface px-2 py-1 bg-surface text-on-surface hover:bg-surface-container-high active:translate-y-1 font-mono-label text-mono-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="content_copy">content_copy</span> COPY
+                        </button>
+</div>
+<div class="p-4 overflow-x-auto">
+<pre class="font-mono-label text-mono-label text-sm leading-relaxed"><code class="language-rust text-[#e3e2e0]">
+<span class="text-[#fca5a5]">fn</span> <span class="text-[#93c5fd]">initialize_avionics</span>(power_state: &amp;PowerState) -&gt; <span class="text-[#fca5a5]">Result</span>&lt;(), SystemError&gt; {
+    <span class="text-[#747573]">// TODO: Implement initialization sequence</span>
+    <span class="text-[#fca5a5]">let</span> telemetry = Telemetry::<span class="text-[#93c5fd]">new</span>();
+    
+    <span class="text-[#fca5a5]">if</span> power_state.<span class="text-[#93c5fd]">is_nominal</span>() {
+        telemetry.<span class="text-[#93c5fd]">begin_broadcast</span>();
+        <span class="text-[#fca5a5]">println!</span>(<span class="text-[#86efac]">"Systems nominal. Broadcast live."</span>);
+    } <span class="text-[#fca5a5]">else</span> {
+        <span class="text-[#fca5a5]">return</span> <span class="text-[#fca5a5]">Err</span>(SystemError::InsufficientPower);
+    }
+
+    <span class="text-[#fca5a5]">Ok</span>(())
+}
+</code></pre>
+</div>
+</div>
+<!-- Claim XP Action -->
+<div class="flex justify-end pt-8">
+<button class="group relative flex items-center justify-center font-headline-md text-headline-md bg-primary text-on-primary border-2 border-on-surface px-8 py-4 shadow-[10px_10px_0px_0px_#111111] transition-all duration-75 active:translate-x-[6px] active:translate-y-[6px] active:shadow-[4px_4px_0px_0px_#111111] hover:bg-surface-tint uppercase tracking-widest">
+                        Claim XP
+                        <span class="material-symbols-outlined ml-2" data-icon="star" data-weight="fill">star</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - Track Roadmap</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#906f70",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#e11d48",
+                        "on-secondary-fixed": "#001a42",
+                        "inverse-surface": "#313030",
+                        "on-primary-container": "#fffaf9",
+                        "canvas-paper": "#FEF08A",
+                        "on-tertiary-fixed": "#231b00",
+                        "surface": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#be0037",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-container-high": "#ebe7e7",
+                        "tertiary": "#735c00",
+                        "on-background": "#1c1b1b",
+                        "crayon-red": "#E11D48",
+                        "on-primary-fixed": "#40000c",
+                        "on-surface-variant": "#5c3f40",
+                        "notebook-line": "#60A5FA",
+                        "on-tertiary-container": "#4e3e00",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "background": "#fcf9f8",
+                        "surface-container-low": "#f6f3f2",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "primary": "#b80035",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "secondary": "#0058be",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-fixed-dim": "#eec200",
+                        "tertiary-container": "#cea700",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed-variant": "#920028",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container": "#f0edec",
+                        "inverse-primary": "#ffb3b6",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#e5bdbe",
+                        "primary-fixed": "#ffdada",
+                        "tertiary-fixed": "#ffe083",
+                        "kinder-blue": "#3B82F6",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#2170e4",
+                        "primary-fixed-dim": "#ffb3b6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "shadow-offset": "6px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "border-width": "3px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Rubik"],
+                        "headline-lg": ["Anton"],
+                        "headline-lg-mobile": ["Anton"],
+                        "scribble-caption": ["Rubik"],
+                        "body-lg": ["Rubik"],
+                        "headline-md": ["Anton"],
+                        "label-bold": ["Rubik"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "headline-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["40px", { "lineHeight": "44px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "scribble-caption": ["12px", { "lineHeight": "14px", "fontWeight": "700" }],
+                        "body-lg": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-bold": ["14px", { "lineHeight": "16px", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .notebook-bg {
+            background-color: theme('colors.canvas-paper');
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 39px,
+                theme('colors.notebook-line') 40px
+            );
+            background-position: 0 40px;
+        }
+        .rough-border {
+            border: theme('spacing.border-width') solid theme('colors.on-background');
+            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
+        }
+        .marker-path {
+            width: 8px;
+            background-color: theme('colors.on-background');
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            z-index: 0;
+            border-radius: 4px;
+        }
+        .solid-shadow {
+            box-shadow: 6px 6px 0px 0px #1c1b1b;
+        }
+        .solid-shadow-sm {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .interactive-press:active {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background font-body-md min-h-screen flex overflow-x-hidden">
+<!-- TopNavBar (Mobile) -->
+<nav class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-canvas-paper border-b-border-width border-on-background shadow-[6px_6px_0px_0px_#1c1b1b]">
+<div class="font-headline-md-mobile text-headline-md-mobile text-primary dark:text-primary-fixed-dim uppercase tracking-tighter">FlyBeta</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface">local_fire_department</span>
+<span class="material-symbols-outlined text-on-surface">monetization_on</span>
+<span class="material-symbols-outlined text-on-surface">military_tech</span>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col pt-24 z-40 bg-surface border-r-border-width border-on-background w-64 shadow-[6px_0px_0px_0px_#1c1b1b]">
+<div class="px-gutter mb-8 flex flex-col items-center border-b-border-width border-on-background pb-4 mx-4">
+<img alt="Student Avatar" class="w-24 h-24 rounded-full rough-border solid-shadow mb-4 object-cover" data-alt="A stylized, colorful avatar illustration of a young, energetic child resembling Shin-chan, drawn with thick black marker outlines and solid vibrant colors, embodying a playful kindergarten aesthetic on a light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnlsVwI9g-Qca9t5Jz8hUJZul8_LdyfLywYsJMwFiB0WefZDZhKLvD69pvLFHUFPdPrRT0EtOejLL1ect3tenpjk3P0mXzU5jCjdpZ3Kb0O_mqd-3VNGqSscgoVIChQvC0FA5MZsZQwIN7PCklyi4MOyqxbCekqJA2naBsTU_ownmK84EFg3lV_kGBtmQAYYTZuQI-tWg68_W0o5AbLNROmHhqpj_EU8GpwkMj92EiLj9pKugH8o2P"/>
+<h2 class="font-headline-md text-headline-md text-primary">Shin-chan</h2>
+<p class="font-scribble-caption text-scribble-caption text-on-surface-variant uppercase mt-1">Level 5 Rookie</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 px-2">
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all interactive-press" href="#">
+<span class="material-symbols-outlined mr-4">home</span>
+<span class="font-label-bold text-label-bold uppercase">Home</span>
+</a>
+<a class="bg-primary text-on-primary border-border-width border-on-background shadow-[4px_4px_0px_0px_#1c1b1b] m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all interactive-press" href="#">
+<span class="material-symbols-outlined mr-4">school</span>
+<span class="font-label-bold text-label-bold uppercase">Lessons</span>
+</a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all interactive-press" href="#">
+<span class="material-symbols-outlined mr-4">group</span>
+<span class="font-label-bold text-label-bold uppercase">Friends</span>
+</a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all interactive-press" href="#">
+<span class="material-symbols-outlined mr-4">settings</span>
+<span class="font-label-bold text-label-bold uppercase">Settings</span>
+</a>
+</div>
+<div class="p-4 mt-auto">
+<button class="w-full bg-tertiary-fixed text-on-tertiary-fixed rough-border solid-shadow p-4 font-label-bold text-label-bold uppercase hover:bg-kinder-blue hover:text-white transition-all interactive-press flex items-center justify-center">
+<span class="material-symbols-outlined mr-2">stars</span> GO PREMIUM
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 mt-20 md:mt-0 p-gutter md:p-margin-desktop notebook-bg min-h-screen relative">
+<!-- Header -->
+<div class="mb-12 relative z-10 text-center md:text-left">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase bg-white inline-block px-4 py-2 rough-border solid-shadow transform -rotate-2">Mission Roadmap</h1>
+<p class="font-body-lg text-body-lg mt-4 bg-white inline-block px-4 py-2 rough-border solid-shadow-sm transform rotate-1">Track your progress, Rookie!</p>
+</div>
+<!-- Roadmap Container -->
+<div class="relative max-w-3xl mx-auto py-12">
+<!-- Vertical Marker Line -->
+<div class="marker-path"></div>
+<!-- Nodes List -->
+<div class="flex flex-col gap-24 relative z-10">
+<!-- Completed Node 1 -->
+<div class="flex items-center justify-start md:justify-center relative group">
+<div class="md:w-1/2 flex md:justify-end pr-8 hidden md:flex">
+<div class="bg-surface-container-high rough-border solid-shadow p-4 max-w-xs transform -rotate-3 opacity-70">
+<h3 class="font-label-bold text-label-bold uppercase text-on-surface-variant">Past Mission</h3>
+</div>
+</div>
+<div class="w-16 h-16 bg-surface rough-border solid-shadow rounded-full flex items-center justify-center z-20 absolute left-8 md:left-1/2 transform -translate-x-1/2">
+<span class="material-symbols-outlined text-crayon-red text-4xl" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="ml-24 md:ml-0 md:w-1/2 flex justify-start pl-8">
+<div class="bg-surface rough-border solid-shadow-sm p-6 w-full max-w-sm flex items-center justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg">Shape Sorter</h3>
+<p class="font-scribble-caption text-scribble-caption text-on-surface-variant mt-1">Ticket Punched</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-50 text-3xl">confirmation_number</span>
+</div>
+</div>
+</div>
+<!-- Completed Node 2 -->
+<div class="flex items-center justify-start md:justify-center relative">
+<div class="ml-24 md:ml-0 md:w-1/2 flex justify-end pr-8 md:order-1 order-2">
+<div class="bg-surface rough-border solid-shadow-sm p-6 w-full max-w-sm flex items-center justify-between transform rotate-1">
+<div>
+<h3 class="font-body-lg text-body-lg">Color Match</h3>
+<p class="font-scribble-caption text-scribble-caption text-on-surface-variant mt-1">Ticket Punched</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-50 text-3xl">confirmation_number</span>
+</div>
+</div>
+<div class="w-16 h-16 bg-surface rough-border solid-shadow rounded-full flex items-center justify-center z-20 absolute left-8 md:left-1/2 transform -translate-x-1/2 md:order-2">
+<span class="material-symbols-outlined text-crayon-red text-4xl" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="md:w-1/2 pl-8 hidden md:flex md:order-3"></div>
+</div>
+<!-- Active Node - Mission Dossier -->
+<div class="flex items-center justify-start md:justify-center relative my-8">
+<div class="w-20 h-20 bg-kinder-blue rough-border solid-shadow rounded-full flex items-center justify-center z-20 absolute left-6 md:left-1/2 transform -translate-x-1/2 border-4 border-on-background animate-pulse">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<div class="ml-24 md:ml-0 w-full flex justify-center z-30">
+<div class="bg-white rough-border solid-shadow p-8 w-full max-w-xl transform -rotate-1 hover:rotate-0 transition-transform duration-200">
+<div class="border-b-4 border-notebook-line pb-4 mb-4 flex justify-between items-start">
+<div>
+<span class="bg-crayon-red text-white font-label-bold text-label-bold uppercase px-2 py-1 rough-border solid-shadow-sm inline-block mb-2 transform -rotate-3">Active Mission</span>
+<h2 class="font-headline-md text-headline-md text-on-background uppercase">Count to 10</h2>
+</div>
+<span class="material-symbols-outlined text-5xl text-kinder-blue">calculate</span>
+</div>
+<div class="flex flex-col md:flex-row gap-6 items-center">
+<img alt="Mission Preview" class="w-32 h-32 rough-border solid-shadow-sm object-cover" data-alt="A playful, messy sketch of a chalkboard with numbers 1 through 10 written in brightly colored chalk, drawn in a neo-brutalist kindergarten style with thick black outlines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvxPP4ZMWGGmU8KWWfnaXiuXZY_ussauycLWSQ0eal6ZgZUaxyJyHiU1iDEDy9BL1he9o7hwGCDPrHkAuW5VqPEsXsIJVQ-D9K_5Malqgsl6BJetU3PPrfaKaH1W4bitAOd6C9-tY8o807mndal0ll8JX5YZPIXvq9K0AZpwR6euv4YfPm-giTMi1TnvLA_ghGLKysg11InAL3VJaf_1-ZKsohmJ7fFw1SpHL30UEvlaA5FmWGak96"/>
+<div>
+<p class="font-body-md text-body-md mb-4">Master the numbers one through ten in this exciting adventure!</p>
+<button class="bg-primary text-on-primary rough-border solid-shadow px-6 py-3 font-label-bold text-label-bold uppercase interactive-press w-full md:w-auto">Start Mission</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Locked Node 1 -->
+<div class="flex items-center justify-start md:justify-center relative opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+<div class="ml-24 md:ml-0 md:w-1/2 flex justify-end pr-8 md:order-1 order-2">
+<div class="bg-surface-variant border-dashed border-4 border-on-surface-variant p-6 w-full max-w-sm flex items-center justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface-variant">Letter Tracing</h3>
+<p class="font-scribble-caption text-scribble-caption text-on-surface-variant mt-1 flex items-center"><span class="material-symbols-outlined text-sm mr-1">lock</span> Locked</p>
+</div>
+</div>
+</div>
+<div class="w-16 h-16 bg-surface-variant border-dashed border-4 border-on-surface-variant rounded-full flex items-center justify-center z-20 absolute left-8 md:left-1/2 transform -translate-x-1/2 md:order-2">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">lock</span>
+</div>
+<div class="md:w-1/2 pl-8 hidden md:flex md:order-3"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface border-t-border-width border-on-background shadow-[0px_-6px_0px_0px_#1c1b1b]">
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-bold text-[10px] uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center p-2 text-primary border-b-4 border-primary pb-1" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-bold text-[10px] uppercase">Lessons</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-label-bold text-[10px] uppercase">Friends</span>
+</a>
+</nav>
+</body></html>

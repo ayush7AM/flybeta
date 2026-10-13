@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - The Blueprint Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Work+Sans:wght@400;500&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-container": "#cea700",
+                "on-secondary-fixed-variant": "#930013",
+                "secondary-fixed": "#ffdad7",
+                "on-primary-container": "#90a8ff",
+                "on-secondary-container": "#fffbff",
+                "inverse-surface": "#22333c",
+                "surface": "#f4faff",
+                "surface-dim": "#cbdde8",
+                "error": "#ba1a1a",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#e8f6ff",
+                "inverse-primary": "#b6c4ff",
+                "tertiary": "#735c00",
+                "outline": "#757682",
+                "on-secondary": "#ffffff",
+                "surface-bright": "#f4faff",
+                "surface-container-high": "#d9ebf7",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#dce1ff",
+                "on-error-container": "#93000a",
+                "secondary": "#b61722",
+                "on-secondary-fixed": "#410004",
+                "on-error": "#ffffff",
+                "on-primary-fixed-variant": "#264191",
+                "primary-fixed-dim": "#b6c4ff",
+                "on-tertiary-container": "#4e3e00",
+                "inverse-on-surface": "#e2f3ff",
+                "on-tertiary-fixed-variant": "#574500",
+                "outline-variant": "#c5c5d3",
+                "primary-container": "#1e3a8a",
+                "on-tertiary": "#ffffff",
+                "surface-variant": "#d3e5f1",
+                "tertiary-fixed": "#ffe083",
+                "secondary-container": "#da3437",
+                "tertiary-fixed-dim": "#eec200",
+                "on-tertiary-fixed": "#231b00",
+                "on-primary-fixed": "#00164e",
+                "on-background": "#0c1e26",
+                "surface-tint": "#4059aa",
+                "primary": "#00236f",
+                "on-primary": "#ffffff",
+                "surface-container-highest": "#d3e5f1",
+                "secondary-fixed-dim": "#ffb3ad",
+                "surface-container": "#def0fc",
+                "on-surface": "#0c1e26",
+                "on-surface-variant": "#444651",
+                "background": "#e0f2fe",
+                "gadget-red": "#EF4444",
+                "navy-blue": "#1E3A8A",
+                "pale-yellow": "#FEF9C3"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "grid-margin": "24px",
+                "xs": "8px",
+                "grid-gutter": "24px",
+                "md": "24px",
+                "unit": "4px",
+                "sm": "16px",
+                "xl": "64px",
+                "lg": "40px"
+        },
+        "fontFamily": {
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-sm": [
+                        "Space Grotesk"
+                ],
+                "display": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Work Sans"
+                ],
+                "body-md": [
+                        "Work Sans"
+                ],
+                "label-bold": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "800"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "800"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-bold": [
+                        "14px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: 
+                linear-gradient(to right, #ffffff 1px, transparent 1px),
+                linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .brutalist-border {
+            border: 4px solid theme('colors.navy-blue');
+        }
+
+        .brutalist-shadow {
+            box-shadow: 6px 6px 0px 0px theme('colors.navy-blue');
+        }
+        
+        .brutalist-shadow-hover:hover {
+            box-shadow: 2px 2px 0px 0px theme('colors.navy-blue');
+            transform: translate(4px, 4px);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .brutalist-button {
+            border: 4px solid theme('colors.navy-blue');
+            box-shadow: 6px 6px 0px 0px theme('colors.navy-blue');
+            transition: all 0.1s ease-in-out;
+        }
+        
+        .brutalist-button:active, .brutalist-button.active {
+            box-shadow: 0px 0px 0px 0px theme('colors.navy-blue');
+            transform: translate(6px, 6px);
+        }
+
+        .brutalist-input:focus {
+            border-color: theme('colors.navy-blue');
+            box-shadow: 6px 6px 0px 0px theme('colors.navy-blue');
+            outline: none;
+        }
+
+        .blueprint-card {
+            background-color: theme('colors.pale-yellow');
+            border: 4px solid theme('colors.navy-blue');
+            box-shadow: 6px 6px 0px 0px theme('colors.navy-blue');
+            padding: 24px;
+            position: relative;
+        }
+        
+        .blueprint-card::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: theme('colors.gadget-red');
+            border: 2px solid theme('colors.navy-blue');
+        }
+    </style>
+</head>
+<body class="min-h-screen pt-20 pb-20 md:pb-0 md:pl-64">
+<!-- TopNavBar (Web) -->
+<nav class="flex justify-between items-center w-full px-grid-margin py-xs z-50 sticky top-0 bg-surface border-4 border-primary shadow-[6px_6px_0px_0px_rgba(0,35,111,1)] hidden md:flex">
+<div class="flex items-center gap-grid-gutter">
+<div class="font-headline-md text-headline-md font-extrabold text-primary brutalist-border px-2 py-1 bg-surface-container-lowest">
+                FlyBeta
+            </div>
+<div class="flex gap-4">
+<a class="text-on-surface px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none border-b-4 border-transparent" href="#">Lessons</a>
+<a class="text-on-surface px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none border-b-4 border-transparent" href="#">Quests</a>
+<a class="text-on-surface px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none border-b-4 border-transparent" href="#">Archive</a>
+<a class="text-secondary border-b-4 border-secondary px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none" href="#">Labs</a>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="p-2 brutalist-border brutalist-shadow bg-surface-container-lowest text-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none">
+<span class="material-symbols-outlined">local_fire_department</span>
+</button>
+<button class="p-2 brutalist-border brutalist-shadow bg-surface-container-lowest text-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none">
+<span class="material-symbols-outlined">monetization_on</span>
+</button>
+<button class="p-2 brutalist-border brutalist-shadow bg-surface-container-lowest text-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none">
+<span class="material-symbols-outlined">emoji_events</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex flex-col p-md w-64 border-r-4 border-primary shadow-[6px_0px_0px_0px_rgba(0,35,111,1)] bg-surface z-40">
+<div class="px-4 pb-6 border-b-4 border-primary mb-4 pt-20">
+<div class="w-16 h-16 brutalist-border brutalist-shadow bg-surface-container-lowest mb-4 overflow-hidden relative">
+<img alt="Cadet Profile Avatar" class="object-cover w-full h-full" data-alt="A stylized, brutalist-inspired avatar portrait of a sci-fi pilot cadet in high-contrast black and white with red accents. The aesthetic is stark, minimalist, and graphic, reminiscent of a stark technical manual illustration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2xDPj6tYfUCOHecJnm4YyI16RGYtWKcxKk1BgKsN6XjEztLK2jNxnCxo-LkZDs5N0NJspcnISHCvwTlChlanEWgZuTykYPMVPVNBBv5pOyscZiFEA1BWpJsowpe4XYeb-4UgJSiDif_g1teCbkUxlNikd47sjTld7HaSsTj4B9YTTCGXvPThrb7OUMAChh8B7YyxUeweFhq3DhnO704VXIDEOfhn0a1knm5O-7qYLIe5FDSNPDfAz"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Cadet</h2>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Rank: Explorer</p>
+</div>
+<div class="flex flex-col flex-1 overflow-y-auto px-2">
+<a class="text-on-surface hover:bg-surface-container-low m-2 border-4 border-transparent p-3 flex items-center gap-3 transition-all hover:translate-x-[2px] hover:shadow-[4px_0px_0px_0px_rgba(0,35,111,1)] active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-bold text-label-bold">Dashboard</span>
+</a>
+<a class="text-on-surface hover:bg-surface-container-low m-2 border-4 border-transparent p-3 flex items-center gap-3 transition-all hover:translate-x-[2px] hover:shadow-[4px_0px_0px_0px_rgba(0,35,111,1)] active:scale-95" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Map</span>
+</a>
+<a class="text-on-surface hover:bg-surface-container-low m-2 border-4 border-transparent p-3 flex items-center gap-3 transition-all hover:translate-x-[2px] hover:shadow-[4px_0px_0px_0px_rgba(0,35,111,1)] active:scale-95" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-bold text-label-bold">Leaderboard</span>
+</a>
+<a class="bg-tertiary-container text-on-tertiary-container border-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] m-2 p-3 flex items-center gap-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-bold text-label-bold">Library</span>
+</a>
+<a class="text-on-surface hover:bg-surface-container-low m-2 border-4 border-transparent p-3 flex items-center gap-3 transition-all hover:translate-x-[2px] hover:shadow-[4px_0px_0px_0px_rgba(0,35,111,1)] active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-bold text-label-bold">Settings</span>
+</a>
+</div>
+<div class="p-4 mt-auto">
+<button class="w-full bg-gadget-red text-white brutalist-button font-label-bold text-label-bold py-3 uppercase tracking-wider">
+                Launch Mission
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="p-sm md:p-lg max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<header class="mb-12 border-b-4 border-navy-blue pb-8">
+<h1 class="font-display text-display text-navy-blue uppercase mb-4 tracking-tighter">THE BLUEPRINT LAB</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl border-l-4 border-navy-blue pl-4">Architect and define the structural logic of your next AI initiative. Input constraints below to generate a tactile project map.</p>
+</header>
+<!-- Drafting Board Input Area -->
+<section class="mb-16 relative">
+<!-- Decorative measuring tape elements -->
+<div class="absolute -top-4 -left-4 w-full h-4 bg-tertiary-fixed border-4 border-navy-blue flex justify-between px-2 overflow-hidden z-10 hidden md:flex">
+<div class="w-1 h-full bg-navy-blue mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div>
+<div class="w-1 h-full bg-navy-blue mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div><div class="w-1 h-2 bg-navy-blue mt-2 mx-1"></div>
+<div class="w-1 h-full bg-navy-blue mx-1"></div>
+</div>
+<div class="bg-surface-container-lowest brutalist-border p-6 md:p-8 brutalist-shadow relative z-0">
+<div class="flex justify-between items-center mb-4 border-b-4 border-navy-blue pb-2">
+<h2 class="font-headline-md text-headline-md text-navy-blue flex items-center gap-2">
+<span class="material-symbols-outlined">architecture</span>
+                        Project Brief
+                    </h2>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-variant brutalist-border">V_1.0.4</span>
+</div>
+<textarea class="w-full h-48 bg-surface p-4 brutalist-border brutalist-input font-body-md text-body-md resize-none" placeholder="Describe the core objective, key constraints, and desired outcomes of your project. Be specific about the domain and target audience..."></textarea>
+<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex gap-2 w-full md:w-auto">
+<span class="font-label-sm text-label-sm px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed brutalist-border">NLP</span>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed brutalist-border">Generative</span>
+</div>
+<button class="w-full md:w-auto bg-gadget-red text-white brutalist-button font-label-bold text-label-bold py-3 px-8 uppercase tracking-wider flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+                        Generate Blueprint
+                    </button>
+</div>
+</div>
+</section>
+<!-- Blueprint Cards Scatter Grid -->
+<section>
+<div class="flex justify-between items-end mb-8 border-b-4 border-navy-blue pb-2">
+<h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-navy-blue uppercase">GENERATED STEPS</h3>
+<div class="flex gap-2">
+<button class="p-2 bg-surface brutalist-border hover:bg-surface-variant active:translate-y-1 transition-all text-navy-blue"><span class="material-symbols-outlined">view_agenda</span></button>
+<button class="p-2 bg-surface-container-lowest brutalist-border brutalist-shadow text-navy-blue"><span class="material-symbols-outlined">grid_view</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
+<!-- Card 1 -->
+<div class="blueprint-card transform hover:-translate-y-2 hover:rotate-1 transition-all duration-200">
+<div class="flex justify-between items-start mb-6">
+<span class="font-headline-lg text-headline-lg text-navy-blue opacity-50">01</span>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-variant border-2 border-navy-blue">DATA_PREP</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-navy-blue mb-4 leading-tight uppercase">Corpus Curation &amp; Sanitization</h4>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-3 mb-6">
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-gadget-red text-[18px] mt-1">check_box_outline_blank</span> Aggregate raw text logs</li>
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-gadget-red text-[18px] mt-1">check_box_outline_blank</span> Remove PII tokens</li>
+</ul>
+<div class="mt-auto border-t-4 border-navy-blue pt-4 flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-navy-blue">Est. 2 Weeks</span>
+<button class="text-gadget-red hover:text-navy-blue"><span class="material-symbols-outlined">edit</span></button>
+</div>
+</div>
+<!-- Card 2 (Rotated for tactical feel) -->
+<div class="blueprint-card transform rotate-2 hover:-translate-y-2 hover:rotate-3 transition-all duration-200 z-10">
+<div class="flex justify-between items-start mb-6">
+<span class="font-headline-lg text-headline-lg text-navy-blue opacity-50">02</span>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-variant border-2 border-navy-blue">MODEL_SEL</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-navy-blue mb-4 leading-tight uppercase">Architecture Evaluation</h4>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-3 mb-6">
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-gadget-red text-[18px] mt-1">check_box_outline_blank</span> Benchmark 7B vs 13B params</li>
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-gadget-red text-[18px] mt-1">check_box_outline_blank</span> Test latency constraints</li>
+</ul>
+<div class="mt-auto border-t-4 border-navy-blue pt-4 flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-navy-blue">Est. 1 Week</span>
+<button class="text-gadget-red hover:text-navy-blue"><span class="material-symbols-outlined">edit</span></button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="blueprint-card transform -rotate-1 hover:-translate-y-2 hover:rotate-0 transition-all duration-200">
+<div class="flex justify-between items-start mb-6">
+<span class="font-headline-lg text-headline-lg text-navy-blue opacity-50">03</span>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-variant border-2 border-navy-blue">FINE_TUNE</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-navy-blue mb-4 leading-tight uppercase">Instruction LoRA Training</h4>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-3 mb-6">
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-gadget-red text-[18px] mt-1">check_box_outline_blank</span> Configure hyperparams</li>
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-gadget-red text-[18px] mt-1">check_box_outline_blank</span> Initiate distributed run</li>
+</ul>
+<div class="mt-auto border-t-4 border-navy-blue pt-4 flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-navy-blue">Est. 3 Days</span>
+<button class="text-gadget-red hover:text-navy-blue"><span class="material-symbols-outlined">edit</span></button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface border-t-4 border-navy-blue flex justify-around items-center h-20 shadow-[0px_-4px_0px_0px_rgba(0,35,111,1)]">
+<a class="flex flex-col items-center justify-center p-2 text-on-surface" href="#">
+<span class="material-symbols-outlined mb-1">menu_book</span>
+<span class="font-label-sm text-label-sm text-[10px]">Lessons</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="font-label-sm text-label-sm text-[10px]">Quests</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-primary bg-surface-container-high border-4 border-navy-blue translate-y-[-8px] shadow-[4px_4px_0px_0px_rgba(0,35,111,1)]" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">science</span>
+<span class="font-label-sm text-label-sm text-[10px] font-bold">Labs</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface" href="#">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span class="font-label-sm text-label-sm text-[10px]">Archive</span>
+</a>
+</nav>
+</body></html>

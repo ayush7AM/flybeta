@@ -1,0 +1,55 @@
+{
+  "domain": {
+    "name": "data",
+    "title": "Data Science",
+    "icon": "chart-bar",
+    "color": "#059669"
+  },
+  "level": {
+    "number": 1,
+    "title": "Data Alchemy",
+    "description": "Transform raw, messy data into gold — learn the foundational tools and techniques every data scientist uses to wrangle, explore, and visualize datasets."
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "What Does a Data Scientist Actually Do?",
+      "content_md": "# What Does a Data Scientist Actually Do?\n\nData Science sits at the intersection of **statistics**, **programming**, and **domain expertise**. A data scientist turns raw data into actionable insights and decisions.\n\n## The Data Science Lifecycle\n\nEvery project follows a predictable arc:\n\n```\n1. QUESTION    → Define what you want to learn\n2. COLLECT     → Gather raw data from various sources\n3. CLEAN       → Fix missing values, outliers, and formatting\n4. EXPLORE     → Visualize and summarize patterns (EDA)\n5. MODEL       → Apply statistics or ML to answer the question\n6. COMMUNICATE → Present findings to stakeholders\n```\n\n## The Dirty Secret\n\nData scientists spend roughly **80% of their time on steps 2-3** (collecting and cleaning). The glamorous modeling part? About 20%.\n\n## Key Tools of the Trade\n\n| Tool | Purpose |\n|------|---------|\n| **Python** | General-purpose programming and ML |\n| **pandas** | Data manipulation and analysis |\n| **NumPy** | Numerical computing |\n| **matplotlib / seaborn** | Visualization |\n| **scikit-learn** | Machine learning |\n| **SQL** | Querying databases |\n| **Jupyter Notebooks** | Interactive exploration |\n\n## Data Science vs Related Fields\n\n- **Data Analyst:** Focused on reporting and dashboards. Uses SQL and Excel heavily.\n- **Data Engineer:** Builds the pipelines that move and store data.\n- **ML Engineer:** Deploys and scales machine learning models in production.\n- **Data Scientist:** Does all of the above, with a focus on experimentation and modeling.",
+      "xp_reward": 10,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 2,
+      "title": "Pandas: Your Data Swiss Army Knife",
+      "content_md": "# Pandas: Your Data Swiss Army Knife\n\nPandas is the backbone of data science in Python. It provides the **DataFrame** — a powerful table-like structure that makes data manipulation intuitive.\n\n## Creating a DataFrame\n\n```python\nimport pandas as pd\n\n# From a dictionary\ndf = pd.DataFrame({\n    'name': ['Alice', 'Bob', 'Charlie', 'Diana'],\n    'age': [28, 35, 42, 31],\n    'salary': [72000, 89000, 95000, 68000],\n    'department': ['Engineering', 'Marketing', 'Engineering', 'Design']\n})\n\nprint(df)\n```\n\n## Essential Operations\n\n### Inspection\n```python\ndf.shape        # (4, 4) → 4 rows, 4 columns\ndf.dtypes       # data types of each column\ndf.describe()   # statistics: mean, std, min, max\ndf.head(2)      # first 2 rows\ndf.info()       # memory usage and null counts\n```\n\n### Selection & Filtering\n```python\n# Select a column\ndf['name']                        # returns a Series\n\n# Filter rows\nengineers = df[df['department'] == 'Engineering']\nhigh_earners = df[df['salary'] > 80000]\n\n# Multiple conditions\nsenior_eng = df[(df['department'] == 'Engineering') & (df['age'] > 30)]\n```\n\n### Adding & Transforming Columns\n```python\n# New column from computation\ndf['annual_bonus'] = df['salary'] * 0.10\n\n# Apply a custom function\ndf['age_group'] = df['age'].apply(\n    lambda x: 'Senior' if x > 35 else 'Junior'\n)\n```\n\n### Aggregation\n```python\n# Group by department, compute mean salary\ndf.groupby('department')['salary'].mean()\n\n# Multiple aggregations\ndf.groupby('department').agg(\n    avg_salary=('salary', 'mean'),\n    headcount=('name', 'count')\n)\n```\n\n## Pro Tip\n\nChain operations for clean, readable pipelines:\n```python\nresult = (\n    df[df['salary'] > 70000]\n    .groupby('department')['salary']\n    .mean()\n    .sort_values(ascending=False)\n)\n```",
+      "xp_reward": 15,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 3,
+      "title": "Dealing with Dirty Data",
+      "content_md": "# Dealing with Dirty Data\n\nReal-world data is never clean. It's riddled with missing values, duplicates, inconsistent formats, and outliers. Cleaning it is the most important (and tedious) part of data science.\n\n## Common Data Quality Issues\n\n| Issue | Example |\n|-------|---------|\n| Missing values | `NaN`, empty strings, `None` |\n| Duplicates | Same row appearing twice |\n| Inconsistent formats | `'USA'`, `'US'`, `'United States'` |\n| Wrong data types | Age stored as `'32'` (string) instead of `32` (int) |\n| Outliers | A salary of `$9,999,999` in a dataset of teachers |\n\n## Handling Missing Values\n\n```python\nimport pandas as pd\nimport numpy as np\n\n# Detect missing values\ndf.isnull().sum()  # count NaNs per column\n\n# Strategy 1: Drop rows with any missing values\ndf_clean = df.dropna()\n\n# Strategy 2: Drop columns that are mostly empty\ndf_clean = df.dropna(axis=1, thresh=len(df) * 0.5)\n\n# Strategy 3: Fill with a sensible default\ndf['salary'].fillna(df['salary'].median(), inplace=True)\ndf['department'].fillna('Unknown', inplace=True)\n```\n\n## Removing Duplicates\n\n```python\n# Find duplicates\ndf.duplicated().sum()\n\n# Remove them\ndf = df.drop_duplicates()\n\n# Remove based on specific columns\ndf = df.drop_duplicates(subset=['email'], keep='last')\n```\n\n## Fixing Data Types\n\n```python\n# Convert types\ndf['age'] = df['age'].astype(int)\ndf['date'] = pd.to_datetime(df['date'])\ndf['revenue'] = df['revenue'].str.replace('$', '').astype(float)\n```\n\n## Detecting Outliers (IQR Method)\n\n```python\nQ1 = df['salary'].quantile(0.25)\nQ3 = df['salary'].quantile(0.75)\nIQR = Q3 - Q1\n\nlower_bound = Q1 - 1.5 * IQR\nupper_bound = Q3 + 1.5 * IQR\n\noutliers = df[(df['salary'] < lower_bound) | (df['salary'] > upper_bound)]\nprint(f'Found {len(outliers)} outliers')\n```\n\n## The Golden Rule\n\n**Document every cleaning step.** Future-you (and your teammates) will thank you when someone asks \"why did we drop 200 rows?\"",
+      "xp_reward": 15,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 4,
+      "title": "EDA: Exploratory Data Analysis",
+      "content_md": "# EDA: Exploratory Data Analysis\n\nExploratory Data Analysis (EDA) is the detective work of data science. Before building any model, you need to **understand your data** — its shape, its patterns, its quirks.\n\n## The EDA Checklist\n\n1. How big is the dataset? (`df.shape`)\n2. What are the data types? (`df.dtypes`)\n3. Are there missing values? (`df.isnull().sum()`)\n4. What do the distributions look like?\n5. Are there correlations between features?\n6. Are there obvious outliers?\n\n## Visualization with Matplotlib & Seaborn\n\n```python\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Set a clean style\nsns.set_theme(style='whitegrid')\n```\n\n### Distribution of a Single Variable\n```python\n# Histogram\nfig, ax = plt.subplots(figsize=(8, 4))\nsns.histplot(df['salary'], bins=30, kde=True, ax=ax)\nax.set_title('Salary Distribution')\nplt.show()\n```\n\n### Relationships Between Variables\n```python\n# Scatter plot with color coding\nsns.scatterplot(\n    data=df, x='experience_years', y='salary',\n    hue='department', style='education_level'\n)\nplt.title('Salary vs Experience')\nplt.show()\n```\n\n### Correlation Heatmap\n```python\n# Show correlations between all numeric columns\ncorr_matrix = df.select_dtypes(include='number').corr()\n\nplt.figure(figsize=(10, 8))\nsns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)\nplt.title('Feature Correlations')\nplt.show()\n```\n\n### Categorical Breakdowns\n```python\n# Box plot: salary by department\nsns.boxplot(data=df, x='department', y='salary')\nplt.xticks(rotation=45)\nplt.title('Salary by Department')\nplt.show()\n```\n\n## Key Questions EDA Answers\n\n- **Which features matter most?** High correlation with the target.\n- **Should I transform anything?** Skewed distributions might need log transforms.\n- **Are there data leaks?** Features that perfectly predict the target are suspicious.\n- **What story does the data tell?** Patterns that inform business decisions.",
+      "xp_reward": 10,
+      "coins_reward": 5,
+      "is_mandatory": true
+    },
+    {
+      "order": 5,
+      "title": "End-to-End Mini Project: Titanic Survival Analysis",
+      "content_md": "# End-to-End Mini Project: Titanic Survival Analysis\n\nLet's put everything together with the iconic Titanic dataset. We'll go from raw data to insights in one pipeline.\n\n## Load & Inspect\n\n```python\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\n# Seaborn ships with the dataset built in\ndf = sns.load_dataset('titanic')\nprint(f'Shape: {df.shape}')\nprint(f'Survival rate: {df[\"survived\"].mean():.1%}')\ndf.head()\n```\n\n## Clean\n\n```python\n# Check missing values\nprint(df.isnull().sum())\n\n# Fill missing age with median\ndf['age'].fillna(df['age'].median(), inplace=True)\n\n# Drop columns we won't use\ndf = df.drop(columns=['deck', 'embark_town', 'alive', 'who', 'adult_male'])\n\n# Drop remaining rows with missing data\ndf = df.dropna()\nprint(f'Clean shape: {df.shape}')\n```\n\n## Explore\n\n```python\n# Survival by class\nsurvival_by_class = df.groupby('class')['survived'].mean()\nprint(survival_by_class)\n\n# Visualization\nfig, axes = plt.subplots(1, 3, figsize=(15, 4))\n\n# 1. Survival by gender\nsns.barplot(data=df, x='sex', y='survived', ax=axes[0])\naxes[0].set_title('Survival by Gender')\n\n# 2. Age distribution by survival\nsns.histplot(data=df, x='age', hue='survived', bins=30, ax=axes[1])\naxes[1].set_title('Age Distribution')\n\n# 3. Survival by class\nsns.barplot(data=df, x='class', y='survived', ax=axes[2])\naxes[2].set_title('Survival by Class')\n\nplt.tight_layout()\nplt.show()\n```\n\n## Key Findings\n\nFrom this EDA you'll discover:\n- **Women survived at ~75%** vs men at ~19%.\n- **First class passengers** had the highest survival rate (~63%).\n- **Children (age < 15)** had elevated survival — \"women and children first\" was real.\n- **Fare paid** strongly correlates with survival (proxy for class & cabin location).\n\n## The Takeaway\n\nWith just pandas, seaborn, and curiosity, we extracted powerful historical insights from 891 rows of raw data. **This is the core of data science** — not fancy models, but the ability to ask the right questions and let the data answer.\n\n## Challenge\n\nTry computing the survival rate grouped by **both** gender and class. Which specific group had the highest and lowest survival rates?",
+      "xp_reward": 20,
+      "coins_reward": 10,
+      "is_mandatory": false
+    }
+  ]
+}

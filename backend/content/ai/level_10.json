@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "ai",
+    "title": "AI & Machine Learning",
+    "icon": "brain",
+    "color": "#8B5CF6"
+  },
+  "level": {
+    "number": 10,
+    "title": "The Capstone",
+    "description": "Enter the Boss Arena. It's time to build your own AI application and push it to GitHub.",
+    "quiz_data": [
+      {
+        "question": "What is the purpose of the AI Capstone Project?",
+        "options": [
+          "To learn SQL",
+          "To combine everything you've learned into building a real ML model",
+          "To write an essay",
+          "To take a nap"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which of these steps comes FIRST in an ML pipeline?",
+        "options": [
+          "Deploying the model",
+          "Training the model",
+          "Data Collection and Cleaning",
+          "Evaluating accuracy"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is 'Overfitting'?",
+        "options": [
+          "When the AI model is too large for the hard drive",
+          "When the model memorizes the training data but fails on new, unseen data",
+          "When the AI gets too hot",
+          "When there is too much data"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Why do we split data into 'Training' and 'Testing' sets?",
+        "options": [
+          "To save space",
+          "To evaluate the model on data it hasn't seen before",
+          "To make it run faster",
+          "Because the computer can't hold it all"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does deploying a model mean?",
+        "options": [
+          "Deleting it",
+          "Making it available for real-world use via an API or app",
+          "Printing the code",
+          "Sending it to a database"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "Building an AI Script",
+      "content_md": "# The Capstone Project \ud83c\udfc6\n\nYou've learned how AI works. Now it's time to actually use it. We are going to write a Python script that calls a real AI API (like Google Gemini or OpenAI) and push the code to GitHub.\n\n## Step 1: Get Your API Key\n\nFirst, you need an **API Key**. This is a secret password that allows your code to talk to the AI provider's servers. Go to the provider's developer console and generate a free API key.\n\n<flipcard front=\"\ud83d\udd11 What is an API Key?\" back=\"A unique string of characters used to authenticate your script so the AI provider knows who is making the request.\"></flipcard>\n\n## Step 2: Write the Python Code\n\nCreate a new file called `ai_assistant.py` and install the provider's Python library (e.g., `pip install google-genai`).\n\nWrite a simple script that asks the AI a question:\n\n```python\nimport os\nfrom google import genai\n\nclient = genai.Client(api_key=os.environ.get(\"GEMINI_API_KEY\"))\n\nresponse = client.models.generate_content(\n    model='gemini-2.5-flash',\n    contents='Explain Quantum Computing to a 5 year old.',\n)\n\nprint(response.text)\n```\n\n## Step 3: Secure Your Key\n\n**NEVER** paste your API key directly into your code if you are going to put it on the internet. Hackers will steal it. Instead, save it as an Environment Variable on your computer.\n\n<flipcard front=\"\ud83d\uded1 What happens if I put my API Key on GitHub?\" back=\"Bots constantly scan GitHub for exposed keys. They will steal yours and run up thousands of dollars in server charges on your account!\"></flipcard>\n\n## Step 4: Push to GitHub\n\nInitialize a git repository, commit your code, and push it to your GitHub profile to show the world what you've built!\n\n<flipcard front=\"\ud83d\ude80 Congratulations!\" back=\"You have successfully completed the AI & Machine Learning Track. You are now ready to build intelligent applications!\"></flipcard>",
+      "xp_reward": 100,
+      "coins_reward": 100,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - The Blueprint Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#5b5c5b",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary-fixed": "#1a1c1b",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#916f6b",
+                      "secondary-container": "#e5e2e1",
+                      "secondary-fixed": "#e5e2e1",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#c7c6c5",
+                      "surface": "#fcf9f8",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-container": "#fdfcfa",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#ffb4ac",
+                      "surface-container-high": "#ebe7e7",
+                      "on-surface": "#1c1b1b",
+                      "on-primary-container": "#fffbff",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#464746",
+                      "on-primary-fixed": "#410002",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "on-background": "#1c1b1b",
+                      "primary-fixed": "#ffdad6",
+                      "on-surface-variant": "#5c403d",
+                      "on-primary-fixed-variant": "#93000e",
+                      "background": "#fcf9f8",
+                      "tertiary-container": "#747573",
+                      "secondary": "#5f5e5e",
+                      "surface-bright": "#fcf9f8",
+                      "primary-container": "#e02a2b",
+                      "surface-tint": "#bf0717",
+                      "outline-variant": "#e6bdb9",
+                      "primary-fixed-dim": "#ffb4ac",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#656464",
+                      "on-secondary-fixed-variant": "#474646",
+                      "inverse-surface": "#313030",
+                      "tertiary-fixed": "#e3e2e0",
+                      "surface-container": "#f0edec",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f6f3f2",
+                      "inverse-on-surface": "#f3f0ef",
+                      "primary": "#bb0215",
+                      "surface-dim": "#dcd9d9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "48px",
+                      "stack-gap": "12px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "mono-label": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Anton"
+                      ],
+                      "headline-lg-mobile": [
+                              "Anton"
+                      ],
+                      "label-bold": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Anton"
+                      ],
+                      "headline-lg": [
+                              "Anton"
+                      ]
+              },
+              "fontSize": {
+                      "mono-label": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "96px",
+                              {
+                                      "lineHeight": "90px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: 
+                linear-gradient(to right, theme('colors.surface-variant') 1px, transparent 1px),
+                linear-gradient(to bottom, theme('colors.surface-variant') 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .brutalist-border {
+            border: 2px solid theme('colors.on-surface');
+        }
+
+        .brutalist-shadow {
+            box-shadow: 6px 6px 0px 0px #111111;
+        }
+        
+        .brutalist-shadow-hover:hover {
+            box-shadow: 2px 2px 0px 0px #111111;
+            transform: translate(4px, 4px);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .brutalist-button {
+            border: 2px solid theme('colors.on-surface');
+            box-shadow: 6px 6px 0px 0px #111111;
+            transition: all 0.1s ease-in-out;
+        }
+        
+        .brutalist-button:active, .brutalist-button.active {
+            box-shadow: 0px 0px 0px 0px #111111;
+            transform: translate(6px, 6px);
+        }
+
+        .brutalist-input:focus {
+            border-color: theme('colors.primary');
+            box-shadow: 6px 6px 0px 0px #111111;
+            outline: none;
+        }
+
+        .blueprint-card {
+            background-color: theme('colors.surface-container-lowest');
+            border: 2px solid theme('colors.on-surface');
+            box-shadow: 6px 6px 0px 0px #111111;
+            padding: 24px;
+            position: relative;
+        }
+        
+        .blueprint-card::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: theme('colors.surface-variant');
+            border: 1px solid theme('colors.on-surface');
+        }
+    </style>
+</head>
+<body class="min-h-screen pt-20 pb-20 md:pb-0 md:pl-64">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex fixed top-0 left-0 w-full z-50 justify-between items-center px-margin-desktop h-20 bg-surface border-b-2 border-on-surface shadow-[6px_6px_0px_0px_#111111]">
+<div class="flex items-center gap-gutter">
+<div class="font-headline-md text-headline-md font-bold text-on-surface border-2 border-on-surface px-2 py-1 bg-surface-container-lowest">
+                FlyBeta
+            </div>
+<div class="flex gap-4">
+<a class="text-tertiary px-4 py-2 font-medium hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none border-b-4 border-transparent" href="#">Lessons</a>
+<a class="text-tertiary px-4 py-2 font-medium hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none border-b-4 border-transparent" href="#">Quests</a>
+<a class="text-tertiary px-4 py-2 font-medium hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none border-b-4 border-transparent" href="#">Archive</a>
+<a class="text-on-surface border-b-4 border-primary px-4 py-2 font-bold hover:bg-surface-container-high transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">Labs</a>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="p-2 brutalist-border brutalist-shadow bg-surface-container-lowest hover:bg-surface-container-high active:translate-x-1 active:translate-y-1 active:shadow-none">
+<span class="material-symbols-outlined text-on-surface">local_fire_department</span>
+</button>
+<button class="p-2 brutalist-border brutalist-shadow bg-surface-container-lowest hover:bg-surface-container-high active:translate-x-1 active:translate-y-1 active:shadow-none">
+<span class="material-symbols-outlined text-on-surface">monetization_on</span>
+</button>
+<button class="p-2 brutalist-border brutalist-shadow bg-surface-container-lowest hover:bg-surface-container-high active:translate-x-1 active:translate-y-1 active:shadow-none">
+<span class="material-symbols-outlined text-on-surface">database</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex fixed left-0 top-20 h-[calc(100vh-80px)] flex-col py-4 w-64 border-r-2 border-on-surface shadow-[6px_0px_0px_0px_#111111] bg-surface z-40">
+<div class="px-4 pb-6 border-b-2 border-on-surface mb-4">
+<div class="w-16 h-16 brutalist-border brutalist-shadow bg-surface-container-lowest mb-4 overflow-hidden relative">
+<img alt="User Profile" class="object-cover w-full h-full" data-alt="A stylized, brutalist-inspired avatar portrait of a sci-fi pilot cadet in high-contrast black and white with red accents. The aesthetic is stark, minimalist, and graphic, reminiscent of a stark technical manual illustration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2xDPj6tYfUCOHecJnm4YyI16RGYtWKcxKk1BgKsN6XjEztLK2jNxnCxo-LkZDs5N0NJspcnISHCvwTlChlanEWgZuTykYPMVPVNBBv5pOyscZiFEA1BWpJsowpe4XYeb-4UgJSiDif_g1teCbkUxlNikd47sjTld7HaSsTj4B9YTTCGXvPThrb7OUMAChh8B7YyxUeweFhq3DhnO704VXIDEOfhn0a1knm5O-7qYLIe5FDSNPDfAz"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Cadet 09</h2>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Rank: Pilot</p>
+</div>
+<div class="flex flex-col flex-1 overflow-y-auto px-2">
+<a class="text-on-surface-variant hover:bg-surface-container-high m-2 border-2 border-transparent p-3 flex items-center gap-3 transition-all duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none hover:border-on-surface hover:shadow-[2px_2px_0px_0px_#111111]" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-bold text-label-bold">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high m-2 border-2 border-transparent p-3 flex items-center gap-3 transition-all duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none hover:border-on-surface hover:shadow-[2px_2px_0px_0px_#111111]" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Map</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high m-2 border-2 border-transparent p-3 flex items-center gap-3 transition-all duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none hover:border-on-surface hover:shadow-[2px_2px_0px_0px_#111111]" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-bold text-label-bold">Leaderboard</span>
+</a>
+<a class="bg-primary text-on-primary border-2 border-on-surface shadow-[4px_4px_0px_0px_#111111] m-2 p-3 flex items-center gap-3 transition-all duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Library</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high m-2 border-2 border-transparent p-3 flex items-center gap-3 transition-all duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none hover:border-on-surface hover:shadow-[2px_2px_0px_0px_#111111]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-bold text-label-bold">Settings</span>
+</a>
+</div>
+<div class="p-4 mt-auto">
+<button class="w-full bg-primary text-on-primary brutalist-button font-label-bold text-label-bold py-3 uppercase tracking-wider">
+                Launch Mission
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="p-margin-mobile md:p-margin-desktop max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<header class="mb-12 border-b-2 border-on-surface pb-8">
+<h1 class="font-display-lg text-display-lg md:text-[120px] md:leading-[110px] text-on-surface uppercase mb-4 tracking-tighter">THE BLUEPRINT LAB</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl border-l-4 border-primary pl-4">Architect and define the structural logic of your next AI initiative. Input constraints below to generate a tactile project map.</p>
+</header>
+<!-- Drafting Board Input Area -->
+<section class="mb-16 relative">
+<!-- Decorative measuring tape elements -->
+<div class="absolute -top-4 -left-4 w-full h-4 bg-[#f0d8a8] border-2 border-on-surface flex justify-between px-2 overflow-hidden z-10 hidden md:flex">
+<div class="w-1 h-full bg-on-surface mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div>
+<div class="w-1 h-full bg-on-surface mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div><div class="w-1 h-2 bg-on-surface mt-2 mx-1"></div>
+<div class="w-1 h-full bg-on-surface mx-1"></div>
+</div>
+<div class="bg-surface-container-lowest brutalist-border p-6 md:p-8 brutalist-shadow relative z-0">
+<div class="flex justify-between items-center mb-4 border-b-2 border-on-surface pb-2">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined">architecture</span>
+                        Project Brief
+                    </h2>
+<span class="font-mono-label text-mono-label px-2 py-1 bg-surface-variant brutalist-border">V_1.0.4</span>
+</div>
+<textarea class="w-full h-48 bg-surface p-4 brutalist-border brutalist-input font-body-md text-body-md resize-none" placeholder="Describe the core objective, key constraints, and desired outcomes of your project. Be specific about the domain and target audience..."></textarea>
+<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex gap-2 w-full md:w-auto">
+<span class="font-mono-label text-mono-label px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed brutalist-border">NLP</span>
+<span class="font-mono-label text-mono-label px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed brutalist-border">Generative</span>
+</div>
+<button class="w-full md:w-auto bg-primary text-on-primary brutalist-button font-label-bold text-label-bold py-3 px-8 uppercase tracking-wider flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+                        Generate Blueprint
+                    </button>
+</div>
+</div>
+</section>
+<!-- Blueprint Cards Scatter Grid -->
+<section>
+<div class="flex justify-between items-end mb-8 border-b-2 border-on-surface pb-2">
+<h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">GENERATED STEPS</h3>
+<div class="flex gap-2">
+<button class="p-2 bg-surface brutalist-border hover:bg-surface-variant active:translate-y-1 transition-all"><span class="material-symbols-outlined">view_agenda</span></button>
+<button class="p-2 bg-surface-container-lowest brutalist-border brutalist-shadow"><span class="material-symbols-outlined">grid_view</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
+<!-- Card 1 -->
+<div class="blueprint-card transform hover:-translate-y-2 hover:rotate-1 transition-all duration-200">
+<div class="flex justify-between items-start mb-6">
+<span class="font-headline-lg text-headline-lg text-tertiary opacity-50">01</span>
+<span class="font-mono-label text-mono-label px-2 py-1 bg-surface-variant border border-on-surface">DATA_PREP</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-4 leading-tight uppercase">Corpus Curation &amp; Sanitization</h4>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-3 mb-6">
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-primary text-[18px] mt-1">check_box_outline_blank</span> Aggregate raw text logs</li>
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-primary text-[18px] mt-1">check_box_outline_blank</span> Remove PII tokens</li>
+</ul>
+<div class="mt-auto border-t-2 border-on-surface pt-4 flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-tertiary">Est. 2 Weeks</span>
+<button class="text-primary hover:text-surface-tint"><span class="material-symbols-outlined">edit</span></button>
+</div>
+</div>
+<!-- Card 2 (Rotated for tactical feel) -->
+<div class="blueprint-card transform rotate-2 hover:-translate-y-2 hover:rotate-3 transition-all duration-200 z-10">
+<div class="flex justify-between items-start mb-6">
+<span class="font-headline-lg text-headline-lg text-tertiary opacity-50">02</span>
+<span class="font-mono-label text-mono-label px-2 py-1 bg-surface-variant border border-on-surface">MODEL_SEL</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-4 leading-tight uppercase">Architecture Evaluation</h4>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-3 mb-6">
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-primary text-[18px] mt-1">check_box_outline_blank</span> Benchmark 7B vs 13B params</li>
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-primary text-[18px] mt-1">check_box_outline_blank</span> Test latency constraints</li>
+</ul>
+<div class="mt-auto border-t-2 border-on-surface pt-4 flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-tertiary">Est. 1 Week</span>
+<button class="text-primary hover:text-surface-tint"><span class="material-symbols-outlined">edit</span></button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="blueprint-card transform -rotate-1 hover:-translate-y-2 hover:rotate-0 transition-all duration-200">
+<div class="flex justify-between items-start mb-6">
+<span class="font-headline-lg text-headline-lg text-tertiary opacity-50">03</span>
+<span class="font-mono-label text-mono-label px-2 py-1 bg-surface-variant border border-on-surface">FINE_TUNE</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-4 leading-tight uppercase">Instruction LoRA Training</h4>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-3 mb-6">
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-primary text-[18px] mt-1">check_box_outline_blank</span> Configure hyperparams</li>
+<li class="flex gap-2 items-start"><span class="material-symbols-outlined text-primary text-[18px] mt-1">check_box_outline_blank</span> Initiate distributed run</li>
+</ul>
+<div class="mt-auto border-t-2 border-on-surface pt-4 flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-tertiary">Est. 3 Days</span>
+<button class="text-primary hover:text-surface-tint"><span class="material-symbols-outlined">edit</span></button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface border-t-2 border-on-surface flex justify-around items-center h-20 shadow-[0px_-4px_0px_0px_#111111]">
+<a class="flex flex-col items-center justify-center p-2 text-tertiary" href="#">
+<span class="material-symbols-outlined mb-1">menu_book</span>
+<span class="font-mono-label text-mono-label text-[10px]">Lessons</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-tertiary" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="font-mono-label text-mono-label text-[10px]">Quests</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface bg-surface-container-high border-2 border-on-surface translate-y-[-8px] shadow-[4px_4px_0px_0px_#111111]" href="#">
+<span class="material-symbols-outlined mb-1 text-primary" style="font-variation-settings: 'FILL' 1;">science</span>
+<span class="font-mono-label text-mono-label text-[10px] font-bold">Labs</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-tertiary" href="#">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span class="font-mono-label text-mono-label text-[10px]">Archive</span>
+</a>
+</nav>
+</body></html>

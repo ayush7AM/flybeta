@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "data",
+    "title": "Data Science",
+    "icon": "database",
+    "color": "#3B82F6"
+  },
+  "level": {
+    "number": 10,
+    "title": "The Capstone",
+    "description": "Enter the Boss Arena. It's time to build a real Python data pipeline and push it to GitHub.",
+    "quiz_data": [
+      {
+        "question": "What is the primary goal of the Data Science Capstone?",
+        "options": [
+          "To build a website",
+          "To take a messy dataset, clean it, analyze it, and build a predictive model",
+          "To memorize SQL commands",
+          "To write an essay"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What should you do BEFORE building a predictive model?",
+        "options": [
+          "Deploy it",
+          "Understand the business problem, clean the data, and perform EDA",
+          "Delete the outliers",
+          "Format your hard drive"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "How do you evaluate a classification model?",
+        "options": [
+          "By how fast it runs",
+          "Using metrics like Accuracy, Precision, and Recall",
+          "By looking at the code",
+          "By asking the user"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is a 'Confusion Matrix'?",
+        "options": [
+          "A complicated math problem",
+          "A table used to describe the performance of a classification model (True Positives, False Positives, etc.)",
+          "A poorly written database",
+          "A movie about the Matrix"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is the final step of a Data Science project?",
+        "options": [
+          "Deleting the data",
+          "Communicating the insights and deploying the model to deliver business value",
+          "Running the SQL query again",
+          "Saving the file"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "Building the Pipeline",
+      "content_md": "# The Capstone Project \ud83c\udfc6\n\nYou've learned how to think like a Data Scientist. Now it's time to act like one. We are going to download a messy dataset, clean it using Python and Pandas, and push the code to GitHub.\n\n## Step 1: Find the Data\n\nGo to [Kaggle.com](https://www.kaggle.com/) (the home of Data Science) and download a free CSV dataset. Find something that interests you\u2014video game sales, housing prices, or sports statistics.\n\n<flipcard front=\"\ud83c\udf10 What is Kaggle?\" back=\"The world's largest community for Data Scientists. It offers thousands of free datasets, tutorials, and machine learning competitions.\"></flipcard>\n\n## Step 2: Write the Pandas Script\n\nCreate a Python file called `clean_data.py`. We are going to tell our Robot Assistant to clean the kitchen!\n\n```python\nimport pandas as pd\n\n# 1. Load the data\ndf = pd.read_csv('my_messy_data.csv')\n\n# 2. Drop the empty rows (take out the trash)\ndf = df.dropna()\n\n# 3. Find a trend (sort the candies)\naverage_price = df['Price'].mean()\n\nprint(f\"The average price is: {average_price}\")\n```\n\n<flipcard front=\"\ud83e\uddf9 What does .dropna() do?\" back=\"It tells Pandas to scan the entire spreadsheet and automatically delete any row that has missing or blank information.\"></flipcard>\n\n## Step 3: Push to GitHub\n\nInitialize a git repository, commit your Python script (but ignore the giant CSV file using `.gitignore`), and push it to your GitHub profile to build your portfolio!\n\n<flipcard front=\"\ud83d\ude80 Congratulations!\" back=\"You have successfully completed the Data Science Track. You are now ready to tackle real-world data problems!\"></flipcard>",
+      "xp_reward": 100,
+      "coins_reward": 100,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+    }
+  ]
+}

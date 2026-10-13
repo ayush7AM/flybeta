@@ -1,0 +1,85 @@
+{
+  "domain": {
+    "name": "cloud",
+    "title": "Cloud Computing",
+    "icon": "cloud",
+    "color": "#2563EB"
+  },
+  "level": {
+    "number": 9,
+    "title": "Scaling & Security",
+    "description": "How do you handle millions of users without crashing? Meet the traffic cops of the internet.",
+    "quiz_data": [
+      {
+        "question": "What is Vertical Scaling?",
+        "options": [
+          "Adding more servers to a group",
+          "Upgrading a single server with more CPU and RAM",
+          "Stacking servers on top of each other",
+          "Moving servers to the cloud"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is Horizontal Scaling?",
+        "options": [
+          "Adding more identical servers to share the load",
+          "Buying a bigger server",
+          "Laying servers flat on the floor",
+          "Reducing the number of servers"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What is the role of a Load Balancer?",
+        "options": [
+          "To weigh the servers",
+          "To act as a traffic cop, distributing incoming requests across multiple servers",
+          "To increase internet speed",
+          "To stop hackers"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which scaling method is generally preferred in the Cloud?",
+        "options": [
+          "Vertical Scaling",
+          "Horizontal Scaling",
+          "Diagonal Scaling",
+          "No scaling"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Why is Horizontal Scaling more resilient?",
+        "options": [
+          "Because smaller servers are cheaper",
+          "Because if one server crashes, the others can still handle the traffic",
+          "Because it uses less electricity",
+          "Because it's easier to code"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "Horizontal vs. Vertical Scaling",
+      "content_md": "# Horizontal vs. Vertical Scaling \u2696\ufe0f\n\nIf your website becomes incredibly popular overnight, your single server won't be able to handle all the traffic. It will crash under the pressure. You need to **Scale** (grow) your app.\n\nThere are two ways to do this:\n\n## 1. Vertical Scaling (Scaling UP) \ud83c\udfe2\nImagine you have a small delivery van. Vertical scaling is like taking that van to a mechanic, stripping out the engine, and replacing it with a massive, turbo-charged monster engine. \n\nIn the Cloud, this means keeping your **one server**, but upgrading it to have more CPU and RAM. \n- **The Problem:** A server can only get so big before you hit the physical limits of hardware. Plus, you have to turn the server off to upgrade it!\n\n## 2. Horizontal Scaling (Scaling OUT) \ud83d\ude97\ud83d\ude97\ud83d\ude97\nImagine you have a small delivery van. Instead of making it bigger, you just buy **10 more identical vans**. \n\nIn the Cloud, this means keeping your small servers, but adding **hundreds of identical copies** of them side-by-side.\n- **The Benefit:** There is no limit! If you need more power, you just add another server. This is the true power of the Cloud.\n\n<flipcard front=\"\ud83c\udfe2 What is the difference between Vertical and Horizontal scaling?\" back=\"Vertical (Scaling UP) is making a single server bigger and stronger. Horizontal (Scaling OUT) is adding many more identical servers to share the load.\"></flipcard>",
+      "xp_reward": 15,
+      "coins_reward": 10,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1502444330042-d1a1ddf9bb5b?w=800"
+    },
+    {
+      "order": 2,
+      "title": "The Load Balancer: The Traffic Cop",
+      "content_md": "# The Load Balancer: The Traffic Cop \ud83d\udc6e\u200d\u2642\ufe0f\n\nSo, you chose **Horizontal Scaling**. You now have 5 identical web servers running your app.\n\nWhen a user types your website address into their browser, which of the 5 servers do they connect to?\n\nIf all the users accidentally connect to Server #1, it will crash, while the other 4 servers sit around doing nothing!\n\n## Enter the Load Balancer\n\nTo fix this, we put a **Load Balancer** in front of the servers. \n\nThink of a Load Balancer as a traffic cop standing at a massive intersection during rush hour.\n- Car 1 arrives: The cop points them to Server A.\n- Car 2 arrives: The cop points them to Server B.\n- Car 3 arrives: The cop points them to Server C.\n\nThe Load Balancer ensures that the traffic is perfectly distributed so that no single server ever gets overwhelmed.\n\n<flipcard front=\"\ud83d\udc6e\u200d\u2642\ufe0f What is the job of a Load Balancer?\" back=\"A Load Balancer acts like a traffic cop, distributing incoming internet traffic evenly across multiple servers so no single server gets overloaded and crashes.\"></flipcard>",
+      "xp_reward": 20,
+      "coins_reward": 10,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1549420063-e380fb8e492f?w=800"
+    }
+  ]
+}

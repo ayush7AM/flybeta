@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Project Architect Lab - FlyBeta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rubik:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#906f70",
+                      "on-surface": "#1c1b1b",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#e11d48",
+                      "on-secondary-fixed": "#001a42",
+                      "inverse-surface": "#313030",
+                      "on-primary-container": "#fffaf9",
+                      "canvas-paper": "#FEF08A",
+                      "on-tertiary-fixed": "#231b00",
+                      "surface": "#fcf9f8",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#be0037",
+                      "on-secondary-fixed-variant": "#004395",
+                      "surface-container-high": "#ebe7e7",
+                      "tertiary": "#735c00",
+                      "on-background": "#1c1b1b",
+                      "crayon-red": "#E11D48",
+                      "on-primary-fixed": "#40000c",
+                      "on-surface-variant": "#5c3f40",
+                      "notebook-line": "#60A5FA",
+                      "on-tertiary-container": "#4e3e00",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#574500",
+                      "background": "#fcf9f8",
+                      "surface-container-low": "#f6f3f2",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "primary": "#b80035",
+                      "secondary-fixed": "#d8e2ff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "secondary": "#0058be",
+                      "on-secondary-container": "#fefcff",
+                      "tertiary-fixed-dim": "#eec200",
+                      "tertiary-container": "#cea700",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#dcd9d9",
+                      "on-primary-fixed-variant": "#920028",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container-highest": "#e5e2e1",
+                      "surface-container": "#f0edec",
+                      "inverse-primary": "#ffb3b6",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#e5bdbe",
+                      "primary-fixed": "#ffdada",
+                      "tertiary-fixed": "#ffe083",
+                      "kinder-blue": "#3B82F6",
+                      "surface-bright": "#fcf9f8",
+                      "secondary-container": "#2170e4",
+                      "primary-fixed-dim": "#ffb3b6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "shadow-offset": "6px",
+                      "margin-mobile": "16px",
+                      "unit": "8px",
+                      "border-width": "3px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Rubik"
+                      ],
+                      "headline-lg": [
+                              "Anton"
+                      ],
+                      "headline-lg-mobile": [
+                              "Anton"
+                      ],
+                      "scribble-caption": [
+                              "Rubik"
+                      ],
+                      "body-lg": [
+                              "Rubik"
+                      ],
+                      "headline-md": [
+                              "Anton"
+                      ],
+                      "label-bold": [
+                              "Rubik"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "scribble-caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "900"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        /* Neo-Brutalism & Kinder-Aesthetics Helpers */
+        .ruled-paper {
+            background-color: theme('colors.canvas-paper');
+            background-image: linear-gradient(theme('colors.notebook-line') 2px, transparent 2px);
+            background-size: 100% 32px;
+            background-position: 0 0;
+        }
+        
+        .marker-border {
+            border: theme('spacing.border-width') solid theme('colors.on-background');
+            border-radius: theme('borderRadius.DEFAULT');
+        }
+
+        .solid-shadow {
+            box-shadow: 6px 6px 0px 0px #111111;
+        }
+
+        .solid-shadow-hover:hover {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+            transition: all 0.1s ease-in-out;
+        }
+        
+        .solid-shadow-active:active {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+        }
+
+        /* SVG Filter for "roughened" border look if supported */
+        .rough-edges {
+            filter: url('#roughpaper');
+        }
+        
+        /* Scatter utility for cards */
+        .scatter-1 { transform: rotate(-2deg); }
+        .scatter-2 { transform: rotate(3deg); }
+        .scatter-3 { transform: rotate(-1deg); }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+<!-- SVG Filters for rough edges -->
+<svg aria-hidden="true" focusable="false" style="width:0;height:0;position:absolute;">
+<defs>
+<filter id="roughpaper">
+<feturbulence basefrequency="0.04" result="noise" type="fractalNoise"></feturbulence>
+<fedisplacementmap in="SourceGraphic" in2="noise" scale="2" xchannelselector="R" ychannelselector="G"></fedisplacementmap>
+</filter>
+</defs>
+</svg>
+<!-- TopNavBar (Shared Component) - Rendered for Web -->
+<header class="hidden md:flex fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-canvas-paper border-b-border-width border-on-background shadow-[6px_6px_0px_0px_#1c1b1b]">
+<div class="flex items-center gap-6">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim uppercase tracking-tighter">FlyBeta</span>
+<nav class="flex gap-4">
+<!-- Highlight 'Playground' as it fits 'Lab' best contextually if no direct match -->
+<a class="text-on-surface dark:text-on-surface-variant font-label-bold text-label-bold hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all" href="#">Classroom</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-border-width border-primary pb-1 font-label-bold text-label-bold hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all" href="#">Playground</a>
+<a class="text-on-surface dark:text-on-surface-variant font-label-bold text-label-bold hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all" href="#">Gallery</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all cursor-pointer" data-icon="local_fire_department">local_fire_department</span>
+<span class="material-symbols-outlined hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all cursor-pointer" data-icon="monetization_on">monetization_on</span>
+<span class="material-symbols-outlined hover:translate-x-shadow-offset hover:translate-y-shadow-offset hover:shadow-none transition-all cursor-pointer" data-icon="military_tech">military_tech</span>
+</div>
+</header>
+<!-- SideNavBar (Shared Component) - Rendered for Mobile (simulated by hiding TopNav and showing SideNav) -->
+<aside class="md:hidden fixed left-0 top-0 h-full flex flex-col pt-24 z-40 bg-surface border-r-border-width border-on-background w-64 shadow-[6px_0px_0px_0px_#1c1b1b]">
+<div class="px-4 pb-8 mb-4 border-b-[3px] border-on-background">
+<h2 class="font-headline-md text-headline-md text-primary">Shin-chan</h2>
+<p class="font-scribble-caption text-scribble-caption text-on-surface-variant">Level 5 Rookie</p>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all font-label-bold text-label-bold uppercase" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="home">home</span> Home
+            </a>
+<a class="bg-primary text-on-primary border-border-width border-on-background shadow-[4px_4px_0px_0px_#1c1b1b] m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all font-label-bold text-label-bold uppercase" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="school">school</span> Lessons
+            </a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all font-label-bold text-label-bold uppercase" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="group">group</span> Friends
+            </a>
+<a class="bg-surface-variant text-on-surface-variant border-border-width border-on-background m-2 flex items-center p-4 hover:bg-kinder-blue hover:text-white transition-all font-label-bold text-label-bold uppercase" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span> Settings
+            </a>
+</nav>
+<div class="p-4">
+<button class="w-full marker-border solid-shadow solid-shadow-active bg-crayon-red text-on-primary font-label-bold text-label-bold uppercase py-4">GO PREMIUM</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-0 md:pt-[100px] pt-16 min-h-screen ruled-paper flex flex-col p-gutter">
+<!-- Hero Section -->
+<section class="mb-12 max-w-5xl mx-auto w-full text-center rough-edges">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase tracking-tighter mb-4 transform -rotate-2 inline-block bg-surface px-6 py-2 marker-border solid-shadow">
+                THE BLUEPRINT LAB
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant bg-surface inline-block px-4 py-1 marker-border solid-shadow transform rotate-1 mt-2">
+                Scribble your big idea. We'll build the plan.
+            </p>
+</section>
+<!-- Input Section -->
+<section class="mb-16 max-w-3xl mx-auto w-full">
+<div class="bg-surface marker-border solid-shadow p-6 relative rough-edges scatter-1">
+<!-- Decorative Tape -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-6 bg-surface-dim opacity-80 transform -rotate-1 shadow-sm"></div>
+<label class="block font-label-bold text-label-bold uppercase text-on-background mb-4 flex items-center gap-2" for="idea-input">
+<span class="material-symbols-outlined text-crayon-red" data-weight="fill">edit</span>
+                    Draw Your Idea Here:
+                </label>
+<textarea class="w-full marker-border p-4 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:outline-none focus:ring-0 focus:bg-canvas-paper focus:shadow-[6px_6px_0px_0px_#111111] transition-all" id="idea-input" placeholder="I want to build an app that..." rows="5"></textarea>
+<div class="mt-6 flex justify-end">
+<button class="marker-border solid-shadow solid-shadow-hover bg-kinder-blue text-on-primary font-label-bold text-label-bold uppercase py-3 px-8 flex items-center gap-2">
+                        GENERATE PLAN
+                        <span class="material-symbols-outlined" data-weight="fill">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Blueprint Cards Section -->
+<section class="max-w-6xl mx-auto w-full pb-24">
+<h2 class="font-headline-md text-headline-md text-on-background uppercase mb-8 bg-surface inline-block px-4 py-1 marker-border solid-shadow transform -rotate-1">
+                Your Master Plan
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest marker-border solid-shadow p-6 flex flex-col rough-edges scatter-2 hover:z-10 hover:transform hover:scale-105 transition-transform duration-200">
+<div class="border-b-[3px] border-notebook-line pb-2 mb-4 flex justify-between items-start">
+<span class="font-headline-md text-headline-md text-crayon-red">01</span>
+<div class="bg-canvas-paper px-2 py-1 marker-border text-xs font-label-bold text-label-bold uppercase">Phase 1</div>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-background mb-2 uppercase">Define The Core Loop</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">Establish the primary interaction mechanism that keeps users coming back. What is the fundamental rewarding action?</p>
+<div class="mt-4 flex gap-2">
+<span class="material-symbols-outlined text-outline" data-weight="fill">check_box_outline_blank</span>
+<span class="font-scribble-caption text-scribble-caption text-on-surface-variant">Needs Review</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest marker-border solid-shadow p-6 flex flex-col rough-edges scatter-3 hover:z-10 hover:transform hover:scale-105 transition-transform duration-200">
+<div class="border-b-[3px] border-notebook-line pb-2 mb-4 flex justify-between items-start">
+<span class="font-headline-md text-headline-md text-kinder-blue">02</span>
+<div class="bg-canvas-paper px-2 py-1 marker-border text-xs font-label-bold text-label-bold uppercase">Phase 2</div>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-background mb-2 uppercase">Data Schema Draft</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">Map out the essential entities. Users, posts, interactions. Keep it messy but comprehensive.</p>
+<div class="mt-4 flex gap-2">
+<span class="material-symbols-outlined text-crayon-red" data-weight="fill">check_box</span>
+<span class="font-scribble-caption text-scribble-caption line-through text-on-surface-variant">Drafted</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest marker-border solid-shadow p-6 flex flex-col rough-edges scatter-1 hover:z-10 hover:transform hover:scale-105 transition-transform duration-200 lg:translate-y-4">
+<div class="border-b-[3px] border-notebook-line pb-2 mb-4 flex justify-between items-start">
+<span class="font-headline-md text-headline-md text-primary">03</span>
+<div class="bg-canvas-paper px-2 py-1 marker-border text-xs font-label-bold text-label-bold uppercase">Phase 3</div>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-background mb-2 uppercase">UI Wireframes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">Block out the main screens. Don't worry about colors yet, just thick lines and solid shapes.</p>
+<div class="mt-4 w-full h-4 marker-border bg-surface-container relative overflow-hidden">
+<!-- Messy Progress Bar -->
+<div class="absolute top-0 left-0 h-full w-[45%] bg-primary rough-edges border-r-[3px] border-on-background"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest marker-border solid-shadow p-6 flex flex-col rough-edges scatter-2 hover:z-10 hover:transform hover:scale-105 transition-transform duration-200">
+<div class="border-b-[3px] border-notebook-line pb-2 mb-4 flex justify-between items-start">
+<span class="font-headline-md text-headline-md text-secondary">04</span>
+<div class="bg-canvas-paper px-2 py-1 marker-border text-xs font-label-bold text-label-bold uppercase">Phase 4</div>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-background mb-2 uppercase">API Endpoints</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">Design the communication layer between your rough UI and your messy database.</p>
+<button class="mt-4 marker-border solid-shadow solid-shadow-active bg-surface text-on-background font-label-bold text-label-bold uppercase py-2 px-4 hover:bg-surface-variant">View Endpoints</button>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple interaction for textarea to simulate focus states that pure CSS might miss in brutalist context
+        const textarea = document.getElementById('idea-input');
+        textarea.addEventListener('focus', () => {
+            textarea.parentElement.classList.remove('scatter-1');
+            textarea.parentElement.style.transform = 'rotate(0deg) scale(1.02)';
+            textarea.parentElement.style.zIndex = '20';
+        });
+        textarea.addEventListener('blur', () => {
+            textarea.parentElement.classList.add('scatter-1');
+            textarea.parentElement.style.transform = '';
+            textarea.parentElement.style.zIndex = '';
+        });
+    </script>
+</body></html>

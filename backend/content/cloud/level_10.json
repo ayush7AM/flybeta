@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "cloud",
+    "title": "Cloud Computing",
+    "icon": "cloud",
+    "color": "#2563EB"
+  },
+  "level": {
+    "number": 10,
+    "title": "The Capstone Project",
+    "description": "The Boss Arena. Prove your worth by building and containerizing a real application.",
+    "quiz_data": [
+      {
+        "question": "What is the primary goal of containerization?",
+        "options": [
+          "To make the code run slower",
+          "To ensure the app runs identically in any environment",
+          "To encrypt the source code",
+          "To change the programming language"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which file defines how a Docker image is built?",
+        "options": [
+          "docker-compose.yml",
+          "Dockerfile",
+          "package.json",
+          "index.html"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is a Docker Image?",
+        "options": [
+          "A picture of a server",
+          "A read-only template containing instructions to create a container",
+          "A running container",
+          "A virtual machine"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What command starts a container from an image?",
+        "options": [
+          "docker start",
+          "docker run",
+          "docker build",
+          "docker go"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "In a cloud pipeline, what usually happens after a container is built?",
+        "options": [
+          "It is deleted",
+          "It is pushed to a Container Registry and deployed",
+          "It is printed on paper",
+          "It is converted back to source code"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "The Boss Arena: Containerize It!",
+      "content_md": "# The Boss Arena: Containerize It! \u2694\ufe0f\n\nYou've learned about Data Centers, IaaS vs PaaS, Object Storage, and the power of Docker Containers. Now, it's time to prove you are ready to be a Cloud Engineer.\n\nIn this final Capstone Project, you will write a real web application, package it perfectly into a Docker Container (the shipping container of the internet!), and push your code to GitHub.\n\n*(Note: In the future, our AI Evaluator will pull your GitHub repository and grade your code live!)*\n\n## Step 1: The App \ud83d\udcc4\n\nCreate a new folder on your computer called `cloud-capstone`. Inside that folder, create a file named `index.html`.\n\nWrite the following code into the file:\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My First Cloud App</title>\n</head>\n<body>\n    <h1>Hello from the Cloud! \u2601\ufe0f</h1>\n    <p>I have successfully containerized my first application.</p>\n</body>\n</html>\n```\n\n## Step 2: The Dockerfile \ud83d\udc33\n\nNow, we need to create the instructions to build our Docker container. We need a tiny, lightweight web server to serve our HTML file.\n\nIn the exact same folder, create a file named `Dockerfile` (no extension). Write the following code:\n\n```dockerfile\n# Use a lightweight Nginx web server image as our base\nFROM nginx:alpine\n\n# Copy our index.html file into the container's web directory\nCOPY index.html /usr/share/nginx/html/index.html\n\n# Expose port 80 so the internet can see it\nEXPOSE 80\n```\n\n## Step 3: Build & Test (Optional) \ud83d\udee0\ufe0f\n\nIf you have Docker installed on your computer, you can build and test your container right now!\n\nOpen your terminal and run:\n```bash\ndocker build -t my-cloud-app .\ndocker run -p 8080:80 my-cloud-app\n```\n\nIf you go to `http://localhost:8080` in your browser, you should see your app running perfectly inside its container!\n\n## Step 4: Push to GitHub \ud83d\udc19\n\nTo complete this level, you must push your code to a public GitHub repository.\n\n1. Initialize a git repository: `git init`\n2. Add your files: `git add index.html Dockerfile`\n3. Commit: `git commit -m \"My first containerized app\"`\n4. Push to a new public repo on your GitHub account.\n\nWhen you are done, click the **Complete** button below to claim your massive XP reward and finish the Cloud Computing track!\n\n<flipcard front=\"\ud83c\udf89 You've reached the end!\" back=\"Congratulations! You now understand the fundamental building blocks of the Cloud, how apps are packaged, and how they scale globally. You are officially ready for the AI era!\"></flipcard>",
+      "xp_reward": 100,
+      "coins_reward": 50,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800"
+    }
+  ]
+}

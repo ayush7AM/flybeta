@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - Track Selection Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "tertiary": "#1e3a8a",
+                            "surface-variant": "#e0f2fe",
+                            "on-tertiary-fixed": "#1a1c1b",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "on-error": "#ffffff",
+                            "surface-container-lowest": "#ffffff",
+                            "outline": "#1e3a8a",
+                            "secondary-container": "#facc15",
+                            "secondary-fixed": "#facc15",
+                            "error-container": "#ffdad6",
+                            "tertiary-fixed-dim": "#c7c6c5",
+                            "surface": "#ffffff",
+                            "on-secondary": "#1e3a8a",
+                            "on-tertiary-container": "#fdfcfa",
+                            "on-primary": "#ffffff",
+                            "inverse-primary": "#ffb4ac",
+                            "surface-container-high": "#e0f2fe",
+                            "on-surface": "#1e3a8a",
+                            "on-primary-container": "#fffbff",
+                            "surface-container-highest": "#e0f2fe",
+                            "on-tertiary-fixed-variant": "#464746",
+                            "on-primary-fixed": "#410002",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "on-background": "#1e3a8a",
+                            "primary-fixed": "#ffdad6",
+                            "on-surface-variant": "#1e3a8a",
+                            "on-primary-fixed-variant": "#93000e",
+                            "background": "#e0f2fe",
+                            "tertiary-container": "#facc15",
+                            "secondary": "#facc15",
+                            "surface-bright": "#ffffff",
+                            "primary-container": "#ef4444",
+                            "surface-tint": "#ef4444",
+                            "outline-variant": "#1e3a8a",
+                            "primary-fixed-dim": "#ffb4ac",
+                            "error": "#ba1a1a",
+                            "on-secondary-container": "#1e3a8a",
+                            "on-secondary-fixed-variant": "#474646",
+                            "inverse-surface": "#1e3a8a",
+                            "tertiary-fixed": "#e3e2e0",
+                            "surface-container": "#e0f2fe",
+                            "on-error-container": "#93000a",
+                            "on-tertiary": "#ffffff",
+                            "surface-container-low": "#e0f2fe",
+                            "inverse-on-surface": "#e0f2fe",
+                            "primary": "#ef4444",
+                            "surface-dim": "#cbdde8"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "unit": "4px",
+                            "margin-mobile": "16px",
+                            "margin-desktop": "48px",
+                            "stack-gap": "12px",
+                            "gutter": "24px"
+                    },
+                    "fontFamily": {
+                            "mono-label": ["Inter"],
+                            "headline-md": ["Fredoka One"],
+                            "headline-lg-mobile": ["Fredoka One"],
+                            "label-bold": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "display-lg": ["Fredoka One"],
+                            "headline-lg": ["Fredoka One"]
+                    },
+                    "fontSize": {
+                            "mono-label": ["12px", {"lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                            "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                            "headline-lg-mobile": ["32px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                            "label-bold": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                            "display-lg": ["96px", {"lineHeight": "90px", "letterSpacing": "-0.04em", "fontWeight": "400"}],
+                            "headline-lg": ["48px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .grid-bg {
+            background-color: #E0F2FE;
+            background-image: linear-gradient(to right, #ffffff 1px, transparent 1px),
+                              linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .brutalist-button {
+            transition: all 0.1s ease;
+            box-shadow: 6px 6px 0px 0px #1E3A8A;
+        }
+        .brutalist-button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 2px 2px 0px 0px #1E3A8A;
+        }
+        .brutalist-card {
+            box-shadow: 6px 6px 0px 0px #1E3A8A;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .brutalist-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px #1E3A8A;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen grid-bg pt-20">
+<!-- Top Navigation Bar (from JSON) -->
+<nav class="flex justify-between items-center w-full px-grid-margin py-xs z-50 sticky top-0 bg-surface border-b-4 border-primary shadow-[6px_6px_0px_0px_rgba(0,35,111,1)]">
+<div class="flex items-center gap-8">
+<div class="font-headline-md text-headline-md font-extrabold text-primary border-4 border-primary px-2 py-1 bg-surface">
+                FlyBeta
+            </div>
+<div class="hidden md:flex gap-4">
+<a class="text-on-surface px-4 py-2 font-medium hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none font-label-bold text-label-bold border-4 border-transparent hover:border-primary" href="#">Lessons</a>
+<!-- Active Item: Quests roughly maps to "Tracks/Journeys" in this context -->
+<a class="text-secondary border-b-4 border-secondary px-4 py-2 font-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none font-label-bold text-label-bold" href="#">Quests</a>
+<a class="text-on-surface px-4 py-2 font-medium hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none font-label-bold text-label-bold border-4 border-transparent hover:border-primary" href="#">Archive</a>
+<a class="text-on-surface px-4 py-2 font-medium hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none font-label-bold text-label-bold border-4 border-transparent hover:border-primary" href="#">Labs</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">local_fire_department</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">monetization_on</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">emoji_events</span>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24">
+<!-- Header Section -->
+<header class="relative mb-16 md:mb-24">
+<div class="absolute -top-4 -left-4 w-32 h-32 bg-[#FACC15] border-4 border-on-surface transform -rotate-6 z-0"></div>
+<div class="relative z-10 bg-surface border-4 border-on-surface p-8 inline-block shadow-[10px_10px_0px_0px_#1E3A8A]">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg uppercase m-0 leading-none tracking-tight relative">
+<span class="relative z-10">CHOOSE YOUR</span>
+<br/>
+<span class="bg-primary text-on-primary px-4 inline-block mt-2 border-4 border-on-surface transform rotate-1 relative z-20">TRACK</span>
+</h1>
+</div>
+<p class="font-body-lg text-body-lg text-tertiary mt-8 max-w-2xl border-l-4 border-primary pl-4 bg-surface p-4 border-y-4 border-r-4 border-on-surface shadow-[4px_4px_0px_0px_#1E3A8A]">
+                Select your specialized discipline. Your path dictates your curriculum, terminal access rights, and ultimate rank. Choose wisely.
+            </p>
+</header>
+<!-- Tracks Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Track 1: Data Science -->
+<article class="col-span-1 md:col-span-12 lg:col-span-4 bg-surface border-4 border-on-surface brutalist-card flex flex-col overflow-hidden relative group">
+<div class="h-64 border-b-4 border-on-surface relative bg-[#f0fff4]">
+<img class="w-full h-full object-cover" data-alt="A 3D rendered 'Anywhere Door' (Doraemon style: pink door with a gold handle) sitting on a clean technical grid background. Thick navy blue outlines, neo-brutalist style, vibrant flat colors. 3D tech object style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe4jjoEyUdOc0Wl4LWB5n5cSXFO_h-efTV8bqkPiiu6SFvb91d3gTvki99v_J1pY-z-pyTpXMFIFfDtg40yVSzQ1kSHSV9iC5vUxMXmDt1Jct_2ytO17lQbc5KRkDHpCXt9Xl4zu0X6M8bbAxtx0Nou9OlR4CdCXWLU29OoclZgdGHK_VbTCi4Y-NdJY36JeEYoO8eKKe8PyPE7BTFF_QJ2M-pfqqb4DrGw14KUi-_obuaimtOYroO"/>
+<div class="absolute top-4 left-4 bg-[#FACC15] text-[#1E3A8A] font-mono-label text-mono-label px-2 py-1 border-4 border-on-surface uppercase font-bold tracking-widest">
+                         TS-01
+                     </div>
+</div>
+<div class="p-6 flex-grow flex flex-col bg-surface">
+<div class="mb-4">
+<span class="inline-block bg-[#FACC15] text-[#1E3A8A] font-mono-label text-mono-label px-3 py-1 border-4 border-on-surface uppercase mb-2">Emerald Track</span>
+<h2 class="font-headline-md text-headline-md uppercase m-0">Data Science</h2>
+</div>
+<ul class="font-body-md text-body-md text-tertiary mb-8 border-t-4 border-on-surface pt-4 flex-grow">
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Statistical Modeling
+                        </li>
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Big Data Architecture
+                        </li>
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Predictive Analytics
+                        </li>
+</ul>
+<button class="w-full bg-[#EF4444] text-on-primary font-label-bold text-label-bold uppercase py-4 border-4 border-on-surface brutalist-button text-center mt-auto">
+                        Start Track
+                    </button>
+</div>
+</article>
+<!-- Track 2: AI & ML -->
+<article class="col-span-1 md:col-span-12 lg:col-span-4 bg-surface border-4 border-on-surface brutalist-card flex flex-col overflow-hidden relative group">
+<div class="h-64 border-b-4 border-on-surface relative bg-[#f5f3ff]">
+<img class="w-full h-full object-cover" data-alt="A 3D rendered 'Memory Bread' (Doraemon style: a slice of toast with mathematical formulas/binary code printed on it) sitting on a clean technical grid background. Thick navy blue outlines, neo-brutalist style, vibrant flat colors. 3D tech object style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCNrnNwS-wF9p0DJwVS1tvVLzxr5CNmYBmblOZ6ah02HavD3pJJPkkCkc_2KTmH9XbqHN-U207V4lc82uLLh0CAYJgXsi5Pzwuaa-rmR0uAZXtoZGn38jRqZ-E0v1Qmcp_SEOf6GJhdewDP7kOWfs598IDmgRIQ1DaCwZIbKGhoog2bqmeMD1-YCvuX2WtGnL4S7pVJFHF_F4U3qtXFFCAg7oVu9KozKHMIJfCT2dWlAzythyE6OdO"/>
+<div class="absolute top-4 left-4 bg-[#FACC15] text-[#1E3A8A] font-mono-label text-mono-label px-2 py-1 border-4 border-on-surface uppercase font-bold tracking-widest">
+                        TS-02
+                    </div>
+</div>
+<div class="p-6 flex-grow flex flex-col bg-surface">
+<div class="mb-4">
+<span class="inline-block bg-[#FACC15] text-[#1E3A8A] font-mono-label text-mono-label px-3 py-1 border-4 border-on-surface uppercase mb-2">Violet Track</span>
+<h2 class="font-headline-md text-headline-md uppercase m-0">AI &amp; Machine Learning</h2>
+</div>
+<ul class="font-body-md text-body-md text-tertiary mb-8 border-t-4 border-on-surface pt-4 flex-grow">
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Deep Neural Networks
+                        </li>
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Natural Language Proc
+                        </li>
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Reinforcement Learning
+                        </li>
+</ul>
+<button class="w-full bg-[#EF4444] text-on-primary font-label-bold text-label-bold uppercase py-4 border-4 border-on-surface brutalist-button text-center mt-auto">
+                        Start Track
+                    </button>
+</div>
+</article>
+<!-- Track 3: Cloud Computing -->
+<article class="col-span-1 md:col-span-12 lg:col-span-4 bg-surface border-4 border-on-surface brutalist-card flex flex-col overflow-hidden relative group">
+<div class="h-64 border-b-4 border-on-surface relative bg-[#eff6ff]">
+<img class="w-full h-full object-cover" data-alt="A 3D rendered 'Take-Copter' (Doraemon style: yellow bamboo-copter propellor) hovering over a small blue server block on a clean technical grid background. Thick navy blue outlines, neo-brutalist style, vibrant flat colors. 3D tech object style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCo18CqfA-KUUlkd7c1wbll0wKghLmr5te12Wg_hiU27l53Gir3Y-9uBhTKL07O-Pd7B6TLUGadro_mnpcxVwTI6C9HoFy2yFrVyh6Qiao7WOblEgv7oCHRxxBr0EnRpP16QoDHlN5HXdOlEYHllphWhxALRje-4zWncRtIXIivqGpr_hqIGI7kn_l_6fxVNyWQTg_6tIrbbDo5m8ZDcOk9T8KwsqC0JbRGEtQj7nVHYTW4dRvWec8"/>
+<div class="absolute top-4 left-4 bg-[#FACC15] text-[#1E3A8A] font-mono-label text-mono-label px-2 py-1 border-4 border-on-surface uppercase font-bold tracking-widest">
+                        TS-03
+                    </div>
+</div>
+<div class="p-6 flex-grow flex flex-col bg-surface">
+<div class="mb-4">
+<span class="inline-block bg-[#FACC15] text-[#1E3A8A] font-mono-label text-mono-label px-3 py-1 border-4 border-on-surface uppercase mb-2">Cobalt Track</span>
+<h2 class="font-headline-md text-headline-md uppercase m-0">Cloud Computing</h2>
+</div>
+<ul class="font-body-md text-body-md text-tertiary mb-8 border-t-4 border-on-surface pt-4 flex-grow">
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Distributed Systems
+                        </li>
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Container Orchestration
+                        </li>
+<li class="border-b-4 border-on-surface py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> Infrastructure as Code
+                        </li>
+</ul>
+<button class="w-full bg-[#EF4444] text-on-primary font-label-bold text-label-bold uppercase py-4 border-4 border-on-surface brutalist-button text-center mt-auto">
+                        Start Track
+                    </button>
+</div>
+</article>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "data",
+    "title": "Data Science",
+    "icon": "database",
+    "color": "#3B82F6"
+  },
+  "level": {
+    "number": 8,
+    "title": "Predicting the Future",
+    "description": "Discover how Data Scientists use the past to gaze into the future.",
+    "quiz_data": [
+      {
+        "question": "What does 'Statistical Significance' mean?",
+        "options": [
+          "The data is very important",
+          "The result is likely true and not just due to random chance",
+          "The numbers are very large",
+          "The data is a secret"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is a P-Value?",
+        "options": [
+          "A probability value measuring evidence against the null hypothesis",
+          "The price of the data",
+          "A positive value",
+          "A programming variable"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "If your P-Value is 0.01, is the result usually considered significant?",
+        "options": [
+          "No, it must be exactly 0",
+          "Yes, it is typically considered statistically significant (less than 0.05)",
+          "No, it must be greater than 1",
+          "It depends on the time of day"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is an A/B Test?",
+        "options": [
+          "A blood test",
+          "Comparing two versions of something to see which performs better",
+          "A test with only two questions",
+          "A sorting algorithm"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Correlation does NOT equal...",
+        "options": [
+          "Math",
+          "Causation (just because two things happen together doesn't mean one caused the other)",
+          "Statistics",
+          "Data"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "The Crystal Ball",
+      "content_md": "# Predicting the Future \ud83d\udd2e\n\nOne of the most powerful things a Data Scientist can do is **Predictive Analytics**.\n\nIt sounds like magic, but it's really just math. \n\nImagine you want to predict if it will rain tomorrow. You could just guess. Or, you could look at the weather data for the last 100 days. If the data shows that every time the humidity hits 90% and the temperature drops 10 degrees, it rains the next day, you have found a **pattern**.\n\nNow, if you see the humidity hit 90% today, you can confidently predict rain tomorrow.\n\n## Looking Backward to Look Forward\n\nData Scientists build Machine Learning models that act like a crystal ball. But instead of magic, the crystal ball is powered by historical data.\n\n- **Netflix** looks at the last 100 movies you watched to predict the 101st movie you will want to click on.\n- **Banks** look at millions of historical fraudulent transactions to predict if the credit card swipe happening *right now* is a scam.\n- **Hospitals** look at historical patient data to predict which patients are at the highest risk of developing a disease.\n\n<flipcard front=\"\ud83d\udd2e How does Predictive Analytics work?\" back=\"By feeding historical data into a machine learning algorithm to find patterns, and then applying those patterns to new data to predict what will happen next.\"></flipcard>\n\n<flipcard front=\"\ud83d\udcc8 Is the Crystal Ball always right?\" back=\"No. It operates on probabilities, not certainties. It might say there is an 85% chance of rain, but there is always a margin of error.\"></flipcard>",
+      "xp_reward": 40,
+      "coins_reward": 35,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1614064641913-6b7140414f55?w=800&q=80"
+    }
+  ]
+}

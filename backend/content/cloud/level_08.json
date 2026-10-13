@@ -1,0 +1,85 @@
+{
+  "domain": {
+    "name": "cloud",
+    "title": "Cloud Computing",
+    "icon": "cloud",
+    "color": "#2563EB"
+  },
+  "level": {
+    "number": 8,
+    "title": "Serverless Architecture",
+    "description": "What if you didn't even have to rent the server? Welcome to the water faucet model of cloud computing.",
+    "quiz_data": [
+      {
+        "question": "What is the defining feature of Serverless Architecture?",
+        "options": [
+          "There are literally no servers involved",
+          "You don't manage any servers, and you pay only for exact execution time",
+          "It is entirely free",
+          "It requires you to buy physical servers"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "In the Water Faucet metaphor, how does Serverless billing work?",
+        "options": [
+          "You pay a flat monthly water bill",
+          "You only pay for the exact drops of water you use while the faucet is on",
+          "You pay to build the water tower",
+          "Water is free"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What does FaaS stand for?",
+        "options": [
+          "Functions as a Service",
+          "Firewalls as a Service",
+          "Files as a Service",
+          "Frameworks as a Service"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "What triggers a Serverless Function?",
+        "options": [
+          "A manual switch",
+          "An event (like an HTTP request or file upload)",
+          "A timer that runs 24/7",
+          "A physical button press"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which of these is a famous Serverless service?",
+        "options": [
+          "AWS Lambda",
+          "A physical Dell Server",
+          "Microsoft Word",
+          "Docker"
+        ],
+        "correct_index": 0
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "The Water Faucet Metaphor",
+      "content_md": "# The Water Faucet Metaphor \ud83d\udeb0\n\nWhen you use IaaS (like renting a Virtual Machine), you pay by the hour. If you rent a server for 24 hours, you pay for 24 hours of electricity and hardware, even if absolutely nobody visited your website while you were asleep.\n\nThis is like paying for water by renting an entire water tower for the month, even if you only drank one glass!\n\n## The Serverless Revolution\n\n**Serverless** computing changes everything. Instead of renting the server, you just write a small piece of code (a function) and give it to the Cloud provider.\n\nYou say: *\"Hey Amazon, please run this code ONLY when someone clicks the 'Buy' button on my app.\"*\n\nWhen a customer clicks the button, Amazon instantly turns the code on, runs it, and turns it off. \n\n**You only pay for the exact milliseconds your code was running.**\n\nIf no one clicks the button for a week, you pay **$0.00**. This is exactly like your kitchen sink: you only pay for water when the faucet is actively running!\n\n<flipcard front=\"\ud83d\udeb0 What is the main cost benefit of Serverless?\" back=\"You only pay for the exact milliseconds your code is actively running. If there is no traffic, you pay absolutely nothing! (No idle server costs).\"></flipcard>",
+      "xp_reward": 15,
+      "coins_reward": 10,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1584067341857-79774659b6c0?w=800"
+    },
+    {
+      "order": 2,
+      "title": "Functions as a Service (FaaS)",
+      "content_md": "# Functions as a Service (FaaS) \u26a1\n\nWait, why is it called \"Serverless\"? Are there no servers?\n\nNo, there are definitely still physical servers in a data center. It's called \"Serverless\" because **YOU** don't have to think about them, manage them, or pay for them when they are idle.\n\nThe technical term for this is **FaaS (Functions as a Service)**.\n\n## How FaaS Works\n\n1. A developer writes a tiny block of code (a Function). For example: a function that resizes an image.\n2. They upload it to AWS Lambda, Google Cloud Functions, or Azure Functions.\n3. They set a **Trigger**. (e.g., \"Run this function every time a user uploads a photo\").\n4. If 10,000 users upload a photo at the exact same second, the Cloud provider instantly spins up 10,000 copies of the function, runs them all simultaneously, and then shuts them all down.\n\n<flipcard front=\"\u26a1 What does FaaS stand for?\" back=\"Functions as a Service! It allows developers to deploy small snippets of code that automatically scale infinitely without managing any servers.\"></flipcard>",
+      "xp_reward": 20,
+      "coins_reward": 10,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800"
+    }
+  ]
+}

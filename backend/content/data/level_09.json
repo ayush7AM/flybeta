@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "data",
+    "title": "Data Science",
+    "icon": "database",
+    "color": "#3B82F6"
+  },
+  "level": {
+    "number": 9,
+    "title": "Correlation vs Causation",
+    "description": "Learn the most dangerous trap in Data Science, and why two things moving together doesn't mean they are related.",
+    "quiz_data": [
+      {
+        "question": "What is Predictive Analytics?",
+        "options": [
+          "Predicting the weather",
+          "Using historical data and machine learning to forecast future outcomes",
+          "Looking at past data to write a report",
+          "Guessing random numbers"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which of these is an example of Predictive Analytics?",
+        "options": [
+          "Counting how many sales were made yesterday",
+          "Calculating the average age of customers",
+          "Forecasting which customers are most likely to cancel their subscription next month",
+          "Making a pie chart"
+        ],
+        "correct_index": 2
+      },
+      {
+        "question": "What is a 'Feature' in predictive modeling?",
+        "options": [
+          "A cool part of an app",
+          "An input variable or attribute used to make predictions",
+          "The final prediction",
+          "A bug in the code"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is the 'Target Variable'?",
+        "options": [
+          "The output you are trying to predict",
+          "The number of rows in the dataset",
+          "The person running the model",
+          "The speed of the algorithm"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "Can predictive analytics guarantee 100% accuracy?",
+        "options": [
+          "Yes, if the computer is fast enough",
+          "No, it provides probabilities based on patterns, not absolute certainties",
+          "Yes, if you use Deep Learning",
+          "No, it is always wrong"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "The Ice Cream Trap",
+      "content_md": "# Correlation vs Causation \ud83c\udf66\ud83e\udd88\n\nThere is a famous phrase in statistics: **\"Correlation does not imply Causation.\"** \n\nFalling into this trap is the fastest way for a Data Scientist to make a terrible, million-dollar mistake.\n\n## The Trap\n\nImagine you are analyzing data for a beach town. You plot two lines on a graph: \n1. Total Ice Cream Sales\n2. Total Shark Attacks\n\nYou notice something terrifying. Every single time Ice Cream Sales go up, Shark Attacks also go up! The lines match perfectly. They are highly **Correlated**.\n\nA bad Data Scientist would look at this chart and run to the Mayor shouting: *\"Ban ice cream immediately! Eating ice cream causes shark attacks!\"*\n\n<flipcard front=\"\ud83d\udcc8 What is Correlation?\" back=\"When two variables move up or down together at the same time. But just because they move together doesn't mean one is controlling the other!\"></flipcard>\n\n## The Hidden Factor\n\nWhy did the Data Scientist fail? Because they missed the **hidden variable**: The Weather.\n\nWhen it gets hot outside (Summer), more people buy ice cream. Also, when it gets hot outside, more people swim in the ocean, leading to more shark attacks.\n\nIce cream doesn't *cause* shark attacks. Summer causes both of them.\n\n<flipcard front=\"\ud83e\udd88 What is Causation?\" back=\"When an event directly makes another event happen (cause and effect). It is much harder to prove than correlation.\"></flipcard>\n\n<flipcard front=\"\ud83d\udea8 Why is this dangerous in business?\" back=\"If a company assumes a marketing campaign 'caused' a spike in sales just because they happened at the same time, they might waste millions of dollars repeating a useless campaign.\"></flipcard>",
+      "xp_reward": 45,
+      "coins_reward": 40,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1555529733-0e670560f7e1?w=800&q=80"
+    }
+  ]
+}

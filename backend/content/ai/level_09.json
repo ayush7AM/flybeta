@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "ai",
+    "title": "AI & Machine Learning",
+    "icon": "brain",
+    "color": "#8B5CF6"
+  },
+  "level": {
+    "number": 9,
+    "title": "AI Bias & Hallucinations",
+    "description": "Discover the dark side of Artificial Intelligence when things go horribly wrong.",
+    "quiz_data": [
+      {
+        "question": "Why is Ethics important in AI?",
+        "options": [
+          "Because AIs have feelings",
+          "Because AI decisions can heavily impact human lives and society",
+          "Because it makes the AI run faster",
+          "Because it is required by the internet"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is AI Bias?",
+        "options": [
+          "When an AI refuses to work",
+          "When an AI produces prejudiced results due to skewed training data",
+          "When an AI is too smart",
+          "When an AI likes one programmer more than another"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "How can bias enter an AI system?",
+        "options": [
+          "Only if a hacker puts it there",
+          "Through unrepresentative or historically prejudiced training data",
+          "Through computer viruses",
+          "By using a Mac instead of a PC"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is the 'Black Box' problem?",
+        "options": [
+          "AI hardware is painted black",
+          "It is difficult to understand exactly how a deep neural network made a specific decision",
+          "A data storage issue",
+          "A networking error"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which of these is an ethical concern regarding Generative AI?",
+        "options": [
+          "It uses too much electricity",
+          "Deepfakes and misinformation",
+          "It takes up hard drive space",
+          "It requires an internet connection"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "When AI Fails",
+      "content_md": "# AI Bias & Hallucinations \ud83d\udea8\n\nBecause AI learns its rules from Data, it is completely at the mercy of that data. If the data is flawed, the AI will be flawed. \n\n## Hallucinations\n\nRemember how Large Language Models are just predicting the most likely next word? \n\nSometimes, the math points toward a word sequence that sounds incredibly confident and grammatical, but is completely factually incorrect. \n\nIf you ask an AI for a biography of a fake person, it might invent fake dates, fake book titles, and fake quotes, presenting them as absolute truth. We call this a **Hallucination**.\n\n<flipcard front=\"\ud83d\udc7b What is an AI Hallucination?\" back=\"When an AI confidently generates false or completely invented information because its probability math led it down the wrong path.\"></flipcard>\n\n## AI Bias\n\nAI Bias is far more dangerous. Because AI is trained on human data (like the internet), it accidentally learns human prejudices, stereotypes, and historical inequalities.\n\nIf a company trains an AI to screen resumes for a software engineering job, and they use data from the last 20 years (when the industry was heavily male-dominated), the AI might silently learn that \"being male\" is a requirement for being a good engineer. It will start throwing out resumes from women.\n\n<flipcard front=\"\u2696\ufe0f How does AI become biased?\" back=\"It inherits the biases present in its training data. If historical data contains sexism or racism, the AI will learn and replicate those toxic patterns.\"></flipcard>\n\n<flipcard front=\"\ud83d\udee1\ufe0f How do we fix AI Bias?\" back=\"By carefully curating our training datasets to ensure they are diverse, representative, and fair before we ever let the AI train on them.\"></flipcard>",
+      "xp_reward": 45,
+      "coins_reward": 40,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+    }
+  ]
+}

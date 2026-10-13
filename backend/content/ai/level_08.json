@@ -1,0 +1,76 @@
+{
+  "domain": {
+    "name": "ai",
+    "title": "AI & Machine Learning",
+    "icon": "brain",
+    "color": "#8B5CF6"
+  },
+  "level": {
+    "number": 8,
+    "title": "NLP & LLMs",
+    "description": "Understand how ChatGPT works under the hood by predicting text one word at a time.",
+    "quiz_data": [
+      {
+        "question": "What is Generative AI?",
+        "options": [
+          "AI that generates electricity",
+          "AI capable of creating new content (text, images, audio) based on learned patterns",
+          "AI that analyzes data",
+          "AI that plays games"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is an LLM?",
+        "options": [
+          "Large Language Model",
+          "Limited Logic Machine",
+          "Learning Level Matrix",
+          "Local Language Module"
+        ],
+        "correct_index": 0
+      },
+      {
+        "question": "How does an LLM generate text?",
+        "options": [
+          "It copies and pastes from Wikipedia",
+          "It predicts the most likely next word based on context",
+          "It asks a human for help",
+          "It randomly selects words from a dictionary"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "What is a 'Prompt'?",
+        "options": [
+          "A quick AI",
+          "The text instruction or question you give to a Generative AI",
+          "A type of neural network",
+          "An error message"
+        ],
+        "correct_index": 1
+      },
+      {
+        "question": "Which of these is a Generative AI tool?",
+        "options": [
+          "Microsoft Excel",
+          "ChatGPT",
+          "Google Maps",
+          "A calculator"
+        ],
+        "correct_index": 1
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "The Ultimate Autocomplete",
+      "content_md": "# Natural Language Processing \ud83d\udde3\ufe0f\n\nHow can an AI write poetry, code, and essays that sound exactly like a human wrote them? The answer is **Large Language Models (LLMs)**.\n\nDespite how magical tools like ChatGPT seem, they do not \"think\". They do not \"understand\" what you are saying. Underneath the hood, they are just incredibly advanced, massive versions of the autocomplete on your phone's keyboard.\n\n## Predicting the Next Word\n\nIf I say \"The quick brown fox jumps over the lazy...\"\n\nYour brain instantly knows the next word is \"dog\". You know this because you've seen that pattern of words together many times before.\n\nAn LLM does the exact same thing using probability.\n\nWe train an LLM by feeding it millions of books, articles, and websites (massive dataset). It reads billions of sentences and learns the mathematical probability of which word comes next in any given sequence.\n\nWhen you ask ChatGPT a question, it is literally just guessing the most mathematically probable next word, over and over and over again, until the sentence is finished.\n\n<flipcard front=\"\ud83e\udd16 Does ChatGPT 'think' about its answers?\" back=\"No! It uses advanced math to predict what the next most likely word should be based on its massive training data.\"></flipcard>\n\n<flipcard front=\"\ud83d\udcf1 How is it different from phone autocomplete?\" back=\"Your phone only looks at the last 2 or 3 words you typed. An LLM looks at the entire context of your paragraph, making its predictions exponentially more accurate.\"></flipcard>\n\n<flipcard front=\"\ud83d\udcd6 What does NLP stand for?\" back=\"Natural Language Processing. It is the branch of AI focused on giving computers the ability to understand text and spoken words.\"></flipcard>",
+      "xp_reward": 40,
+      "coins_reward": 35,
+      "is_mandatory": true,
+      "illustration_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlyBeta - Interactive Lesson Runner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Space+Grotesk:wght@500;700&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-container": "#cea700",
+                "on-secondary-fixed-variant": "#930013",
+                "secondary-fixed": "#ffdad7",
+                "on-primary-container": "#90a8ff",
+                "on-secondary-container": "#fffbff",
+                "inverse-surface": "#22333c",
+                "surface": "#f4faff",
+                "surface-dim": "#cbdde8",
+                "error": "#ba1a1a",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#e8f6ff",
+                "inverse-primary": "#b6c4ff",
+                "tertiary": "#735c00",
+                "outline": "#757682",
+                "on-secondary": "#ffffff",
+                "surface-bright": "#f4faff",
+                "surface-container-high": "#d9ebf7",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#dce1ff",
+                "on-error-container": "#93000a",
+                "secondary": "#b61722",
+                "on-secondary-fixed": "#410004",
+                "on-error": "#ffffff",
+                "on-primary-fixed-variant": "#264191",
+                "primary-fixed-dim": "#b6c4ff",
+                "on-tertiary-container": "#4e3e00",
+                "inverse-on-surface": "#e2f3ff",
+                "on-tertiary-fixed-variant": "#574500",
+                "outline-variant": "#c5c5d3",
+                "primary-container": "#1e3a8a",
+                "on-tertiary": "#ffffff",
+                "surface-variant": "#d3e5f1",
+                "tertiary-fixed": "#ffe083",
+                "secondary-container": "#da3437",
+                "tertiary-fixed-dim": "#eec200",
+                "on-tertiary-fixed": "#231b00",
+                "on-primary-fixed": "#00164e",
+                "on-background": "#0c1e26",
+                "surface-tint": "#4059aa",
+                "primary": "#00236f",
+                "on-primary": "#ffffff",
+                "surface-container-highest": "#d3e5f1",
+                "secondary-fixed-dim": "#ffb3ad",
+                "surface-container": "#def0fc",
+                "on-surface": "#0c1e26",
+                "on-surface-variant": "#444651",
+                "background": "#f4faff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "grid-margin": "24px",
+                "xs": "8px",
+                "grid-gutter": "24px",
+                "md": "24px",
+                "unit": "4px",
+                "sm": "16px",
+                "xl": "64px",
+                "lg": "40px"
+        },
+        "fontFamily": {
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-sm": [
+                        "Space Grotesk"
+                ],
+                "display": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Work Sans"
+                ],
+                "body-md": [
+                        "Work Sans"
+                ],
+                "label-bold": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "800"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "800"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-bold": [
+                        "14px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-color: #E0F2FE;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar (Rendered for Web/Tablet) -->
+<nav class="hidden md:flex flex justify-between items-center w-full px-grid-margin py-xs z-50 sticky top-0 bg-surface border-4 border-primary shadow-[6px_6px_0px_0px_rgba(0,35,111,1)]">
+<div class="flex items-center gap-6">
+<span class="text-headline-md font-headline-md font-extrabold text-primary border-4 border-primary px-2 py-1 bg-surface-container-lowest">FlyBeta</span>
+<div class="flex">
+<a class="text-secondary border-b-4 border-secondary px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none" href="#">Lessons</a>
+<a class="text-on-surface px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none hover:bg-surface-container-high" href="#">Quests</a>
+<a class="text-on-surface px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none hover:bg-surface-container-high" href="#">Archive</a>
+<a class="text-on-surface px-4 py-2 font-label-bold text-label-bold hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none hover:bg-surface-container-high" href="#">Labs</a>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="p-2 border-4 border-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary" data-icon="local_fire_department">local_fire_department</span>
+</button>
+<button class="p-2 border-4 border-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary" data-icon="monetization_on">monetization_on</span>
+</button>
+<button class="p-2 border-4 border-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,35,111,1)] transition-all active:translate-x-[6px] active:translate-y-[6px] active:shadow-none bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary" data-icon="emoji_events">emoji_events</span>
+</button>
+</div>
+</nav>
+<div class="pt-[40px] pb-12 px-grid-margin md:px-grid-margin max-w-[1440px] mx-auto">
+<!-- Lesson Header -->
+<header class="mb-grid-gutter border-4 border-primary p-4 md:p-6 bg-surface-container-lowest shadow-[8px_8px_0px_0px_#1E3A8A]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-1 border-4 border-primary mb-2 inline-block uppercase font-bold tracking-widest text-primary">MODULE 04 // PROTOCOL INITIALIZATION</span>
+<h1 class="font-display text-display text-primary uppercase mt-2">Core Avionics Systems</h1>
+</div>
+<div class="flex gap-2">
+<span class="border-4 border-primary px-3 py-1 font-label-bold text-label-bold bg-[#FACC15] text-primary uppercase shadow-[4px_4px_0px_0px_#1E3A8A]">COBALT TRACK</span>
+<span class="border-4 border-primary px-3 py-1 font-label-bold text-label-bold bg-surface-container-high uppercase shadow-[4px_4px_0px_0px_#1E3A8A] text-primary">EST. 15 MIN</span>
+</div>
+</div>
+</header>
+<!-- Asymmetrical Split Layout -->
+<div class="grid grid-cols-4 md:grid-cols-12 gap-grid-gutter">
+<!-- Left Rail: Checklist -->
+<aside class="col-span-4 md:col-span-4 lg:col-span-3 border-4 border-primary bg-surface-container-lowest shadow-[8px_8px_0px_0px_#1E3A8A] p-4 self-start">
+<h3 class="font-headline-md text-headline-md border-b-4 border-primary pb-2 mb-4 uppercase text-primary">Task List</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 border-4 border-primary bg-[#FACC15] flex items-center justify-center shrink-0 mt-1 shadow-[4px_4px_0px_0px_#1E3A8A]">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="check" data-weight="fill">check</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold line-through opacity-70 text-primary">Review Protocol Alpha</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">COMPLETED</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 border-4 border-primary bg-surface-container-lowest shrink-0 mt-1 shadow-[4px_4px_0px_0px_#1E3A8A]"></div>
+<div>
+<p class="font-label-bold text-label-bold text-primary">Initialize Subsystems</p>
+<p class="font-label-sm text-label-sm text-secondary uppercase mt-1 font-bold">CURRENT TASK</p>
+</div>
+</li>
+<li class="flex items-start gap-3 opacity-50">
+<div class="w-6 h-6 border-4 border-primary bg-surface-container-lowest shrink-0 mt-1"></div>
+<div>
+<p class="font-label-bold text-label-bold text-primary">Run Diagnostics</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">LOCKED</p>
+</div>
+</li>
+<li class="flex items-start gap-3 opacity-50">
+<div class="w-6 h-6 border-4 border-primary bg-surface-container-lowest shrink-0 mt-1"></div>
+<div>
+<p class="font-label-bold text-label-bold text-primary">Commit Changes</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">LOCKED</p>
+</div>
+</li>
+</ul>
+</aside>
+<!-- Main Content -->
+<main class="col-span-4 md:col-span-8 lg:col-span-9 space-y-grid-gutter">
+<!-- Mission Briefing Callout -->
+<div class="border-l-8 border-l-[#FACC15] border-t-4 border-r-4 border-b-4 border-primary p-6 bg-surface-container-lowest shadow-[8px_8px_0px_0px_#1E3A8A]">
+<h2 class="font-headline-md text-headline-md uppercase mb-2 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[#FACC15]" data-icon="campaign">campaign</span>
+                        Mission Briefing
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        To proceed, you must construct the basic initialization loop for the core avionics module. The system expects a continuous feedback sequence handling both telemetry and basic power distribution requests before returning a nominal status code.
+                    </p>
+</div>
+<!-- Code Editor Block -->
+<div class="border-4 border-primary bg-[#1c1b1b] text-[#fdfcfa] shadow-[8px_8px_0px_0px_#1E3A8A] overflow-hidden">
+<div class="flex justify-between items-center border-b-4 border-primary bg-surface-container-high p-2">
+<div class="flex gap-2">
+<span class="w-4 h-4 border-4 border-primary bg-error"></span>
+<span class="w-4 h-4 border-4 border-primary bg-[#facc15]"></span>
+<span class="w-4 h-4 border-4 border-primary bg-[#34d399]"></span>
+</div>
+<span class="font-label-bold text-label-bold text-primary uppercase tracking-widest">avionics_init.rs</span>
+<button class="border-4 border-primary px-3 py-1 bg-[#FACC15] text-primary hover:bg-[#eab308] active:translate-y-1 font-label-bold text-label-bold flex items-center gap-1 shadow-[2px_2px_0px_0px_#1E3A8A] active:shadow-none transition-all uppercase">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span> COPY
+                        </button>
+</div>
+<div class="p-4 overflow-x-auto">
+<pre class="font-body-md text-body-md text-sm leading-relaxed font-mono"><code class="language-rust text-[#e3e2e0]">
+<span class="text-[#fca5a5]">fn</span> <span class="text-[#93c5fd]">initialize_avionics</span>(power_state: &amp;PowerState) -&gt; <span class="text-[#fca5a5]">Result</span>&lt;(), SystemError&gt; {
+    <span class="text-[#747573]">// TODO: Implement initialization sequence</span>
+    <span class="text-[#fca5a5]">let</span> telemetry = Telemetry::<span class="text-[#93c5fd]">new</span>();
+    
+    <span class="text-[#fca5a5]">if</span> power_state.<span class="text-[#93c5fd]">is_nominal</span>() {
+        telemetry.<span class="text-[#93c5fd]">begin_broadcast</span>();
+        <span class="text-[#fca5a5]">println!</span>(<span class="text-[#86efac]">"Systems nominal. Broadcast live."</span>);
+    } <span class="text-[#fca5a5]">else</span> {
+        <span class="text-[#fca5a5]">return</span> <span class="text-[#fca5a5]">Err</span>(SystemError::InsufficientPower);
+    }
+
+    <span class="text-[#fca5a5]">Ok</span>(())
+}
+</code></pre>
+</div>
+</div>
+<!-- Claim XP Action -->
+<div class="flex justify-end pt-8">
+<button class="group relative flex items-center justify-center font-headline-md text-headline-md bg-[#EF4444] text-white border-4 border-primary px-8 py-4 shadow-[12px_12px_0px_0px_#1E3A8A] transition-all duration-75 active:translate-x-[8px] active:translate-y-[8px] active:shadow-[4px_4px_0px_0px_#1E3A8A] hover:bg-[#dc2626] uppercase tracking-widest">
+                        Claim XP
+                        <span class="material-symbols-outlined ml-2 text-[#FACC15]" data-icon="star" data-weight="fill">star</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+</body></html>
