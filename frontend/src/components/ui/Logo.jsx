@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import logoImg from '../../assets/logo.png';
 import { useTheme } from '../../context/ThemeContext';
 
-export default function Logo({ to = '/', className = '' }) {
+export default function Logo({ to = '/', className = '', compact = false }) {
   const { isDarkMode } = useTheme();
 
   return (
@@ -19,7 +19,7 @@ export default function Logo({ to = '/', className = '' }) {
           mixBlendMode: isDarkMode ? 'screen' : 'multiply'
         }}
       />
-      <span className="font-black text-2xl tracking-tighter uppercase text-ink transition-colors">
+      <span className={`font-black text-xl sm:text-2xl tracking-tighter uppercase text-ink transition-colors ${compact ? 'hidden sm:inline' : ''}`}>
         FLYBETA
       </span>
     </Link>

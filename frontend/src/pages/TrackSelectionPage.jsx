@@ -79,7 +79,7 @@ export default function TrackSelectionPage() {
       </header>
 
       {/* Track Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="tour-tracks" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {domains.map((domain) => (
           <TrackCard key={domain.id || domain.name} domain={domain} />
         ))}

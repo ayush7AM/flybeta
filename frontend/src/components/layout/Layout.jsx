@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import OracleWidget from './OracleWidget';
+import TourGuide from '../tour/TourGuide';
 import { useTheme } from '../../context/ThemeContext';
 
 // ── Per-theme background images ──────────────────────────────────────────
@@ -45,10 +46,11 @@ export default function Layout() {
       {/* All content sits above the overlay */}
       <div className="relative" style={{ zIndex: 10 }}>
         <Navbar />
-        <main className="max-w-[1440px] mx-auto px-4 md:px-12 pt-28 pb-16">
+        <main className="max-w-[1440px] mx-auto px-4 md:px-12 pt-24 md:pt-28 pb-28 md:pb-16">
           <Outlet />
         </main>
         <OracleWidget />
+        <TourGuide />
       </div>
     </div>
   );

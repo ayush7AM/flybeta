@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { getUserProfile, loginUser, registerUser } from '../services/api';
+import { endTour } from '../components/tour/tour';
 
 const AuthContext = createContext(null);
 
@@ -92,6 +93,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem('flybeta_access');
     localStorage.removeItem('flybeta_refresh');
+    endTour();
     setUser(null);
   };
 

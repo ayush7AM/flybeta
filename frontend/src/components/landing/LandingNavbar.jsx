@@ -24,7 +24,7 @@ export default function LandingNavbar() {
   };
 
   return (
-    <nav className="relative z-20 flex items-center justify-between w-full px-8 py-4">
+    <nav className="relative z-20 flex items-center justify-between gap-3 w-full px-4 md:px-8 py-4">
       {/* Left: Logo */}
       <Logo to="/" />
 
@@ -45,7 +45,7 @@ export default function LandingNavbar() {
       </div>
 
       {/* Right: Get Started & Toggle */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
         <button
           onClick={toggleDarkMode}
           className="bg-transparent border-2 border-ink text-ink p-2 hover:bg-canvas transition-colors cursor-pointer"
@@ -55,7 +55,7 @@ export default function LandingNavbar() {
         </button>
 
         {user ? (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <Link 
               to="/tracks"
               className="hidden md:flex items-center gap-2 bg-canvas px-4 py-2 border-2 border-ink hover:bg-border-light transition-colors no-underline text-ink label-mono"
@@ -65,13 +65,13 @@ export default function LandingNavbar() {
             </Link>
             <button
               onClick={logout}
-              className="text-sm font-bold uppercase tracking-wider text-red-600 hover:text-red-700 underline bg-transparent border-none cursor-pointer"
+              className="hidden md:inline text-sm font-bold uppercase tracking-wider text-red-600 hover:text-red-700 underline bg-transparent border-none cursor-pointer"
             >
               Logout
             </button>
             <Link
               to="/tracks"
-              className="bg-black text-white px-6 py-2.5 font-bold hover:bg-[var(--color-primary)] hover:text-black border-4 border-black transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-wider text-sm no-underline"
+              className="bg-black text-white px-3 md:px-6 py-2 md:py-2.5 font-bold hover:bg-[var(--color-primary)] hover:text-black border-4 border-black transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-wider text-xs md:text-sm no-underline whitespace-nowrap"
             >
               Dashboard
             </Link>
@@ -79,7 +79,7 @@ export default function LandingNavbar() {
         ) : (
           <button
             onClick={() => setIsAuthOpen(true)}
-            className="bg-black text-white px-6 py-2.5 font-bold hover:bg-[#EAB308] hover:text-black border-4 border-black transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-wider text-sm cursor-pointer"
+            className="bg-black text-white px-3 md:px-6 py-2 md:py-2.5 font-bold hover:bg-[#EAB308] hover:text-black border-4 border-black transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-wider text-xs md:text-sm cursor-pointer whitespace-nowrap"
           >
             GET STARTED
           </button>

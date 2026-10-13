@@ -136,6 +136,12 @@ export const getLevel = async (id) => {
   return data;
 };
 
+// Graded server-side — returns { passed, score, total, level_unlocked, user }
+export const submitLevelQuiz = async (levelId, answers) => {
+  const { data } = await api.post(`levels/${levelId}/pass_quiz/`, { answers });
+  return data;
+};
+
 // ── Lesson endpoints ────────────────────────────────────────────────────
 export const getLessons = async (levelId) => {
   const params = levelId ? { level: levelId } : {};

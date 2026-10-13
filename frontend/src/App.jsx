@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/layout/Layout';
+import ScrollToTop from './components/layout/ScrollToTop';
 import LandingPage from './pages/LandingPage';
 import TrackSelectionPage from './pages/TrackSelectionPage';
 import TrackRoadmapPage from './pages/TrackRoadmapPage';
@@ -16,6 +17,7 @@ import DashboardPage from './pages/DashboardPage';
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ThemeProvider>
         <AuthProvider>
           <Routes>

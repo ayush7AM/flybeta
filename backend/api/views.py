@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+import logging
 import re
 import traceback
 
@@ -6,6 +7,8 @@ import traceback
 from django.contrib.auth import get_user_model
 # pyrefly: ignore [missing-import]
 from django.db import transaction
+# pyrefly: ignore [missing-import]
+from django.db.models import Max
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -21,15 +24,48 @@ from api.serializers import (
     CapstoneSubmissionSerializer, UserProfileSerializer
 )
 from api.ai_services import generate_project_blueprint, generate_code_review, generate_video_quiz, ask_oracle
-from learn.services.github_service import fetch_github_repo_content
+from learn.services.github_service import fetch_github_repo_content, parse_repo_url, RepoFetchError
 from learn.services.ai_evaluator import evaluate_code
-from rest_framework import viewsets
+from rest_framework import mixins, viewsets
+from rest_framework.throttling import ScopedRateThrottle
+
+logger = logging.getLogger(__name__)
 
 
 def get_dev_user():
     """Get the dev user for mock auth. In production, use request.user instead."""
     User = get_user_model()
     return User.objects.get(username='dev')
+
+
+QUIZ_PASS_PERCENT = 60
+QUIZ_XP_REWARD = 50
+
+
+def get_highest_unlocked_level(user, domain):
+    """The highest level number the user may access in a domain (Level 1 is always open)."""
+    progress = DomainProgress.objects.filter(user=user, domain=domain).first()
+    return progress.highest_unlocked_level if progress else 1
+
+
+def unlock_next_level(user, level):
+    """
+    Advance the user's frontier past `level` if it is their highest unlocked level.
+    Returns True if a new level was unlocked. Call inside transaction.atomic() —
+    the DomainProgress row lock stops double submits from unlocking/rewarding twice.
+    """
+    domain_progress, _ = DomainProgress.objects.select_for_update().get_or_create(
+        user=user,
+        domain=level.domain,
+    )
+    last_level = level.domain.levels.aggregate(Max('number'))['number__max']
+    if domain_progress.highest_unlocked_level != level.number or level.number >= last_level:
+        return False
+
+    domain_progress.highest_unlocked_level += 1
+    domain_progress.current_level = domain_progress.highest_unlocked_level
+    domain_progress.save(update_fields=['highest_unlocked_level', 'current_level'])
+    return True
 
 
 class UserMeView(APIView):
@@ -141,27 +177,55 @@ class LevelViewSet(ReadOnlyModelViewSet):
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
     def pass_quiz(self, request, pk=None):
+        """
+        POST /api/v1/levels/{id}/pass_quiz/
+        Body: {"answers": [option_index, ...]} — one entry per quiz question.
+
+        Grades the answers server-side. A passing score unlocks the next level
+        and awards XP the first time the level is cleared.
+        """
         level = self.get_object()
         user = request.user
-        
-        with transaction.atomic():
-            domain_progress, _ = DomainProgress.objects.get_or_create(
-                user=user,
-                domain=level.domain
+        quiz = level.quiz_data or []
+
+        if not quiz:
+            return Response(
+                {'error': 'This level has no quiz.'},
+                status=status.HTTP_400_BAD_REQUEST,
             )
-            
-            if domain_progress.highest_unlocked_level == level.number:
-                domain_progress.highest_unlocked_level += 1
-                domain_progress.save()
-                
-                profile = user.profile
-                profile.xp += 50
-                profile.total_xp += 50
-                profile.current_rank = profile.compute_rank()
-                profile.save()
-                
+
+        if level.number > get_highest_unlocked_level(user, level.domain):
+            return Response(
+                {'error': 'This level is locked.'},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        answers = request.data.get('answers')
+        if not isinstance(answers, list) or len(answers) != len(quiz):
+            return Response(
+                {'error': f'"answers" must be a list of {len(quiz)} option indexes.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        score = sum(1 for question, answer in zip(quiz, answers) if answer == question.get('correct_index'))
+        passed = score * 100 >= QUIZ_PASS_PERCENT * len(quiz)
+        level_unlocked = False
+
+        if passed:
+            with transaction.atomic():
+                level_unlocked = unlock_next_level(user, level)
+                if level_unlocked:
+                    profile = user.profile
+                    profile.xp += QUIZ_XP_REWARD
+                    profile.total_xp += QUIZ_XP_REWARD
+                    profile.current_rank = profile.compute_rank()
+                    profile.save()
+
         return Response({
-            'status': 'success',
+            'passed': passed,
+            'score': score,
+            'total': len(quiz),
+            'level_unlocked': level_unlocked,
             'user': UserProfileSerializer(user.profile).data
         }, status=status.HTTP_200_OK)
 
@@ -193,12 +257,20 @@ class LessonViewSet(ReadOnlyModelViewSet):
         3. Award XP and coins to UserProfile
         4. Update streak based on last_active_date
         5. Check if all mandatory lessons are done → mark level complete
+           (and unlock the next level if this level has no boss quiz)
         6. Return updated user stats
         """
         lesson = self.get_object()
         user = request.user
         profile = user.profile
         today = date.today()
+        next_level_unlocked = False
+
+        if lesson.level.number > get_highest_unlocked_level(user, lesson.level.domain):
+            return Response(
+                {'error': 'This level is locked.'},
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         with transaction.atomic():
             # 1. Get or create LevelProgress
@@ -250,6 +322,10 @@ class LessonViewSet(ReadOnlyModelViewSet):
                 level_progress.is_completed = True
                 level_progress.save()
 
+            # Levels with a boss quiz unlock via pass_quiz instead
+            if level_completed and not lesson.level.quiz_data:
+                next_level_unlocked = unlock_next_level(user, lesson.level)
+
         # 6. Return updated stats (full profile payload)
         return Response({
             'status': 'already_completed' if already_completed else 'completed',
@@ -261,6 +337,7 @@ class LessonViewSet(ReadOnlyModelViewSet):
             },
             'user': UserProfileSerializer(profile).data,
             'level_completed': level_completed,
+            'next_level_unlocked': next_level_unlocked,
         }, status=status.HTTP_200_OK)
 
 
@@ -406,57 +483,93 @@ class OracleChatView(APIView):
             )
 
 
-class CapstoneSubmissionViewSet(viewsets.ModelViewSet):
+class CapstoneSubmissionViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     """
-    POST /api/v1/capstone/
-    Accepts a GitHub URL, extracts code, grades it, and returns the AI report card.
+    POST /api/v1/capstone/  — submit a GitHub repo for AI grading (final level only)
+    GET  /api/v1/capstone/  — the current user's own submissions
+    GET  /api/v1/capstone/{id}/
+
+    Submissions are immutable once created and visible only to their owner.
     """
-    queryset = CapstoneSubmission.objects.all()
     serializer_class = CapstoneSubmissionSerializer
     permission_classes = [IsAuthenticated]
+    throttle_scope = 'capstone'
+
+    def get_queryset(self):
+        return CapstoneSubmission.objects.filter(user=self.request.user).select_related('domain', 'user')
+
+    def get_throttles(self):
+        # Each submission costs GitHub + Gemini calls; reads are free
+        return [ScopedRateThrottle()] if self.action == 'create' else []
 
     def create(self, request, *args, **kwargs):
         user = request.user
         domain_id = request.data.get('domain')
-        github_url = request.data.get('github_url')
-        
+        github_url = (request.data.get('github_url') or '').strip()
+
         if not domain_id or not github_url:
             return Response({'error': 'domain and github_url are required'}, status=status.HTTP_400_BAD_REQUEST)
-            
+
         try:
-            domain = Domain.objects.get(pk=domain_id)
-        except Domain.DoesNotExist:
+            owner, repo = parse_repo_url(github_url)
+        except RepoFetchError as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            domain = Domain.objects.get(pk=domain_id, is_published=True)
+        except (Domain.DoesNotExist, ValueError, TypeError):
             return Response({'error': 'Domain not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        final_level = domain.levels.aggregate(Max('number'))['number__max']
+        if final_level is None or get_highest_unlocked_level(user, domain) < final_level:
+            return Response(
+                {'error': f'Reach Level {final_level} of {domain.title} to submit its capstone.'},
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         # 1. Save as pending
         submission = CapstoneSubmission.objects.create(
             user=user,
             domain=domain,
-            github_url=github_url,
+            github_url=f'https://github.com/{owner}/{repo}',
             status='pending'
         )
 
         try:
             # 2. Fetch code from GitHub
-            code_content = fetch_github_repo_content(github_url)
-            
+            code_content = fetch_github_repo_content(submission.github_url)
+
             # 3. Grade using AI
             eval_result = evaluate_code(domain.title, code_content)
-            
-            # 4. Update the submission
-            submission.score = eval_result['score']
-            submission.passed = eval_result['passed']
-            submission.ai_feedback = eval_result['feedback']
-            submission.status = 'graded'
-            submission.save()
-            
-        except Exception as e:
+        except RepoFetchError as e:
+            # Something the student can fix — tell them exactly what
             submission.status = 'failed'
-            submission.ai_feedback = f"Error during evaluation: {str(e)}"
+            submission.ai_feedback = str(e)
             submission.save()
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception:
+            # GitHub or Gemini trouble is not a failing grade
+            logger.exception('Capstone evaluation failed for submission %s', submission.pk)
+            submission.status = 'failed'
+            submission.ai_feedback = 'Evaluation could not be completed due to a service error.'
+            submission.save()
+            return Response(
+                {'error': 'The AI evaluator is unavailable right now. Please try again in a few minutes.'},
+                status=status.HTTP_502_BAD_GATEWAY,
+            )
+
+        # 4. Update the submission
+        submission.score = eval_result['score']
+        submission.passed = eval_result['passed']
+        submission.ai_feedback = eval_result['feedback']
+        submission.status = 'graded'
+        submission.save()
 
         # 5. Return updated submission
         serializer = self.get_serializer(submission)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-

@@ -26,6 +26,7 @@ export default function LessonRunnerPage() {
   const [error, setError] = useState(null);
   const [completing, setCompleting] = useState(false);
   const [reward, setReward] = useState(null); // { xp, coins } flash
+  const [showLessonList, setShowLessonList] = useState(false); // phones only — always shown on lg
 
   // Auth gate state
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -36,6 +37,11 @@ export default function LessonRunnerPage() {
 
   // Freemium gate: unauthenticated users on Level 2+
   const isGatedByAuth = !user && levelNum > 1;
+
+  // Progress gate: logged-in users can't skip ahead to levels they haven't unlocked
+  const domainProgress = user?.domain_progress?.find(p => p.domain_name === name);
+  const highestUnlockedLevel = domainProgress?.highest_unlocked_level || 1;
+  const isLockedByProgress = !!user && levelNum > highestUnlockedLevel;
 
   useEffect(() => {
     // SWR pattern: fetch silently to revalidate
@@ -51,6 +57,7 @@ export default function LessonRunnerPage() {
   useEffect(() => {
     setReward(null);
     setCompleting(false);
+    setShowLessonList(false);
   }, [order]);
 
   if (loading) {
@@ -98,7 +105,7 @@ export default function LessonRunnerPage() {
   if (isGatedByAuth) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="brutalist-card p-12 text-center max-w-lg">
+        <div className="brutalist-card p-6 md:p-12 text-center max-w-lg">
           <Lock className="w-16 h-16 mx-auto mb-4 text-muted" strokeWidth={2.5} />
           <h2 className="heading-lg m-0 mb-2">Level {levelNum} is Locked</h2>
           <p className="text-muted mb-6">
@@ -127,10 +134,34 @@ export default function LessonRunnerPage() {
     );
   }
 
+  // ── Progress Gate: Show locked state for levels beyond the user's frontier ──
+  if (isLockedByProgress) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="brutalist-card p-6 md:p-12 text-center max-w-lg">
+          <Lock className="w-16 h-16 mx-auto mb-4 text-muted" strokeWidth={2.5} />
+          <h2 className="heading-lg m-0 mb-2">Level {levelNum} is Locked</h2>
+          <p className="text-muted mb-6">
+            Finish Level {highestUnlockedLevel} to unlock this level.
+          </p>
+          <Link to={`/track/${name}`} className="brutalist-btn brutalist-btn-primary no-underline inline-block">
+            ← Back to Roadmap
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   // Navigation helpers
   const currentIndex = allLessons.findIndex(l => l.order === lessonOrder);
   const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
   const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
+
+  // Finishing this level's last lesson opens the next level (once it's unlocked)
+  const nextLevel = domain.levels?.find(l => l.number === levelNum + 1);
+  const nextLevelFirstLesson = nextLevel?.lessons?.length
+    ? [...nextLevel.lessons].sort((a, b) => a.order - b.order)[0]
+    : null;
 
   // Handle lesson completion
   const handleComplete = async () => {
@@ -145,18 +176,25 @@ export default function LessonRunnerPage() {
       // Update AuthContext with new stats (instant Navbar update)
       updateUser(result.user);
 
+      const highestUnlocked = result.user.domain_progress
+        ?.find(p => p.domain_name === name)?.highest_unlocked_level || 1;
+      const openNextLevel = !nextLesson && nextLevelFirstLesson && highestUnlocked >= nextLevel.number;
+
       // Always show the success overlay
       setReward({
         xp: currentLesson.xp_reward,
         coins: currentLesson.coins_reward,
         levelCompleted: result.level_completed,
         alreadyDone: result.status === 'already_completed',
+        nextLevelNumber: openNextLevel ? nextLevel.number : null,
       });
 
       // Navigate after 1.5s so the user actually sees the celebration
       setTimeout(() => {
         if (nextLesson) {
           navigate(`/track/${name}/level/${levelNum}/lesson/${nextLesson.order}`);
+        } else if (openNextLevel) {
+          navigate(`/track/${name}/level/${nextLevel.number}/lesson/${nextLevelFirstLesson.order}`);
         } else {
           navigate(`/track/${name}`);
         }
@@ -240,6 +278,12 @@ export default function LessonRunnerPage() {
                 </span>
               </div>
             )}
+
+            {reward.nextLevelNumber && (
+              <p className="label-mono m-0 mt-5" style={{ fontSize: '0.85rem' }}>
+                🔓 Level {reward.nextLevelNumber} unlocked — opening it now…
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -273,11 +317,23 @@ export default function LessonRunnerPage() {
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar — Lesson List */}
         <aside className="lg:w-72 shrink-0">
-          <div className="brutalist-card p-4 lg:sticky lg:top-24">
-            <h3 className="heading-md text-sm mb-3 pb-2 border-b-2 border-ink">
-              Level {levelNum}: {currentLevel.title}
-            </h3>
-            <ul className="list-none p-0 m-0">
+          <div id="tour-lesson-list" className="brutalist-card p-4 lg:sticky lg:top-24">
+            <div className={`flex items-center justify-between gap-3 border-ink ${
+              showLessonList ? 'mb-3 pb-2 border-b-2' : 'lg:mb-3 lg:pb-2 lg:border-b-2'
+            }`}>
+              <h3 className="heading-md text-sm m-0">
+                Level {levelNum}: {currentLevel.title}
+              </h3>
+              {/* Phones: lesson list collapses so the lesson itself comes first */}
+              <button
+                onClick={() => setShowLessonList(!showLessonList)}
+                className="lg:hidden label-mono shrink-0 whitespace-nowrap px-3 py-2 border-2 border-ink bg-canvas text-ink cursor-pointer"
+                aria-expanded={showLessonList}
+              >
+                {currentIndex + 1} / {allLessons.length} {showLessonList ? '▴' : '▾'}
+              </button>
+            </div>
+            <ul className={`list-none p-0 m-0 ${showLessonList ? '' : 'hidden lg:block'}`}>
               {allLessons.map((lesson) => {
                 const isActive = lesson.order === lessonOrder;
                 return (
@@ -313,7 +369,7 @@ export default function LessonRunnerPage() {
         {/* Main Content */}
         <div className="flex-1 min-w-0">
           {/* Lesson Header */}
-          <div className="brutalist-card p-6 mb-6">
+          <div className="brutalist-card p-4 md:p-6 mb-6">
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               {!currentLesson.is_mandatory && (
                 <span className="brutalist-badge bg-gold-light text-gold">Bonus</span>
@@ -329,7 +385,7 @@ export default function LessonRunnerPage() {
           </div>
 
           {/* Markdown Content */}
-          <div className="brutalist-card p-8">
+          <div id="tour-lesson-content" className="brutalist-card p-4 md:p-8">
             <MarkdownRenderer content={currentLesson.content_md} />
           </div>
 
@@ -343,6 +399,7 @@ export default function LessonRunnerPage() {
                   quizData={currentLevel.quiz_data || []} 
                   levelId={currentLevel.id} 
                   onUnlock={handleComplete} 
+                  continueLabel={nextLevelFirstLesson ? `Continue to Level ${nextLevel.number} →` : 'Return to Roadmap →'}
                 />
               )}
             </div>
@@ -365,11 +422,22 @@ export default function LessonRunnerPage() {
 
             {!(!nextLesson && (levelNum === 10 || currentLevel.quiz_data)) && (
               <button
+                id="tour-complete-btn"
                 onClick={handleComplete}
                 disabled={completing}
                 className={`brutalist-btn brutalist-btn-primary ${completing ? 'opacity-60 cursor-not-allowed' : ''}`}
               >
-                {completing ? 'Saving...' : nextLesson ? 'Complete & Continue →' : '✓ Complete Level →'}
+                {completing ? 'Saving...' : nextLesson ? (
+                  <>
+                    <span className="hidden sm:inline">Complete &amp; Continue →</span>
+                    <span className="sm:hidden">Complete →</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="hidden sm:inline">✓ Complete Level →</span>
+                    <span className="sm:hidden">✓ Finish Level</span>
+                  </>
+                )}
               </button>
             )}
           </div>

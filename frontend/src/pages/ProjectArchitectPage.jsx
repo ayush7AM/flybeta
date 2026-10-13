@@ -78,7 +78,7 @@ export default function ProjectArchitectPage() {
           ))}
         </div>
 
-        <div className="brutalist-card p-6 md:p-8 relative z-0">
+        <div id="tour-blueprint" className="brutalist-card p-6 md:p-8 relative z-0">
           {/* Header */}
           <div className="flex justify-between items-center mb-4 pb-2 border-b-2 border-ink">
             <h2 className="heading-md flex items-center gap-2">

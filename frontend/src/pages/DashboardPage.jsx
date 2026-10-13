@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { updateActiveTheme } from '../services/api';
 import EditProfileModal from '../components/EditProfileModal';
+import { useStartTour } from '../components/tour/tour';
 
 // ── Rank badge styling ──────────────────────────────────────────────────
 
@@ -34,7 +35,7 @@ const RANK_ICONS = {
 const TRACK_META = {
   cloud:          { label: 'Cloud Computing',   color: '#2563EB', icon: '☁️' },
   ai:             { label: 'AI & ML',           color: '#6D28D9', icon: '🤖' },
-  'data-science': { label: 'Data Science',      color: '#059669', icon: '📊' },
+  data:           { label: 'Data Science',      color: '#059669', icon: '📊' },
 };
 
 export default function DashboardPage() {
@@ -44,6 +45,7 @@ export default function DashboardPage() {
 
   const [themeUpdating, setThemeUpdating] = useState(null); // key being updated
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const startTour = useStartTour();
 
   // ── Profile save handler (from EditProfileModal) ──────────────────────
   const handleProfileSave = () => {
@@ -98,13 +100,23 @@ export default function DashboardPage() {
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
       {/* ── Page Header ─────────────────────────────────────────────── */}
-      <div>
-        <h1 className="heading-xl">COMMAND CENTER</h1>
-        <p className="text-muted label-mono mt-1">YOUR PILOT DASHBOARD</p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="heading-xl">COMMAND CENTER</h1>
+          <p className="text-muted label-mono mt-1">YOUR PILOT DASHBOARD</p>
+        </div>
+        <button
+          onClick={startTour}
+          className="brutalist-badge bg-canvas text-ink cursor-pointer hover:bg-border-light transition-colors"
+          title="Walk through FlyBeta's features again"
+        >
+          🎓 Replay tutorial
+        </button>
       </div>
 
       {/* ── Hero Identity Card ──────────────────────────────────────── */}
       <div
+        id="tour-identity"
         className="brutalist-card p-6 md:p-8"
         style={{ background: 'var(--color-surface)' }}
       >
@@ -180,7 +192,7 @@ export default function DashboardPage() {
       </div>
 
       {/* ── XP & Rank Progress ──────────────────────────────────────── */}
-      <div className="brutalist-card p-6" style={{ background: 'var(--color-surface)' }}>
+      <div id="tour-rank" className="brutalist-card p-6" style={{ background: 'var(--color-surface)' }}>
         <h3 className="heading-md mb-4">RANK PROGRESSION</h3>
 
         <div className="flex items-center justify-between mb-2">
@@ -231,7 +243,7 @@ export default function DashboardPage() {
       </div>
 
       {/* ── Track Progress ──────────────────────────────────────────── */}
-      <div className="brutalist-card p-6" style={{ background: 'var(--color-surface)' }}>
+      <div id="tour-track-progress" className="brutalist-card p-6" style={{ background: 'var(--color-surface)' }}>
         <h3 className="heading-md mb-4">TRACK PROGRESS</h3>
 
         <div className="space-y-4">

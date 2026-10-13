@@ -36,10 +36,20 @@ class LessonSerializer(serializers.ModelSerializer):
 
 class LevelSerializer(serializers.ModelSerializer):
     lessons = LessonSerializer(many=True, read_only=True)
+    quiz_data = serializers.SerializerMethodField()
 
     class Meta:
         model = Level
         fields = ['id', 'domain', 'number', 'title', 'description', 'lessons', 'quiz_data']
+
+    def get_quiz_data(self, obj):
+        # Answers stay server-side — quizzes are graded by LevelViewSet.pass_quiz
+        if not obj.quiz_data:
+            return obj.quiz_data
+        return [
+            {key: value for key, value in question.items() if key != 'correct_index'}
+            for question in obj.quiz_data
+        ]
 
 
 class DomainSerializer(serializers.ModelSerializer):
@@ -73,6 +83,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='user.name', read_only=True)
     email = serializers.EmailField(source='user.email', read_only=True)
     domain_progress = serializers.SerializerMethodField()
+    completed_lesson_ids = serializers.SerializerMethodField()
 
     # Computed rank fields (from model properties)
     next_rank = serializers.CharField(read_only=True)
@@ -87,7 +98,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'current_rank', 'next_rank', 'xp_to_next_rank', 'rank_progress_pct',
             'theme_preference',
             'avatar', 'bio',
-            'domain_progress',
+            'domain_progress', 'completed_lesson_ids',
         ]
         read_only_fields = [
             'username', 'name', 'email',
@@ -99,3 +110,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def get_domain_progress(self, obj):
         progress = obj.user.domain_progress.all()
         return DomainProgressSerializer(progress, many=True).data
+
+    def get_completed_lesson_ids(self, obj):
+        return list(
+            Lesson.objects.filter(completed_by__user=obj.user).values_list('id', flat=True).distinct()
+        )

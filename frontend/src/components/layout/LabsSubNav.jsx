@@ -9,7 +9,7 @@ export default function LabsSubNav() {
   const { pathname } = useLocation();
 
   return (
-    <nav className="flex gap-0 mb-10 border-2 border-ink w-fit"
+    <nav id="tour-labs-nav" className="flex gap-0 mb-10 border-2 border-ink w-fit"
          style={{ boxShadow: 'var(--shadow-brutal-sm)' }}>
       {LAB_TABS.map(({ label, path }) => {
         const isActive = pathname === path;

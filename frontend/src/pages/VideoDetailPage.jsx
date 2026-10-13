@@ -23,7 +23,7 @@ export default function VideoDetailPage() {
   }
 
   return (
-    <div className="h-[calc(100vh-100px)] flex flex-col">
+    <div className="lg:h-[calc(100vh-100px)] flex flex-col">
       {/* ── Back Navigation ──────────────────────────────────────────── */}
       <Link
         to="/vision"

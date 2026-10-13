@@ -159,6 +159,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+    'DEFAULT_THROTTLE_RATES': {
+        'capstone': '10/hour',  # per user; each submission costs GitHub + Gemini calls
+    },
 }
 
 

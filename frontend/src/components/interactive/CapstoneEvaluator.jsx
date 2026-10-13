@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../services/api';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import { Loader2, CheckCircle, XCircle, Lock } from 'lucide-react';
@@ -22,7 +22,7 @@ export default function CapstoneEvaluator({ preselectedDomain = '' }) {
 
   useEffect(() => {
     // Fetch domains
-    axios.get('/api/v1/domains/')
+    api.get('domains/')
       .then(res => {
         const domainData = res.data.results || res.data;
         setDomains(Array.isArray(domainData) ? domainData : []);
@@ -42,7 +42,7 @@ export default function CapstoneEvaluator({ preselectedDomain = '' }) {
     setResult(null);
 
     try {
-      const res = await axios.post('/api/v1/capstone/', {
+      const res = await api.post('capstone/', {
         domain: domainId,
         github_url: githubUrl
       });
@@ -150,7 +150,8 @@ export default function CapstoneEvaluator({ preselectedDomain = '' }) {
           </div>
           
           <div className="p-8 prose prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-600 prose-a:font-bold hover:prose-a:text-blue-800 prose-pre:bg-gray-900 prose-pre:text-green-400 prose-pre:border-4 prose-pre:border-black prose-pre:rounded-none prose-pre:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] prose-code:font-bold prose-code:text-pink-600 prose-blockquote:border-l-8 prose-blockquote:border-black prose-blockquote:bg-yellow-100 prose-blockquote:p-4 prose-blockquote:font-bold">
-            <MarkdownRenderer content={result.ai_feedback} />
+            {/* AI output is shaped by repo content — never render it as HTML */}
+            <MarkdownRenderer content={result.ai_feedback} allowHtml={false} />
           </div>
         </div>
       )}

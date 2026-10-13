@@ -56,6 +56,16 @@ export default function TrackRoadmapPage() {
   
   const domainProgress = user?.domain_progress?.find(p => p.domain_name === name);
   const highestUnlockedLevel = domainProgress?.highest_unlocked_level || 1;
+  const completedLessonIds = new Set(user?.completed_lesson_ids || []);
+
+  // A level is done once the user has moved past it, or (for the final level,
+  // which has nothing after it) once every mandatory lesson is complete.
+  const isLevelCompleted = (level) => {
+    if (!user) return false;
+    if (level.number < highestUnlockedLevel) return true;
+    const mandatory = level.lessons?.filter(l => l.is_mandatory) || [];
+    return mandatory.length > 0 && mandatory.every(l => completedLessonIds.has(l.id));
+  };
 
   return (
     <div>
@@ -101,8 +111,11 @@ export default function TrackRoadmapPage() {
                   key={level.id}
                   level={level}
                   domainName={name}
-                  isActive={level.number === 1}
+                  isActive={level.number === (user ? highestUnlockedLevel : 1)}
                   isLocked={user ? level.number > highestUnlockedLevel : false}
+                  isCompleted={isLevelCompleted(level)}
+                  completedLessonIds={completedLessonIds}
+                  tourId={level.number === 1 ? 'tour-first-level' : undefined}
                   isAuthGated={isAuthGated}
                   onAuthGate={() => setShowAuthModal(true)}
                 />

@@ -586,3 +586,158 @@ body {
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+
+/* ── Phones (below Tailwind's md breakpoint) ─────────────────────────────── */
+@media (max-width: 767px) {
+  /* iOS Safari zooms into any focused field under 16px */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  .heading-md {
+    font-size: 20px;
+  }
+
+  .brutalist-btn {
+    padding: 12px 16px;
+  }
+
+  .markdown-content h1 {
+    font-size: 28px;
+  }
+
+  .markdown-content h2 {
+    font-size: 21px;
+  }
+
+  .oracle-fab {
+    width: 52px;
+    height: 52px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* ── Onboarding Tour (driver.js) ─────────────────────────────────────────── */
+/* !important: driver.css loads after this file and styles the same elements */
+.flybeta-tour-popover.driver-popover {
+  background: var(--color-surface) !important;
+  color: var(--color-ink) !important;
+  border: 3px solid var(--color-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--shadow-brutal) !important;
+  padding: 18px !important;
+  max-width: 340px !important;
+  font-family: var(--font-body) !important;
+}
+
+.flybeta-tour-popover .driver-popover-title {
+  font-family: var(--font-heading) !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: uppercase !important;
+  color: var(--color-ink) !important;
+}
+
+.flybeta-tour-popover .driver-popover-description {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: var(--color-ink) !important;
+  opacity: 0.85;
+}
+
+.flybeta-tour-popover .driver-popover-footer {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 16px !important;
+}
+
+.flybeta-tour-popover .driver-popover-progress-text {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  color: var(--color-muted) !important;
+}
+
+/* Skip Tutorial is appended into this group, so let it wrap onto its own row */
+.flybeta-tour-popover .driver-popover-navigation-btns {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  margin-left: auto !important;
+}
+
+.flybeta-tour-popover .driver-popover-navigation-btns button {
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 8px 12px !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+.flybeta-tour-popover .driver-popover-next-btn {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border: 2px solid var(--color-ink) !important;
+  box-shadow: 3px 3px 0 0 var(--color-ink) !important;
+}
+
+.flybeta-tour-popover .driver-popover-prev-btn {
+  background: var(--color-surface) !important;
+  color: var(--color-ink) !important;
+  border: 2px solid var(--color-ink) !important;
+}
+
+.flybeta-tour-popover .driver-popover-btn-disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+.flybeta-tour-popover .tour-skip-btn {
+  order: 3;
+  flex-basis: 100%;
+  text-align: right;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: var(--color-muted);
+}
+
+.flybeta-tour-popover .tour-skip-btn:hover {
+  color: var(--color-primary);
+}
+
+.flybeta-tour-popover .driver-popover-arrow {
+  border-color: var(--color-ink);
+}
+
+@media (max-width: 767px) {
+  .flybeta-tour-popover.driver-popover {
+    max-width: calc(100vw - 32px) !important;
+    padding: 14px !important;
+  }
+
+  .flybeta-tour-popover .driver-popover-title {
+    font-size: 18px !important;
+  }
+}

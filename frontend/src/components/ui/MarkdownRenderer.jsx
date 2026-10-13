@@ -8,14 +8,17 @@ import FlipCard from '../interactive/FlipCard';
  *
  * Supported custom tags:
  *   <flipcard front="..." back="..." image="..."></flipcard>
+ *
+ * Pass allowHtml={false} for untrusted content (e.g. AI output) so raw HTML
+ * is never rendered.
  */
-export default function MarkdownRenderer({ content }) {
+export default function MarkdownRenderer({ content, allowHtml = true }) {
   if (!content) return null;
 
   return (
     <div className="markdown-content">
       <Markdown
-        rehypePlugins={[rehypeRaw]}
+        rehypePlugins={allowHtml ? [rehypeRaw] : []}
         components={{
           // Map the custom <flipcard> HTML tag to the React FlipCard component
           flipcard: ({ node, ...props }) => {

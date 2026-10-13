@@ -176,6 +176,7 @@ export default function OracleWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
+          id="tour-oracle"
           className="oracle-fab"
           title="Ask The Oracle"
           style={{

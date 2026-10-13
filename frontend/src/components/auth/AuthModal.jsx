@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { X, Mail, User, Lock, ArrowRight, Loader } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useStartTour } from '../tour/tour';
 import { requestPasswordReset } from '../../services/api';
 
 export default function AuthModal({ isOpen, onClose, customMessage = null, initialView = 'login' }) {
   const { login, register } = useAuth();
+  const startTour = useStartTour();
   
   // 'login', 'register', 'forgot'
   const [view, setView] = useState(initialView); 
@@ -65,6 +67,7 @@ export default function AuthModal({ isOpen, onClose, customMessage = null, initi
         });
         if (res.success) {
           onClose();
+          startTour(); // first-time walkthrough of the whole site
         } else {
           setError(res.error);
         }

@@ -31,6 +31,7 @@ export default function VisionPage() {
 
       {/* ── Sub-Navigation Toggle ────────────────────────────────────── */}
       <nav
+        id="tour-vision-tabs"
         className="flex gap-0 mb-10 border-2 border-ink w-fit"
         style={{ boxShadow: 'var(--shadow-brutal-sm)' }}
       >
